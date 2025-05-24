@@ -1,0 +1,27 @@
+.language-changer {
+  position: relative;
+
+  &__select {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid var(--foreground);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    option {
+      background: var(--background);
+      color: var(--foreground);
+    }
+  }
+}

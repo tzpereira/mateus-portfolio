@@ -1,0 +1,3 @@
+interface FooterProps {
+  locale: string;
+}

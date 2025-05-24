@@ -1,0 +1,38 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  &__frame {
+    border: 0.5px solid var(--foreground);
+    padding-right: 2rem;
+    padding-left: 2rem;
+    width: 98%;
+    height: 95%;
+    position: absolute;
+    border-radius: 6px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    width: 55%;
+  }
+
+  &__note {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    text-align: right;
+    width: 200px;
+  }
+}

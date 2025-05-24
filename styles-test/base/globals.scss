@@ -1,0 +1,29 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mixins;
+
+:root {
+  --background: #{vars.$color-background-light};
+  --foreground: #{vars.$color-foreground-light};
+  --font-family: var(--font-jetbrains, #{vars.$font-jetbrains});
+}
+
+@include mixins.respond-to('dark') {
+  :root {
+    --background: #{vars.$color-background-dark};
+    --foreground: #{vars.$color-foreground-dark};
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jetbrains);
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}

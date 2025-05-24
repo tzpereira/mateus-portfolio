@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &___content {
+    font-size: 1rem;
+    font-weight: lighter;
+  }
+}
