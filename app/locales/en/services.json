@@ -1,0 +1,25 @@
+{
+  "title": "Services",
+  "services": [
+    {
+      "title": "Tech Strategy & Consulting",
+      "description": "I provide strategic guidance for teams and founders, helping them define optimal paths to achieve scalability, speed, and sustainable growth.",
+      "icon": "cardinal-points.svg"
+    },
+    {
+      "title": "AI Integration & Automation",
+      "description": "Enhance your workflows with smart AI integration and custom automations—from OpenAI APIs to internal bots and data pipelines.",
+      "icon": "ai.svg"
+    },
+    {
+      "title": "Custom Software",
+      "description": "Building custom solutions: from backend systems and APIs to full web apps and automation tools, always with clean code and robust architecture.",
+      "icon": "binary.svg"
+    },
+    {
+      "title": "Codebase Rescue & Support",
+      "description": "I recover underperforming systems through performance optimization, technical debt elimination, stack modernization, and bug reduction.",
+      "icon": "support.svg"
+    }
+  ]
+}

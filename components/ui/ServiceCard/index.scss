@@ -1,0 +1,39 @@
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 200;
+    margin-bottom: 0.5rem;
+  }
+
+  &__content {
+      background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 0.5px solid #333;
+    width: 35vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+    // For proportional layout
+    .service-card__description {
+      flex: 2;
+      color: #bfbfbf;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .service-card__icon {
+      flex: 1;
+      min-width: 200px;
+      max-width: 200px;
+      height: 200px;
+    }
+  }
+}

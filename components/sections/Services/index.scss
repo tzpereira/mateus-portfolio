@@ -1,0 +1,70 @@
+.services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: none;
+
+  &__title-container{
+      display: flex;
+      justify-content: flex-start;
+      width: 80vw;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  &__frame {
+    display: flex;
+    width: 80vw;
+  }
+
+  &__grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  &__card {
+    background-color: #151515;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    text-align: left;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: #3d3d3d;
+    }
+  }
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    fill: #9f9f9f;
+    margin-bottom: 0.5rem;
+  }
+
+  &__card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  &__card-description {
+    font-size: 0.95rem;
+    color: #cccccc;
+    line-height: 1.6;
+  }
+}
