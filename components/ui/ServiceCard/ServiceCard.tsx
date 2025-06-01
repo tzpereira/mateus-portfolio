@@ -1,7 +1,7 @@
 'use client';
 
 import './index.scss';
-import { iconMap } from '@/assets/icons/iconMapper';
+import { iconMap } from '@/assets/icons/iconExporter';
 
 type ServiceCardProps = {
   title: string;
