@@ -1,5 +1,5 @@
 import './index.scss';
-import initTranslations from '@/app/i118n';
+import initTranslations from '@/app/i18n';
 import { ServiceCard } from '@/components/ui/ServiceCard';
 
 type ServicesProps = {

@@ -1,6 +1,6 @@
 import './index.scss';
 import { Header } from '@/components/layout/Header';
-import initTranslations from '@/app/i118n';
+import initTranslations from '@/app/i18n';
 
 export default async function Hero({ locale }: HeroProps) {
   const { t } = await initTranslations(locale, ['hero']); 

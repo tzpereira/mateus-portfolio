@@ -1,5 +1,5 @@
 import './index.scss';
-import initTranslations from '@/app/i118n';
+import initTranslations from '@/app/i18n';
 
 export default async function Footer({ locale }: FooterProps) {
   const { t } = await initTranslations(locale, ['footer']); 

@@ -1,12 +1,15 @@
+// i18n
+import initTranslations from '../i18n';
+import TranslationsProvider from '@/components/translationProvider';
+
+// Sections
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
 import { Footer } from "@/components/layout/Footer";
-import initTranslations from '../i118n';
-import TranslationsProvider from '@/components/translationProvider';
-import '@/styles-test/components/_page.scss';
 
-const i18nNamespaces = ['home'];
+// Styles
+import '@/styles/components/_page.scss';
 
 interface HomeProps {
   params: {
@@ -16,17 +19,18 @@ interface HomeProps {
 
 export default async function Home({ params: { locale } }: HomeProps) {
 
-  const { resources } = await initTranslations(locale, i18nNamespaces);
+  const { resources } = await initTranslations(locale, ['home']);
 
   return (
     <TranslationsProvider
-      namespaces={i18nNamespaces}
+      namespaces={['home']}
       locale={locale}
       resources={resources}>
         <main className="main">
           <Hero locale={locale} />
           <Services locale={locale} />
           <Work locale={locale} />
+          <Services locale={locale} />
           <Footer locale={locale} />
         </main>
     </TranslationsProvider>

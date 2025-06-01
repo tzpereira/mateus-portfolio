@@ -1,5 +1,4 @@
-// app/[locale]/layout.tsx
-import '@/styles-test/main.scss';
+import '@/styles/main.scss';
 import { ThemeProvider } from 'next-themes';
 import { JetBrains_Mono } from 'next/font/google';
 

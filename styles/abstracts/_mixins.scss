@@ -1,0 +1,8 @@
+@mixin respond-to($media) {
+  @if $media == 'mobile' {
+    @media (max-width: 600px) { @content; }
+  }
+  @else if $media == 'dark' {
+    @media (prefers-color-scheme: dark) { @content; }
+  }
+}
