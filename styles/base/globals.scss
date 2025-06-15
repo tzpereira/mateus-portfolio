@@ -27,3 +27,15 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
+@keyframes reflect-move {
+  0% {
+    transform: rotate(15deg) translate(0px, 0px);
+  }
+  50% {
+    transform: rotate(15deg) translate(20px, 20px);
+  }
+  100% {
+    transform: rotate(15deg) translate(0px, 0px);
+  }
+}
