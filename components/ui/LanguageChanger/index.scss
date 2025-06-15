@@ -3,15 +3,17 @@
 
   &__select {
     appearance: none;
-    background-color: transparent;
-    border: 1px solid var(--foreground);
+    background: rgba(255, 255, 255, 0.05); // fundo levemente branco e translúcido
+    border: 1px solid rgba(255, 255, 255, 0.12); // borda de vidro
     border-radius: 0.5rem;
     padding: 0.25rem 0.75rem;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--foreground);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    backdrop-filter: blur(12px); // efeito de vidro
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.2s ease-in-out;
 
     &:hover,
     &:focus {
