@@ -6,7 +6,7 @@ export default async function Hero({ locale }: HeroProps) {
   const { t } = await initTranslations(locale, ['hero']); 
 
   return (
-    <section className="hero">
+    <section className="section hero">
       <div className="hero__frame">
         <Header locale={locale} />
         <h1 className="hero__title">{t('title')}</h1>

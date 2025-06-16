@@ -30,7 +30,6 @@ export default async function Home({ params: { locale } }: HomeProps) {
           <Hero locale={locale} />
           <Services locale={locale} />
           <Work locale={locale} />
-          <Services locale={locale} />
           <Footer locale={locale} />
         </main>
     </TranslationsProvider>

@@ -15,7 +15,7 @@ export default async function Services({ locale }: ServicesProps) {
   }[];
 
   return (
-    <section className="services">
+    <section className="section services">
       <div className='services__title-container'>
         <h2 className="services__title">{t('title')}</h2>
       </div>
