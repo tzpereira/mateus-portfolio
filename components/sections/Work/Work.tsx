@@ -101,11 +101,13 @@ export default function Work({ locale }: WorkProps) {
       // Aguarda 100ms para iniciar o scroll animado
       setTimeout(() => {
         animateScrollTo(nextIndex);
-
-        // Se chegou nas extremidades, libera o scroll externo
+      
+        const atTopGoingUp = current === 0 && dir === 'up';
+        const atBottomGoingDown = current === CARD_COUNT - 1 && dir === 'down';
+      
         if (
-          (activeIndex === 0 && allowedScrollDirection.current === 'up') ||
-          (activeIndex === CARD_COUNT - 1 && allowedScrollDirection.current === 'down')
+          (atTopGoingUp && allowedScrollDirection.current === 'up') ||
+          (atBottomGoingDown && allowedScrollDirection.current === 'down')
         ) {
           setIsLocked(false);
           allowedScrollDirection.current = null;
