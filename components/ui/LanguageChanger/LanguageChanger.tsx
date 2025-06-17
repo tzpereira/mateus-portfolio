@@ -14,14 +14,14 @@ export default function LanguageChanger() {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
 
-    // Set cookie for next-i18n-router
+    // Seta cookie
     const days = 30;
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = date.toUTCString();
     document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
 
-    // Redirection logic
+    // Lógica de redirecionamento
     if (
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
