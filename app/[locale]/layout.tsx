@@ -19,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jetBrainsMono.variable} suppressHydrationWarning>
+    <html lang="en" className={`${jetBrainsMono.variable}`} suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+      <ThemeProvider attribute="class" enableSystem>
+        {children}
+      </ThemeProvider>
       </body>
     </html>
   );

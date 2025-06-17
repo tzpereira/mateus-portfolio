@@ -1,5 +1,4 @@
 @use '../abstracts/variables' as vars;
-@use '../abstracts/mixins' as mixins;
 
 :root {
   --background: #{vars.$color-background-light};
@@ -7,11 +6,9 @@
   --font-family: var(--font-jetbrains, #{vars.$font-jetbrains});
 }
 
-@include mixins.respond-to('dark') {
-  :root {
-    --background: #{vars.$color-background-dark};
-    --foreground: #{vars.$color-foreground-dark};
-  }
+.dark {
+  --background: #{vars.$color-background-dark};
+  --foreground: #{vars.$color-foreground-dark};
 }
 
 html, body {

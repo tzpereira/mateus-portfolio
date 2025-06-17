@@ -8,9 +8,6 @@ import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
 import { Footer } from "@/components/layout/Footer";
 
-// Styles
-import '@/styles/components/_page.scss';
-
 interface HomeProps {
   params: {
     locale: string;

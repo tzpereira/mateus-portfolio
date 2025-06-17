@@ -1,29 +1,50 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
+import { iconMap } from '@/assets/icons/iconExporter';
 import './index.scss';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+
+const THEME_KEY = 'theme';
+
+const updateTheme = (isDarkEnabled: boolean) => {
+  document.documentElement.classList.toggle('dark', isDarkEnabled);
+  localStorage.setItem(THEME_KEY, isDarkEnabled ? 'dark' : 'light');
+};
 
 export default function ThemeChanger() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [isToggled, setIsToggled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem(THEME_KEY);
+      return storedTheme ? storedTheme === 'dark' : true;
+    }
+    return true;
+  });
 
-  // Avoid hydration mismatch
+  const MoonIcon = iconMap['moon.svg'];
+  const SunIcon = iconMap['sun.svg'];
+
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    updateTheme(isToggled);
+  }, [isToggled]);
 
-  if (!mounted) return null;
-
-  const isDark = theme === 'dark';
+  const toggleState = () => setIsToggled((prev) => !prev);
 
   return (
-    <button
-      className="theme-changer"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label="Toggle theme"
-    >
-      {isDark ? '🌞' : '🌙'}
-    </button>
+    <label className="toggle-wrapper" htmlFor="toggle">
+      <div className={`toggle ${isToggled ? 'disabled' : 'enabled'}`}>
+        <div className="icons">
+          <SunIcon />
+          <MoonIcon />
+        </div>
+        <input
+          id="toggle"
+          name="toggle"
+          type="checkbox"
+          checked={isToggled}
+          onChange={toggleState}
+          readOnly
+        />
+      </div>
+    </label>
   );
 }

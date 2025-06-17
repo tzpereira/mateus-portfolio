@@ -16,8 +16,8 @@ export default async function Header({ locale }: HeaderProps) {
           <li>{t('stack')}</li>
           <li>{t('contact')}</li>
         </ul>
-        <ThemeChanger />
         <LanguageChanger />
+        <ThemeChanger />
       </nav>
     </header>
   );
