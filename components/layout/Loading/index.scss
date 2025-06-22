@@ -1,0 +1,17 @@
+.loading-counter-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    user-select: none;
+  }
+  
+  .loading-counter {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--foreground);
+  }
+  
