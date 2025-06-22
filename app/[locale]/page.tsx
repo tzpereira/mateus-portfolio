@@ -19,7 +19,7 @@ interface HomeProps {
 }
 
 export default async function Home({ params }: HomeProps) {
-  const { locale } = await params;
+  const { locale } = params;
 
   const { resources } = await initTranslations(locale, ['home']);
 
