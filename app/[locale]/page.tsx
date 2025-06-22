@@ -12,8 +12,8 @@ import { Contact } from "@/components/sections/Contact";
 import { Loading } from "@/components/layout/Loading"
 import { Footer } from "@/components/layout/Footer";
 
-export default async function Home({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export default async function Home(props: { params: Promise<{ locale: string }> }) {
+  const { locale } = await props.params;
 
   const { resources } = await initTranslations(locale, ['home']);
 
