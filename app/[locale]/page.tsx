@@ -12,13 +12,7 @@ import { Contact } from "@/components/sections/Contact";
 import { Loading } from "@/components/layout/Loading"
 import { Footer } from "@/components/layout/Footer";
 
-interface HomeProps {
-  params: {
-    locale: string;
-  };
-}
-
-export default async function Home({ params }: HomeProps) {
+export default async function Home({ params }: { params: { locale: string } }) {
   const { locale } = params;
 
   const { resources } = await initTranslations(locale, ['home']);
