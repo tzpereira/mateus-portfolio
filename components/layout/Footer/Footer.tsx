@@ -1,4 +1,5 @@
 import './index.scss';
+import { FooterProps } from './types';
 import initTranslations from '@/app/i18n';
 
 export default async function Footer({ locale }: FooterProps) {
