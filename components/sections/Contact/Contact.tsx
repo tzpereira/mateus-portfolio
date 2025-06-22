@@ -19,7 +19,7 @@ export default async function Contact({ locale }: ContactProps) {
           <h3 className="contact__info-title">{t('talk_title')}</h3>
           <p className="contact__info-description">{t('talk_text')}</p>
           <div>
-            <span className="contact__info-subtitle">{t('find_me')} or </span>
+            <span className="contact__info-subtitle">{t('find_me')}</span>
             <a
               href="/resume.pdf"
               download
@@ -32,9 +32,9 @@ export default async function Contact({ locale }: ContactProps) {
           <div className="contact__card contact__only-links-card">
             <div className="contact__card-content contact__only-links">
               <div className="contact__links">
-                <a href="https://wa.me/" target="_blank" rel="noreferrer">{t('whatsapp')}</a>
-                <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer">{t('linkedin')}</a>
-                <a href="https://github.com/" target="_blank" rel="noreferrer">{t('github')}</a>
+                <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">{t('whatsapp')}</a>
+                <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">{t('linkedin')}</a>
+                <a href="https://github.com/mateuspdasilva" target="_blank" rel="noreferrer">{t('github')}</a>
               </div>
               <div className="glass-reflection" />
             </div>
