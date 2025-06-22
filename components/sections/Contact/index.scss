@@ -1,0 +1,213 @@
+  .contact {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      width: 100vw;
+      margin: none;
+    
+      &__title-container {
+        display: flex;
+        justify-content: flex-start;
+        width: 80vw;
+      }
+    
+      &__title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--foreground);
+      }
+    
+      &__frame {
+        display: flex;
+        width: 80vw;
+        height: 45vh;
+        margin-top: 2rem;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+      }
+    
+      &__intro {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        height: 100%;
+        justify-content: space-between;
+      }
+    
+      &__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: auto;
+      }
+    
+      &__only-links-card {
+        width: 25vw;
+      }
+    
+      &__form-card {
+        width: 40vw;
+        height: 100%;
+      }
+    
+      &__card-content {
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        border: 0.5px solid color-mix(in srgb, var(--foreground), transparent 80%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 1.5rem;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+    
+      &__only-links {
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem;
+      }
+    
+      &__links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    
+        a {
+          font-family: monospace;
+          font-size: 1.2rem;
+          color: var(--foreground);
+          text-decoration: none;
+    
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    
+      &__info-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--foreground);
+        margin: 0;
+      }
+    
+      &__info-description {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--foreground);
+        white-space: pre-line;
+      }
+    
+      &__info-subtitle {
+        font-size: 1.5rem;
+        font-family: monospace;
+        color: var(--foreground);
+      }
+    
+      &__download-resume {
+        margin-top: 1rem;
+        display: inline-block;
+        font-family: monospace;
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        width: fit-content;
+        background-color: var(--background);
+        color: var(--foreground);
+        border: 0.5px solid color-mix(in srgb, var(--foreground), transparent 80%);
+    
+        &:hover {
+          background-color: var(--foreground);
+          color: var(--background);
+          border: 0.5px solid color-mix(in srgb, var(--background), transparent 80%);
+        }
+      }
+    
+      &__form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      font-family: monospace;
+    
+      input,
+      textarea {
+        background: transparent;
+        border: none;
+        border-bottom: 0.5px solid color-mix(in srgb, var(--foreground), transparent 20%);
+        font-size: 1.2rem;
+        padding: 1rem;
+        outline: none;
+        color: var(--foreground);
+        font-family: monospace;
+      
+        &::placeholder {
+          font-size: 1.2rem;
+          color: color-mix(in srgb, var(--foreground), transparent 50%);
+        }
+      }
+      
+      textarea {
+        min-height: 120px;
+        resize: none;
+        line-height: 1.5;
+      }
+    
+        button {
+          margin-top: auto;
+          align-self: flex-end;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 1.5rem;
+          padding: 0.75rem 1.25rem;
+          background-color: var(--background);
+          color: var(--foreground);
+          border: 0.5px solid color-mix(in srgb, var(--foreground), transparent 80%);
+
+        
+          &:hover {
+              background-color: var(--foreground);
+              color: var(--background);
+              border: 0.5px solid color-mix(in srgb, var(--background), transparent 80%);
+          }
+        }
+      }
+    
+      .glass-reflection {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-radius: inherit;
+        z-index: 1;
+        mix-blend-mode: screen;
+    
+        &::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
+          transform: rotate(15deg);
+          animation: reflect-move 6s ease-in-out infinite;
+          pointer-events: none;
+        }
+      }
+    }
+  

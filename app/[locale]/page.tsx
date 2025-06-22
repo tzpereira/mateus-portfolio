@@ -6,6 +6,7 @@ import TranslationsProvider from '@/components/translationProvider';
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
+import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 
 interface HomeProps {
@@ -14,7 +15,8 @@ interface HomeProps {
   };
 }
 
-export default async function Home({ params: { locale } }: HomeProps) {
+export default async function Home({ params }: HomeProps) {
+  const { locale } = await params;
 
   const { resources } = await initTranslations(locale, ['home']);
 
@@ -27,6 +29,7 @@ export default async function Home({ params: { locale } }: HomeProps) {
           <Hero locale={locale} />
           <Services locale={locale} />
           <Work locale={locale} />
+          <Contact locale={locale} />
           <Footer locale={locale} />
         </main>
     </TranslationsProvider>

@@ -1,0 +1,17 @@
+{
+    "title": "Contato",
+    "talk_title": "Vamos Conversar!",
+    "talk_text": "Tem um projeto em mente?\n Vamos transformar sua ideia em realidade.",
+    "find_me": "Encontre-me",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "placeholder": {
+      "name": "seu nome",
+      "email": "seu email",
+      "message": "sua mensagem"
+    },
+    "submit": "enviar",
+    "download_resume": "baixe meu CV"
+  }
+  
