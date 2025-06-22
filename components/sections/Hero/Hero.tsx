@@ -9,8 +9,6 @@ export default async function Hero({ locale }: HeroProps) {
     <section className="section hero">
       <div className="hero__frame">
         <Header locale={locale} />
-        <h1 className="hero__title">{t('title')}</h1>
-        <p className="hero__description">{t('about_me')}</p>
         <span className="hero__note">{t('note')}</span>
       </div>
     </section>

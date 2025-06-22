@@ -2,12 +2,17 @@
   width: 50px;
   height: 35px;
   background: var(--foreground);
-  border-radius: 35px;
+  border-radius: 40px;
   display: flex;
-  align-items: center;
+  vertical-align: baseline;
+  align-self: baseline;
   justify-content: center;
   overflow: hidden;
   border: none;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1.5rem;
 
   &__select {
     width: 100%;
@@ -18,12 +23,12 @@
     border-radius: 35px;
     padding: 0;
     margin: 0;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--background);
     cursor: pointer;
     text-align: center;
-    line-height: 35px; // mesma altura do container, para centralizar verticalmente
+    line-height: 1.2;
     transition: background 0.2s ease;
 
     &:hover,

@@ -4,11 +4,11 @@ import { LanguageChanger } from '@/components/ui/LanguageChanger';
 import initTranslations from '@/app/i18n';
 
 export default async function Header({ locale }: HeaderProps) {
-  const { t } = await initTranslations(locale, ['header']); 
+  const { t } = await initTranslations(locale, ['header']);
 
   return (
     <header className="header">
-      <h1 className="header__logo">{t('logo')}</h1>
+        <h1 className="header__logo">{t('logo')}</h1>
       <nav className="header__nav">
         <ul className="header__menu">
           <li>{t('services')}</li>
@@ -16,8 +16,8 @@ export default async function Header({ locale }: HeaderProps) {
           <li>{t('stack')}</li>
           <li>{t('contact')}</li>
         </ul>
-        <LanguageChanger />
         <ThemeChanger />
+        <LanguageChanger />
       </nav>
     </header>
   );
