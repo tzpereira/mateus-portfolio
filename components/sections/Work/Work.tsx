@@ -20,10 +20,11 @@ export default function Work({ locale }: WorkProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLocked, setIsLocked] = useState(true); // Bloqueia scroll do body enquanto dentro da seção
   const [isAnimating, setIsAnimating] = useState(false); // Impede múltiplos scrolls enquanto anima
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null);
   const [sectionTitle, setSectionTitle] = useState('');
   const [works, setWorks] = useState<
-  { title: string; description: string; icon: string }[]
->([]);
+    { title: string; description: string; icon: string }[]
+  >([]);
 
   const activeIndexRef = useRef(0);
   const allowedScrollDirection = useRef<'up' | 'down' | null>(null); // Define direção do scroll permitido
@@ -100,11 +101,12 @@ export default function Work({ locale }: WorkProps) {
 
       // Aguarda 100ms para iniciar o scroll animado
       setTimeout(() => {
+        setScrollDirection(dir);
         animateScrollTo(nextIndex);
-      
+
         const atTopGoingUp = current === 0 && dir === 'up';
         const atBottomGoingDown = current === CARD_COUNT - 1 && dir === 'down';
-      
+
         if (
           (atTopGoingUp && allowedScrollDirection.current === 'up') ||
           (atBottomGoingDown && allowedScrollDirection.current === 'down')
@@ -202,20 +204,49 @@ export default function Work({ locale }: WorkProps) {
             <h2 className="work__title">{sectionTitle}</h2>
           </div>
           <div className="work__frame">
+            <aside className="scroll-progress">
+              <div className="scroll-progress__track">
+                <div
+                  className="scroll-progress__fill"
+                  style={{ height: `${(activeIndex / (works.length - 1)) * 100}%` }}
+                />
+                {works.map((_, idx) => {
+                  const dotTop = (idx / (works.length - 1)) * 100;
+                  const isVisible = activeIndex >= idx;
+
+                  return (
+                    <button
+                      key={idx}
+                      className={`
+                        scroll-progress__dot
+                        ${activeIndex === idx ? 'active' : ''}
+                        ${isVisible ? 'visible' : ''}
+                      `}
+                      style={{ top: `${dotTop}%` }}
+                      onClick={(e) => {
+                        e.currentTarget.blur();
+                        animateScrollTo(idx);
+                      }}
+                      aria-label={`Ir para o card ${idx + 1}`}
+                    />
+                  );
+                })}
+              </div>
+            </aside>
             <div className="scroll-container" ref={containerRef}>
               {works.map((work, idx) => (
                 <div
-                  className={`scroll-card ${idx === activeIndex ? 'visible' : ''}`}
+                  className={`scroll-card ${idx === activeIndex ? `visible ${scrollDirection}` : ''}`}
                   key={idx}
                 >
+                  <div className="scroll-card__text">
+                    <h2>{work.title}</h2>
+                    <p>{work.description}</p>
+                  </div>
                   <div className="scroll-card__image-placeholder">
                     {imageMap[work.icon] && (
                       <img src={imageMap[work.icon].src} alt={work.title} />
                     )}
-                  </div>
-                  <div className="scroll-card__text">
-                    <h2>{work.title}</h2>
-                    <p>{work.description}</p>
                   </div>
                 </div>
               ))}

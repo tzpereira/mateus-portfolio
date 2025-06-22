@@ -17,10 +17,12 @@
   &__title {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__frame {
+    display: flex;
+    justify-content: space-between;
     width: 80vw;
     height: 60vh;
     overflow: hidden;
@@ -31,28 +33,107 @@
 .scroll-container {
   display: flex;
   flex-direction: column;
-  height: calc(60vh * 3);
   width: 100%;
-  transition: transform 0.8s ease-in-out;
+  height: calc(60vh * 3);
+  transition: transform 1s ease;
   will-change: transform;
 
   &.scrolling {
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+}
+
+.scroll-progress {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 100%;
+  margin-right: 3rem;
+
+  &__track {
+    position: relative;
+    width: 6px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  &__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 3px;
+    background-color: var(--foreground);
+    transition: height 0.4s ease;
+    z-index: 1;
+  }
+
+  &__dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+    transition: opacity 0.3s, border-color 0.3s, transform 0.3s;
+
+    &.visible {
+      opacity: 1;
+      border: 2px solid color-mix(in srgb, var(--foreground), transparent 60%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      transition: background-color 0.3s;
+    }
+
+    &.active {
+      transform: translate(-50%, -50%) scale(1.1);
+      border-color: var(--foreground);
+
+      &::after {
+        background-color: var(--foreground);
+      }
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--foreground);
+    }
   }
 }
 
 .scroll-card {
-  height: 60vh;
-  width: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  height: 60vh;
+  gap: 2rem;
   box-sizing: border-box;
   scroll-snap-align: start;
   user-select: none;
-
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.7s ease-in, transform 0.7s ease-in;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 
   &.visible {
     opacity: 1;
@@ -64,30 +145,35 @@
     }
   }
 
-  .scroll-card__image-placeholder {
-    padding: 0;
-    margin: 0;
-    width: 60%;
-    height: 100%;
-    overflow: hidden;
+  &__image-placeholder {
+    flex: 1 1 60%;
     display: flex;
-    justify-content: flex-start; // Alinha à esquerda
-    align-items: center;
-  }
+    align-items: stretch;
+    justify-content: flex-start;
 
-  &__image-placeholder img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: fill;
+      object-position: left;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
   }
 
   &__text {
-    width: 40%;
-    color: #fff;
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 1rem;
+    color: var(--foreground);
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 
     h2 {
       font-size: 2rem;
@@ -97,7 +183,6 @@
     p {
       font-size: 1.1rem;
       line-height: 1.6;
-      max-width: 100%;
     }
   }
 }

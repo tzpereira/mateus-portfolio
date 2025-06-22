@@ -1,21 +1,20 @@
 {
-    "title": "Work",
-    "works": [
-      {
-        "title": "API Bench CLI",
-        "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
-        "icon": "api-bench.png"
-      },
-      {
-        "title": "API Bench CLI",
-        "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
-        "icon": "api-bench.png"
-      },
-      {
-        "title": "API Bench CLI",
-        "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
-        "icon": "api-bench.png"
-      }
-    ]
-  }
-  
+  "title": "Work",
+  "works": [
+    {
+      "title": "API Bench CLI",
+      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "icon": "api-bench.png"
+    },
+    {
+      "title": "API Bench CLI 2",
+      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "icon": "api-bench.png"
+    },
+    {
+      "title": "API Bench CLI 3",
+      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "icon": "api-bench.png"
+    }
+  ]
+}
