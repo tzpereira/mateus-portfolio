@@ -4,7 +4,7 @@
   justify-content: center;
 
   &__title {
-    color: #ffffff;
+    color: var(--foreground);
     font-size: 1.25rem;
     font-weight: 200;
     margin-bottom: 0.5rem;
@@ -13,7 +13,7 @@
   &__content {
     position: relative;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 0.5px solid color-mix(in srgb, var(--foreground), transparent 80%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
@@ -32,7 +32,7 @@
 
     .service-card__description {
       flex: 2;
-      color: #e0e0e0;
+      color: var(--foreground);
       font-size: 1rem;
       line-height: 1.5;
     }
