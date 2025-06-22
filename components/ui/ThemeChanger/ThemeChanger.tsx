@@ -12,22 +12,28 @@ const updateTheme = (isDarkEnabled: boolean) => {
 };
 
 export default function ThemeChanger() {
-  const [isToggled, setIsToggled] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem(THEME_KEY);
-      return storedTheme ? storedTheme === 'dark' : true;
-    }
-    return true;
-  });
+  const [isToggled, setIsToggled] = useState(true); // valor default não importa muito
+  const [hasMounted, setHasMounted] = useState(false);
 
   const MoonIcon = iconMap['moon.svg'];
   const SunIcon = iconMap['sun.svg'];
 
   useEffect(() => {
-    updateTheme(isToggled);
-  }, [isToggled]);
+    const storedTheme = localStorage.getItem(THEME_KEY);
+    const prefersDark = storedTheme ? storedTheme === 'dark' : true;
+    setIsToggled(prefersDark);
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (hasMounted) {
+      updateTheme(isToggled);
+    }
+  }, [isToggled, hasMounted]);
 
   const toggleState = () => setIsToggled((prev) => !prev);
+
+  if (!hasMounted) return null;
 
   return (
     <label className="toggle-wrapper" htmlFor="toggle">
