@@ -1,3 +1,3 @@
-interface HeroProps {
+export interface HeroProps {
   locale: string;
 }

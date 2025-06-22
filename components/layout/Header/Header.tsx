@@ -1,7 +1,9 @@
 import './index.scss';
+import { HeaderProps } from './types';
+import initTranslations from '@/app/i18n';
+
 import { ThemeChanger } from '@/components/ui/ThemeChanger';
 import { LanguageChanger } from '@/components/ui/LanguageChanger';
-import initTranslations from '@/app/i18n';
 
 export default async function Header({ locale }: HeaderProps) {
   const { t } = await initTranslations(locale, ['header']);

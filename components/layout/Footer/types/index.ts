@@ -1,3 +1,3 @@
-interface FooterProps {
+export interface FooterProps {
   locale: string;
 }
