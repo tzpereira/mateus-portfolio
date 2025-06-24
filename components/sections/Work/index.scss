@@ -92,6 +92,11 @@
       border: 2px solid color-mix(in srgb, var(--foreground), transparent 60%);
     }
 
+    &::hover {
+      opacity: 1;
+      border: 2px solid color-mix(in srgb, var(--foreground), transparent 60%);
+    }
+
     &::after {
       content: '';
       position: absolute;

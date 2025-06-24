@@ -1,10 +1,7 @@
 import './index.scss';
+import { ServicesProps } from './types';
 import initTranslations from '@/app/i18n';
 import { ServiceCard } from '@/components/ui/ServiceCard';
-
-type ServicesProps = {
-  locale: string;
-};
 
 export default async function Services({ locale }: ServicesProps) {
   const { t } = await initTranslations(locale, ['services']);

@@ -2,12 +2,11 @@
 
 import './index.scss';
 import initTranslations from '@/app/i18n';
+import { WorkProps } from './types';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 
 import { imageMap } from '@/assets/image/imageExporter';
-
-type WorkProps = { locale: string };
 
 const CARD_HEIGHT_PERCENT = 60; // Altura de cada card em % da viewport
 const SWIPE_THRESHOLD = 30; // Mínimo de px para considerar como swipe
