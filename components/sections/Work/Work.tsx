@@ -4,7 +4,7 @@
 import './index.scss';
 
 // types
-import { WorkProps, WorkEntity } from './types';
+import { WorkEntity, WorkProps } from './types';
 
 // i18n
 import initTranslations from '@/app/i18n';
@@ -15,13 +15,13 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 // images
 import { imageMap } from '@/assets/image/imageExporter';
 
-const CARD_HEIGHT_PERCENT = 60; // Altura de cada card em % da viewport
-const SWIPE_THRESHOLD = 30; // Mínimo de px para considerar como swipe
+const CARD_HEIGHT_PERCENT = 60;
+const SWIPE_THRESHOLD = 30;
 
-export default async function Work({ locale }: WorkProps) {
-  const { t } = await initTranslations(locale, ['stack']);
+export default function Work({ locale }: WorkProps) {
+  const [sectionTitle, setSectionTitle] = useState('');
+  const [works, setWorks] = useState<WorkEntity[]>([]);
 
-  const works = t('works', { returnObjects: true }) as WorkEntity[];
   const containerRef = useRef<HTMLDivElement>(null);
 
   const touchStartY = useRef<number | null>(null);
@@ -30,7 +30,6 @@ export default async function Work({ locale }: WorkProps) {
   const [isLocked, setIsLocked] = useState(true); // Bloqueia scroll do body enquanto dentro da seção
   const [isAnimating, setIsAnimating] = useState(false); // Impede múltiplos scrolls enquanto anima
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null);
-  const [sectionTitle, setSectionTitle] = useState('');
 
   const activeIndexRef = useRef(0);
   const allowedScrollDirection = useRef<'up' | 'down' | null>(null); // Define direção do scroll permitido
@@ -40,6 +39,19 @@ export default async function Work({ locale }: WorkProps) {
     setActiveIndex(index);
     activeIndexRef.current = index;
   }, []);
+
+  // Inicializa título da seção com base no idioma
+  useEffect(() => {
+    initTranslations(locale, ['work']).then(({ t }) => {
+      const data = t('works', { returnObjects: true }) as {
+        title: string;
+        description: string;
+        icon: string;
+      }[];
+      setWorks(data);
+      setSectionTitle(t('title'));
+    });
+  }, [locale]);
 
   // Controla o scroll do body (ativa ou desativa com base no bloqueio)
   useEffect(() => {
@@ -194,7 +206,7 @@ export default async function Work({ locale }: WorkProps) {
       {works.length > 0 ? (
         <>
           <div className="work__title-container">
-            <h2 className="work__title">{t('title')}</h2>
+            <h2 className="work__title">{sectionTitle}</h2>
           </div>
           <div className="work__frame">
             <aside className="scroll-progress">
