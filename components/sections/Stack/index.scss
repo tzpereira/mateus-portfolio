@@ -1,0 +1,29 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+
+  &__title-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 80vw;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  &__hive-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    width: 80vw;
+    height: 60vh;
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "title": "Stack",
+  "stack_data": {
+    "languages": {
+      "title": "Linguagens",
+      "children": [
+        {
+          "title": "Go",
+          "description": "Linguagem compilada e tipada estaticamente, projetada para simplicidade e concorrência.",
+          "icon": "Go.svg"
+        },
+        {
+          "title": "Python",
+          "description": "Linguagem de alto nível conhecida pela legibilidade e capacidades de análise de dados.",
+          "icon": "Python.svg"
+        },
+        {
+          "title": "TypeScript",
+          "description": "JavaScript com tipagem estática para melhor experiência do desenvolvedor e ferramentas.",
+          "icon": "TypeScript.svg"
+        },
+        {
+          "title": "JavaScript",
+          "description": "A linguagem principal para desenvolvimento web dinâmico.",
+          "icon": "Javascript.svg"
+        },
+        {
+          "title": "Bash",
+          "description": "Shell Unix e linguagem de script usada para automação e DevOps.",
+          "icon": "Bash.svg"
+        },
+        {
+          "title": "PHP",
+          "description": "Linguagem amplamente usada no backend, especialmente em sistemas legados.",
+          "icon": "PHP.svg"
+        }
+      ]
+    },
+    "frameworks": {
+      "title": "Frameworks",
+      "children": [
+        {
+          "title": "Fiber",
+          "description": "Framework web para Go inspirado no Express.js, projetado para desempenho.",
+          "icon": "Fiber.svg"
+        },
+        {
+          "title": "Polars",
+          "description": "Biblioteca de DataFrame extremamente rápida para Python e Rust.",
+          "icon": "Polars.svg"
+        },
+        {
+          "title": "Node.js",
+          "description": "Ambiente de execução JavaScript para construir aplicações escaláveis.",
+          "icon": "Node.js.svg"
+        },
+        {
+          "title": "React",
+          "description": "Biblioteca para construção de interfaces com arquitetura baseada em componentes.",
+          "icon": "React.svg"
+        },
+        {
+          "title": "Next.js",
+          "description": "Framework React com SSR, geração de sites estáticos e recursos fullstack.",
+          "icon": "Next.js.svg"
+        },
+        {
+          "title": "Zend Framework",
+          "description": "Framework robusto em PHP para aplicações de nível empresarial.",
+          "icon": "Zend-Framework.svg"
+        },
+        {
+          "title": "Composer",
+          "description": "Gerenciador de dependências para PHP, permite estrutura modular de projetos.",
+          "icon": "Composer.svg"
+        }
+      ]
+    },
+    "devops": {
+      "title": "DevOps",
+      "children": [
+        {
+          "title": "Linux",
+          "description": "Sistema operacional open-source estilo Unix, amplamente utilizado em servidores e containers.",
+          "icon": "Linux.svg"
+        },
+        {
+          "title": "Docker",
+          "description": "Ferramenta para containerizar aplicações, garantindo ambientes consistentes.",
+          "icon": "Docker.svg"
+        },
+        {
+          "title": "AWS",
+          "description": "Amazon Web Services: infraestrutura e serviços de computação em nuvem.",
+          "icon": "AWS.svg"
+        },
+        {
+          "title": "NGINX",
+          "description": "Servidor HTTP e proxy reverso de alto desempenho.",
+          "icon": "NGINX.svg"
+        },
+        {
+          "title": "Grafana",
+          "description": "Plataforma open-source para dashboards de monitoramento e observabilidade.",
+          "icon": "Grafana.svg"
+        },
+        {
+          "title": "Cloudflare",
+          "description": "Plataforma de desempenho e segurança incluindo CDN e serviços de DNS.",
+          "icon": "Cloudflare.svg"
+        },
+        {
+          "title": "Prometheus",
+          "description": "Sistema de monitoramento e banco de dados de séries temporais para métricas.",
+          "icon": "Prometheus.svg"
+        }
+      ]
+    },
+    "database_tools": {
+      "title": "Banco de Dados e Ferramentas",
+      "children": [
+        {
+          "title": "PostgreSQL",
+          "description": "Banco de dados relacional avançado e open-source.",
+          "icon": "PostgreSQL.svg"
+        },
+        {
+          "title": "MySQL",
+          "description": "Banco de dados relacional open-source amplamente utilizado.",
+          "icon": "MySQL.svg"
+        },
+        {
+          "title": "Git",
+          "description": "Sistema de controle de versão distribuído para gerenciamento de código-fonte.",
+          "icon": "Git.svg"
+        },
+        {
+          "title": "Postman",
+          "description": "Ferramenta para testar, construir e documentar APIs.",
+          "icon": "Postman.svg"
+        },
+        {
+          "title": "SSH",
+          "description": "Protocolo para acesso remoto seguro a servidores e sistemas.",
+          "icon": "SSH.svg"
+        },
+        {
+          "title": "NPM",
+          "description": "Gerenciador de pacotes do Node utilizado para instalar dependências JS.",
+          "icon": "NPM.svg"
+        },
+        {
+          "title": "Webpack",
+          "description": "Empacotador de módulos para aplicações modernas em JavaScript.",
+          "icon": "Webpack.svg"
+        },
+        {
+          "title": "Swagger",
+          "description": "Framework para design, documentação e testes de APIs.",
+          "icon": "Swagger.svg"
+        }
+      ]
+    }
+  }
+}
