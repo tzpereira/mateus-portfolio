@@ -5,6 +5,7 @@ import './index.scss';
 
 // types
 import { StackProps, StackData } from './types';
+import type { TFunction } from 'i18next';
 
 // 118n
 import initTranslations from '@/app/i18n';
@@ -16,7 +17,7 @@ import { useEffect, useRef, useState } from 'react';
 import { HiveGroup } from '@/components/ui/HiveGroup';
 
 export default function Stack({ locale }: StackProps) {
-  const [t, setT] = useState<((key: string, options?: any) => any) | null>(null);
+  const [t, setT] = useState<TFunction | null>(null);
   const [stackData, setStackData] = useState<StackData | null>(null);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
