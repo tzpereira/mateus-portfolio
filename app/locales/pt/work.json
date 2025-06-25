@@ -1,19 +1,19 @@
 {
-  "title": "Work",
+  "title": "Projetos",
   "works": [
     {
       "title": "API Bench CLI",
-      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
     },
     {
       "title": "API Bench CLI 2",
-      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
     },
     {
       "title": "API Bench CLI 3",
-      "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
+      "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
     }
   ]

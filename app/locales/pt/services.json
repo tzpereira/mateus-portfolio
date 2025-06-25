@@ -1,24 +1,24 @@
 {
-  "title": "Services",
+  "title": "Serviços",
   "services": [
     {
-      "title": "Tech Strategy & Consulting",
-      "description": "I provide strategic guidance for teams and founders, helping them define optimal paths to achieve scalability, speed, and sustainable growth.",
+      "title": "Estratégia e Consultoria Técnica",
+      "description": "Ofereço orientação estratégica para equipes e fundadores, ajudando a definir caminhos ideais para escalar, ganhar velocidade e crescer de forma sustentável.",
       "icon": "cardinal-points.svg"
     },
     {
-      "title": "AI Integration & Automation",
-      "description": "Enhance your workflows with smart AI integration and custom automations—from OpenAI APIs to internal bots and data pipelines.",
+      "title": "Integração de IA e Automação",
+      "description": "Aprimore seus fluxos com integração inteligente de IA e automações personalizadas — desde APIs da OpenAI até bots internos e pipelines de dados.",
       "icon": "ai.svg"
     },
     {
-      "title": "Custom Software",
-      "description": "Building custom solutions: from backend systems and APIs to full web apps and automation tools, always with clean code and robust architecture.",
+      "title": "Software Sob Medida",
+      "description": "Criação de soluções personalizadas: de sistemas backend e APIs a aplicações web completas e ferramentas de automação, sempre com código limpo e arquitetura robusta.",
       "icon": "binary.svg"
     },
     {
-      "title": "Codebase Rescue & Support",
-      "description": "I recover underperforming systems through performance optimization, technical debt elimination, stack modernization, and bug reduction.",
+      "title": "Resgate e Suporte de Código",
+      "description": "Recupero sistemas ineficientes por meio de otimização de performance, eliminação de dívidas técnicas, modernização do stack e redução de bugs.",
       "icon": "support.svg"
     }
   ]
