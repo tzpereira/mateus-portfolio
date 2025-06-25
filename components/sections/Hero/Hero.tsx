@@ -1,7 +1,13 @@
+// styles
 import './index.scss';
+
+// types
 import { HeroProps } from './types';
+
+// i18n
 import initTranslations from '@/app/i18n';
 
+// components
 import { Header } from '@/components/layout/Header';
 
 export default async function Hero({ locale }: HeroProps) {

@@ -1,9 +1,17 @@
 'use client';
 
+// styles
 import './index.scss';
-import { useRouter, usePathname } from 'next/navigation';
+
+// types
+import { Locale } from './types'
+
+// i18n
 import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/i18nConfig';
+
+// next
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function LanguageChanger() {
   const { i18n } = useTranslation();
@@ -12,7 +20,7 @@ export default function LanguageChanger() {
   const currentPathname = usePathname();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value;
+    const newLocale = e.target.value as Locale;
 
     // Seta cookie
     const days = 30;

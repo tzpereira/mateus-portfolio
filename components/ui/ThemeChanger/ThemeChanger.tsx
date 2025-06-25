@@ -1,14 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { iconMap } from '@/assets/icons/iconExporter';
+// styles
 import './index.scss';
+
+// types
+import { Theme } from './types';
+
+// react
+import React, { useEffect, useState } from 'react';
+
+// icons
+import { iconMap } from '@/assets/icons/iconExporter';
 
 const THEME_KEY = 'theme';
 
-const updateTheme = (isDarkEnabled: boolean) => {
+const updateTheme = (isDarkEnabled: boolean): void => {
+  const theme: Theme = isDarkEnabled ? 'dark' : 'light';
   document.documentElement.classList.toggle('dark', isDarkEnabled);
-  localStorage.setItem(THEME_KEY, isDarkEnabled ? 'dark' : 'light');
+  localStorage.setItem(THEME_KEY, theme);
 };
 
 export default function ThemeChanger() {

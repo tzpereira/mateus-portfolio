@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+// styles
 import './index.scss';
 
-export default function ClientLoadingWrapper({ children }: { children: React.ReactNode }) {
+// types
+import { ClientLoadingWrapperProps } from './types';
+
+// react
+import React, { useState, useEffect } from 'react';
+
+export default function ClientLoadingWrapper({ children }: ClientLoadingWrapperProps) {
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,7 +25,7 @@ export default function ClientLoadingWrapper({ children }: { children: React.Rea
         }
         return prev + 1;
       });
-    }, 10);
+    }, 20);
 
     return () => clearInterval(interval);
   }, [isLoading]);

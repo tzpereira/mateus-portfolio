@@ -1,14 +1,16 @@
 'use client';
 
+// styles
 import './index.scss';
-import { useRef } from 'react';
-import { iconMap } from '@/assets/icons/iconExporter';
 
-type ServiceCardProps = {
-  title: string;
-  description: string;
-  icon: string;
-};
+// types
+import { ServiceCardProps } from './types';
+
+// react
+import { useRef } from 'react';
+
+// icons
+import { iconMap } from '@/assets/icons/iconExporter';
 
 export default function ServiceCard({ title, description, icon }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);

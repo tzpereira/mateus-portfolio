@@ -1,15 +1,19 @@
+// styles
 import './index.scss';
-import { ServicesProps } from './types';
+
+// types
+import { ServicesProps, Service } from './types';
+
+// i18n
 import initTranslations from '@/app/i18n';
+
+// components
 import { ServiceCard } from '@/components/ui/ServiceCard';
 
 export default async function Services({ locale }: ServicesProps) {
   const { t } = await initTranslations(locale, ['services']);
-  const services = t('services', { returnObjects: true }) as {
-    title: string;
-    description: string;
-    icon: string;
-  }[];
+
+  const services = t('services', { returnObjects: true }) as Service[];
 
   return (
     <section className="section services">

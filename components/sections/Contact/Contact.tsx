@@ -1,9 +1,11 @@
+// styles
 import './index.scss';
-import initTranslations from '@/app/i18n';
 
-type ContactProps = {
-  locale: string;
-};
+// types
+import { ContactProps } from './types';
+
+// i18n
+import initTranslations from '@/app/i18n';
 
 export default async function Contact({ locale }: ContactProps) {
   const { t } = await initTranslations(locale, ['contact']);
