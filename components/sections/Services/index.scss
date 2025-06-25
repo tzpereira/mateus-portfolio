@@ -31,41 +31,4 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
-
-  &__card {
-    background-color: #151515;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    text-align: left;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-
-    &:hover {
-      transform: translateY(-4px);
-      border-color: #3d3d3d;
-    }
-  }
-
-  &__icon {
-    width: 80px;
-    height: 80px;
-    fill: #9f9f9f;
-    margin-bottom: 0.5rem;
-  }
-
-  &__card-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--foreground);
-  }
-
-  &__card-description {
-    font-size: 0.95rem;
-    color: var(--foreground);
-    line-height: 1.6;
-  }
 }
