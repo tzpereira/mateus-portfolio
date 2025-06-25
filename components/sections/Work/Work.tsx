@@ -10,7 +10,7 @@ import { WorkEntity, WorkProps } from './types';
 import initTranslations from '@/app/i18n';
 
 // react
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 
 // components
 import { WorkCard } from '@/components/ui/WorkCard';
@@ -22,52 +22,29 @@ const SWIPE_THRESHOLD = 30;
 export default function Work({ locale }: WorkProps) {
   const [sectionTitle, setSectionTitle] = useState('');
   const [works, setWorks] = useState<WorkEntity[]>([]);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const touchStartY = useRef<number | null>(null);
-
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isLocked, setIsLocked] = useState(true); // Bloqueia scroll do body enquanto dentro da seção
-  const [isAnimating, setIsAnimating] = useState(false); // Impede múltiplos scrolls enquanto anima
+  const [isLocked, setIsLocked] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartY = useRef<number | null>(null);
   const activeIndexRef = useRef(0);
-  const allowedScrollDirection = useRef<'up' | 'down' | null>(null); // Define direção do scroll permitido
+  const allowedScrollDirection = useRef<'up' | 'down' | null>(null);
 
-  // Atualiza o índice ativo e mantém referência sincronizada
+  const cardCount = useMemo(() => works.length, [works]);
+
+  // Atualiza index e sincroniza ref
   const updateIndex = useCallback((index: number) => {
     setActiveIndex(index);
     activeIndexRef.current = index;
   }, []);
 
-  // Inicializa título da seção com base no idioma
-  useEffect(() => {
-    initTranslations(locale, ['work']).then(({ t }) => {
-      const data = t('works', { returnObjects: true }) as {
-        title: string;
-        description: string;
-        icon: string;
-      }[];
-      setWorks(data);
-      setSectionTitle(t('title'));
-    });
-  }, [locale]);
-
-  // Controla o scroll do body (ativa ou desativa com base no bloqueio)
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = isLocked ? 'hidden' : previousOverflow;
-    return () => { document.body.style.overflow = previousOverflow };
-  }, [isLocked]);
-
-  // Faz scroll animado para o índice desejado
+  // Anima scroll para índice
   const animateScrollTo = useCallback((index: number) => {
     if (!containerRef.current) return;
-
     setIsAnimating(true);
     updateIndex(index);
-
     containerRef.current.classList.add('is-scrolling');
     containerRef.current.style.transform = `translateY(-${index * CARD_HEIGHT_PERCENT}vh)`;
 
@@ -77,141 +54,134 @@ export default function Work({ locale }: WorkProps) {
     }, 500);
   }, [updateIndex]);
 
-  // Lida com evento de scroll (wheel ou teclado)
-  const handleUserScroll = useCallback(
-    (dir: 'up' | 'down') => {
-      if (isAnimating) return;
+  // Scroll por interação
+  const handleUserScroll = useCallback((dir: 'up' | 'down') => {
+    if (isAnimating) return;
 
-      const CARD_COUNT = works.length;
+    const current = activeIndexRef.current;
+    const nextIndex = dir === 'down' ? current + 1 : current - 1;
 
-      const current = activeIndexRef.current;
-      const nextIndex = dir === 'down' ? current + 1 : current - 1;
+    const outOfBounds = nextIndex < 0 || nextIndex >= cardCount;
 
-      // Se chegou no limite da seção, desbloqueia o body para sair
-      if (nextIndex < 0 || nextIndex >= CARD_COUNT) {
-        if (current === 0 && dir === 'up') {
-          setIsLocked(false);
-          allowedScrollDirection.current = null;
-        }
-        if (current === CARD_COUNT - 1 && dir === 'down') {
-          setIsLocked(false);
-          allowedScrollDirection.current = null;
-        }
-        return;
+    if (outOfBounds) {
+      if ((current === 0 && dir === 'up') || (current === cardCount - 1 && dir === 'down')) {
+        setIsLocked(false);
+        allowedScrollDirection.current = null;
       }
+      return;
+    }
 
-      // Define a direção do fluxo na primeira interação
-      if (allowedScrollDirection.current === null) {
-        allowedScrollDirection.current = dir;
+    if (allowedScrollDirection.current === null) {
+      allowedScrollDirection.current = dir;
+    }
+
+    setTimeout(() => {
+      setScrollDirection(dir);
+      animateScrollTo(nextIndex);
+
+      const atTop = current === 0 && dir === 'up';
+      const atBottom = current === cardCount - 1 && dir === 'down';
+
+      if (
+        (atTop && allowedScrollDirection.current === 'up') ||
+        (atBottom && allowedScrollDirection.current === 'down')
+      ) {
+        setIsLocked(false);
+        allowedScrollDirection.current = null;
+      } else {
+        setIsLocked(true);
       }
+    }, 100);
+  }, [isAnimating, animateScrollTo, cardCount]);
 
-      // Aguarda 100ms para iniciar o scroll animado
-      setTimeout(() => {
-        setScrollDirection(dir);
-        animateScrollTo(nextIndex);
+  // Traduções e dados
+  useEffect(() => {
+    initTranslations(locale, ['work']).then(({ t }) => {
+      setWorks(t('works', { returnObjects: true }) as WorkEntity[]);
+      setSectionTitle(t('title'));
+    });
+  }, [locale]);
 
-        const atTopGoingUp = current === 0 && dir === 'up';
-        const atBottomGoingDown = current === CARD_COUNT - 1 && dir === 'down';
+  // Controle de scroll do body
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = isLocked ? 'hidden' : prev;
+    return () => { document.body.style.overflow = prev; };
+  }, [isLocked]);
 
-        if (
-          (atTopGoingUp && allowedScrollDirection.current === 'up') ||
-          (atBottomGoingDown && allowedScrollDirection.current === 'down')
-        ) {
-          setIsLocked(false);
-          allowedScrollDirection.current = null;
-        } else {
-          setIsLocked(true);
-        }
-      }, 100);
-    },
-    [isAnimating, animateScrollTo, activeIndex, works]
-  );
-
-  // Observa a seção para saber quando deve bloquear/desbloquear o scroll externo
+  // Observador de entrada/saída da seção
   useEffect(() => {
     const section = document.querySelector('.work');
     if (!section) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio === 1) {
-          setIsLocked(true); // Entrou na seção
-          allowedScrollDirection.current = null;
-        } else if (!entry.isIntersecting) {
-          setIsLocked(false); // Saiu da seção
-          allowedScrollDirection.current = null;
-        }
+        setIsLocked(entry.isIntersecting && entry.intersectionRatio === 1);
+        allowedScrollDirection.current = null;
       },
       { threshold: [1] }
     );
-
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
 
-  // Adiciona eventos de scroll do mouse e do teclado
+  // Eventos de input (scroll, teclado, toque)
   useEffect(() => {
     if (!isLocked) return;
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      const direction = e.deltaY > 0 ? 'down' : 'up';
-      handleUserScroll(direction);
+      handleUserScroll(e.deltaY > 0 ? 'down' : 'up');
     };
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowDown', 'PageDown', ' ', 'Spacebar'].includes(e.key)) {
+      const keysDown = ['ArrowDown', 'PageDown', ' ', 'Spacebar'];
+      const keysUp = ['ArrowUp', 'PageUp'];
+      if (keysDown.includes(e.key)) {
         e.preventDefault();
         handleUserScroll('down');
-      } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
+      } else if (keysUp.includes(e.key)) {
         e.preventDefault();
         handleUserScroll('up');
       }
     };
 
-    // TOQUE: INÍCIO DO TOQUE
     const onTouchStart = (e: TouchEvent) => {
       touchStartY.current = e.touches[0].clientY;
     };
 
-    // TOQUE: FIM DO TOQUE
     const onTouchEnd = (e: TouchEvent) => {
       if (touchStartY.current === null) return;
-
-      const touchEndY = e.changedTouches[0].clientY;
-      const deltaY = touchStartY.current - touchEndY;
-
+      const deltaY = touchStartY.current - e.changedTouches[0].clientY;
       if (Math.abs(deltaY) > SWIPE_THRESHOLD) {
-        const direction = deltaY > 0 ? 'down' : 'up';
-        handleUserScroll(direction);
+        handleUserScroll(deltaY > 0 ? 'down' : 'up');
       }
-
       touchStartY.current = null;
     };
 
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchend', onTouchEnd, { passive: true });
     window.addEventListener('wheel', onWheel, { passive: false });
     window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
 
     return () => {
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
     };
   }, [handleUserScroll, isLocked]);
 
+  // Render
   return (
     <section className="section work">
-      {works.length > 0 ? (
+      {works.length > 0 && (
         <>
           <div className="work__title-container">
             <h2 className="work__title">{sectionTitle}</h2>
           </div>
           <div className="work__frame">
             <ScrollProgress
-              total={works.length}
+              total={cardCount}
               currentIndex={activeIndex}
               onDotClick={animateScrollTo}
             />
@@ -227,7 +197,7 @@ export default function Work({ locale }: WorkProps) {
             </div>
           </div>
         </>
-      ) : null}
+      )}
     </section>
   );
 }
