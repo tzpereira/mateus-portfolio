@@ -68,11 +68,6 @@
           "title": "Zend Framework",
           "description": "Framework robusto em PHP para aplicações de nível empresarial.",
           "icon": "Zend-Framework.svg"
-        },
-        {
-          "title": "Composer",
-          "description": "Gerenciador de dependências para PHP, permite estrutura modular de projetos.",
-          "icon": "Composer.svg"
         }
       ]
     },
@@ -130,21 +125,6 @@
           "icon": "MySQL.svg"
         },
         {
-          "title": "Git",
-          "description": "Sistema de controle de versão distribuído para gerenciamento de código-fonte.",
-          "icon": "Git.svg"
-        },
-        {
-          "title": "Postman",
-          "description": "Ferramenta para testar, construir e documentar APIs.",
-          "icon": "Postman.svg"
-        },
-        {
-          "title": "SSH",
-          "description": "Protocolo para acesso remoto seguro a servidores e sistemas.",
-          "icon": "SSH.svg"
-        },
-        {
           "title": "NPM",
           "description": "Gerenciador de pacotes do Node utilizado para instalar dependências JS.",
           "icon": "NPM.svg"
@@ -153,6 +133,21 @@
           "title": "Webpack",
           "description": "Empacotador de módulos para aplicações modernas em JavaScript.",
           "icon": "Webpack.svg"
+        },
+        {
+          "title": "Composer",
+          "description": "Gerenciador de dependências para PHP, permite estrutura modular de projetos.",
+          "icon": "Composer.svg"
+        },
+        {
+          "title": "Git",
+          "description": "Sistema de controle de versão distribuído para gerenciamento de código-fonte.",
+          "icon": "Git.svg"
+        },
+        {
+          "title": "Postman",
+          "description": "Ferramenta para testar, construir e documentar APIs.",
+          "icon": "Postman.svg"
         },
         {
           "title": "Swagger",

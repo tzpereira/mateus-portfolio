@@ -68,11 +68,6 @@
           "title": "Zend Framework",
           "description": "Robust PHP framework for building enterprise-level applications.",
           "icon": "Zend-Framework.svg"
-        },
-        {
-          "title": "Composer",
-          "description": "Dependency manager for PHP, enabling modular project structure.",
-          "icon": "Composer.svg"
         }
       ]
     },
@@ -130,21 +125,6 @@
           "icon": "MySQL.svg"
         },
         {
-          "title": "Git",
-          "description": "Distributed version control system for source code management.",
-          "icon": "Git.svg"
-        },
-        {
-          "title": "Postman",
-          "description": "Tool for testing, building, and documenting APIs.",
-          "icon": "Postman.svg"
-        },
-        {
-          "title": "SSH",
-          "description": "Protocol for secure remote access to servers and systems.",
-          "icon": "SSH.svg"
-        },
-        {
           "title": "NPM",
           "description": "Node package manager used to install JS dependencies.",
           "icon": "NPM.svg"
@@ -153,6 +133,21 @@
           "title": "Webpack",
           "description": "Module bundler for modern JavaScript applications.",
           "icon": "Webpack.svg"
+        },
+        {
+          "title": "Composer",
+          "description": "Dependency manager for PHP, enabling modular project structure.",
+          "icon": "Composer.svg"
+        },
+        {
+          "title": "Git",
+          "description": "Distributed version control system for source code management.",
+          "icon": "Git.svg"
+        },
+        {
+          "title": "Postman",
+          "description": "Tool for testing, building, and documenting APIs.",
+          "icon": "Postman.svg"
         },
         {
           "title": "Swagger",
