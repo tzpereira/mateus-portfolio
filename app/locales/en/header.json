@@ -1,7 +1,6 @@
 {
-    "logo":"Mateus da Silva",
-    "services":"Services",
-    "work":"Work",
-    "stack":"Stack",
-    "contact":"Contact"
+    "services":"SERVICES",
+    "work":"WORK",
+    "stack":"STACK",
+    "contact":"CONTACT"
 }
