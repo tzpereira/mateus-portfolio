@@ -25,7 +25,7 @@ export default function ClientLoadingWrapper({ children }: ClientLoadingWrapperP
         }
         return prev + 1;
       });
-    }, 20);
+    }, 5);
 
     return () => clearInterval(interval);
   }, [isLoading]);
