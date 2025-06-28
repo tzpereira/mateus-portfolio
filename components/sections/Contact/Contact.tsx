@@ -11,7 +11,7 @@ export default async function Contact({ locale }: ContactProps) {
   const { t } = await initTranslations(locale, ['contact']);
 
   return (
-    <section className="section contact">
+    <section id="contact" className="section contact">
       <div className="contact__title-container">
         <h2 className="contact__title">{t('title')}</h2>
       </div>
