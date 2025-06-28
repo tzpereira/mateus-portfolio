@@ -11,7 +11,7 @@
         position: relative;
         width: 6px;
         height: 80%;
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: color-mix(in srgb, var(--foreground), transparent 90%);
         border-radius: 3px;
     }
 
