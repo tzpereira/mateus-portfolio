@@ -1,0 +1,40 @@
+.scroll-indicator {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    margin-top: 2rem;
+    cursor: pointer;
+
+    &__icon-wrapper {
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    &__arrow {
+        color: var(--foreground);
+        width: 56px;
+        height: 32px;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    &__text {
+        margin-top: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--foreground);
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
