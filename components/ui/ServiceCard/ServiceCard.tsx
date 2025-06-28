@@ -33,8 +33,7 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     const distX = (x - centerX) / centerX;
     const distY = (y - centerY) / centerY;
 
-    // Ajuste aqui os valores para simular uma "mesa de vidro pesada"
-    const maxTilt = 8; // graus máximos de inclinação
+    const maxTilt = 8;
     const rotateX = distY * maxTilt;
     const rotateY = distX * -maxTilt;
 
@@ -55,7 +54,8 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
       className="service-card"
       initial={{ opacity: 0, x: fromRight ? 100 : -100 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      exit={{ opacity: 0, x: fromRight ? 100 : -100 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       <h3 className="service-card__title">{title}</h3>
       <div

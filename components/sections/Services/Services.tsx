@@ -16,13 +16,16 @@ import { useEffect, useState } from 'react';
 // components
 import { ServiceCard } from '@/components/ui/ServiceCard';
 
+// hooks
+import { useSectionVisibility } from '@/hooks/useSectionVisibility';
+
 // motion
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Services({ locale }: ServicesProps) {
+  const isVisible = useSectionVisibility('services');
   const [t, setT] = useState<TFunction | null>(null);
   const [services, setServices] = useState<Service[]>([]);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     initTranslations(locale, ['services']).then(({ t }) => {
@@ -31,60 +34,59 @@ export default function Services({ locale }: ServicesProps) {
     });
   }, [locale]);
 
-  useEffect(() => {
-    const section = document.querySelector('.services');
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting && entry.intersectionRatio === 1);
-      },
-      { threshold: [1] }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="services" className="section services">
-      {isVisible ? (
-        <motion.div
-          className='services__title-container'
-          initial={{ opacity: 0.1, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}>
-          <h2 className="services__title">{t ? t('title') : ''}</h2>
-        </motion.div>
-      ) : (
-        <></>
-      )}
-      <div className="services__frame">
-        {isVisible ? (
+      <AnimatePresence mode="wait">
+        {isVisible && (
           <motion.div
-            className="services__grid"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.2,
-                },
-              },
-              hidden: {},
-            }}
+            key="services-title"
+            className="services__title-container"
+            initial={{ opacity: 0.1, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            {services?.map && services.map((service, idx) => (
-              <ServiceCard
-                key={idx}
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                fromRight={idx % 2 === 1}
-              />
-            ))}
+            <h2 className="services__title">{t ? t('title') : ''}</h2>
           </motion.div>
-        ) : (
-          <></>
         )}
+      </AnimatePresence>
+
+      <div className="services__frame">
+        <AnimatePresence mode="wait">
+          {isVisible && (
+            <motion.div
+              key="services-grid"
+              className="services__grid"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.2,
+                  },
+                },
+                exit: {
+                  transition: {
+                    staggerChildren: 0.1,
+                    staggerDirection: -1,
+                  },
+                },
+              }}
+            >
+              {services?.map((service, idx) => (
+                <ServiceCard
+                  key={idx}
+                  title={service.title}
+                  description={service.description}
+                  icon={service.icon}
+                  fromRight={idx % 2 === 1}
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
