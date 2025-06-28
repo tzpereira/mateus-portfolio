@@ -1,38 +1,69 @@
 .hero {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
 
+  &__header-frame {
+    width: 80vw;
+    margin: 0 auto;
+    height: 10vh;
+    flex-shrink: 0;
+  }
+
   &__frame {
-    border: 0.5px solid var(--foreground);
-    padding-right: 2rem;
-    padding-left: 2rem;
-    width: 98%;
-    height: 95%;
-    position: absolute;
+    position: relative;
+    width: 80vw;
+    height: 90vh;
+    flex-grow: 1;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
     border-radius: 6px;
+    flex-direction: column;
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
   }
 
   &__title {
-    font-size: 1rem;
-    font-weight: normal;
-    margin-bottom: 1rem;
+    font-size: 19rem;
+    font-weight: 900;
+    font-style: italic;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.28em;
+    word-break: keep-all;
+    margin: 0;
+    padding: 0;
+  
+    &--break {
+      display: inline;
+    }
   }
 
   &__description {
-    font-size: 1.2rem;
-    width: 55%;
+    font-size: 3rem;
+    font-weight: 700;
+    font-style: italic;
+    text-align: right;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
   }
 
   &__note {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
+    max-width: 25vw;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-weight: 100;
+    text-align: left;
     opacity: 0.8;
-    text-align: right;
-    width: 15vw;
+    margin-top: 2rem;
   }
 }
