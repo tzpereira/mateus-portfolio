@@ -13,19 +13,42 @@ import { TFunction } from 'i18next';
 // react
 import React, { useEffect, useState } from 'react';
 
-//components
+// components
 import { Header } from '@/components/layout/Header';
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
 
-// motion
-import { motion } from 'framer-motion';
+// hooks
+import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 
-const fadeUpMotion = {
+// motion
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.2 },
+  },
+  exit: {
+    transition: { staggerChildren: 0.1, staggerDirection: -1 },
+  },
+};
+
+const fadeUpMotion: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    y: -40,
+    transition: { duration: 0.2, ease: 'easeIn' },
+  },
 };
 
 export default function Hero({ locale }: HeroProps) {
+  const isVisible = useSectionVisibility('hero');
   const [t, setT] = useState<TFunction | null>(null);
 
   useEffect(() => {
@@ -39,24 +62,36 @@ export default function Hero({ locale }: HeroProps) {
       <div className="hero__header-frame">
         <Header locale={locale} />
       </div>
+
       <div className="hero__frame">
-        <motion.div
-          className="hero__content"
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
-        >
-          <motion.h1 className="hero__title" variants={fadeUpMotion}>
-            MAT<span className="hero__title--break">EUS</span>
-          </motion.h1>
-          <motion.p className="hero__description" variants={fadeUpMotion}>
-            {t ? t('title') : ''}
-          </motion.p>
-          <motion.span className="hero__note" variants={fadeUpMotion}>
-            {t ? t('note') : ''}
-          </motion.span>
-        </motion.div>
-        <ScrollIndicator targetId="services" />
+        <AnimatePresence mode="wait">
+          {isVisible && (
+            <motion.div
+              key="hero-content"
+              className="hero__content"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={containerVariants}
+            >
+              <motion.h1 className="hero__title" variants={fadeUpMotion}>
+                MAT<span className="hero__title--break">EUS</span>
+              </motion.h1>
+              <motion.p className="hero__description" variants={fadeUpMotion}>
+                {t ? t('title') : ''}
+              </motion.p>
+              <motion.span className="hero__note" variants={fadeUpMotion}>
+                {t ? t('note') : ''}
+              </motion.span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence mode="wait">
+          {isVisible && (
+            <ScrollIndicator key="scroll-indicator" targetId="services" />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

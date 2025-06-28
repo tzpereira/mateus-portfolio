@@ -1,10 +1,13 @@
-'use client'
+'use client';
 
 // styles
 import './index.scss';
 
 // types
 import type { ScrollIndicatorProps } from './types';
+
+// motion
+import { motion, Variants } from 'framer-motion';
 
 function scrollToSection(id: string) {
   const element = document.getElementById(id);
@@ -13,13 +16,28 @@ function scrollToSection(id: string) {
   }
 }
 
+const scrollMotion: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: { opacity: 0, y: 40, transition: { duration: 0.2, ease: 'easeIn' } },
+};
+
 export default function ScrollIndicator({ targetId }: ScrollIndicatorProps) {
   return (
-    <div
+    <motion.div
       className="scroll-indicator"
-      aria-label="Scroll down"
-      onClick={() => scrollToSection(targetId)}
       role="button"
+      tabIndex={0}
+      aria-label="Scroll down"
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={scrollMotion}
+      onClick={() => scrollToSection(targetId)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           scrollToSection(targetId);
@@ -44,6 +62,6 @@ export default function ScrollIndicator({ targetId }: ScrollIndicatorProps) {
         </svg>
       </div>
       <div className="scroll-indicator__text">SCROLL</div>
-    </div>
+    </motion.div>
   );
 }
