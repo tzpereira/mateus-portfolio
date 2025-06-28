@@ -7,20 +7,26 @@ import './index.scss';
 import { StackProps, StackData } from './types';
 import type { TFunction } from 'i18next';
 
-// 118n
+// i18n
 import initTranslations from '@/app/i18n';
 
 // react
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// icons
+// motion
+import { motion } from 'framer-motion';
+
+// components
 import { HiveGroup } from '@/components/ui/HiveGroup';
+
+// hooks
+import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 
 export default function Stack({ locale }: StackProps) {
   const [t, setT] = useState<TFunction | null>(null);
   const [stackData, setStackData] = useState<StackData | null>(null);
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+
+  const isVisible = useSectionVisibility('stack');
 
   useEffect(() => {
     initTranslations(locale, ['stack']).then(({ t }) => {
@@ -30,42 +36,30 @@ export default function Stack({ locale }: StackProps) {
     });
   }, [locale]);
 
-  useEffect(() => {
-    const section = document.querySelector('.stack');
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setVisible(entry.isIntersecting && entry.intersectionRatio === 1);
-      },
-      { threshold: [1] }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    console.log('Visible:', visible);
-  }, [visible]);
-
-  if (!t || !stackData) return null;
-
   return (
     <section id="stack" className="section stack">
-      <div className="stack__title-container">
-        <h2 className="stack__title">{t('title')}</h2>
-      </div>
-      <div ref={ref} className={`stack__hive-grid ${visible ? 'animate' : ''}`}>
-        {Object.entries(stackData).map(([key, group]) => (
-          <HiveGroup
-            key={key}
-            title={group.title}
-            items={group.children}
-            visible={visible}
-          />
-        ))}
-      </div>
+      {isVisible ? (
+        <>
+          <motion.div
+            className="stack__title-container"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <h2 className="stack__title">{t ? t('title') : ''}</h2>
+          </motion.div>
+
+          <div className="stack__hive-grid">
+            {stackData && Object.entries(stackData).map(([key, group]) => (
+              <HiveGroup
+                key={key}
+                title={group.title}
+                items={group.children}
+              />
+            ))}
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

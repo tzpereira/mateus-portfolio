@@ -6,15 +6,34 @@ import './index.scss';
 // types
 import { HiveGroupProps } from './types';
 
+// motion
+import { motion, Variants } from 'framer-motion';
+
 // icons
 import { iconMap } from '@/assets/icons/iconExporter';
 
-// react
-import React from 'react';
+const groupVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+      ease: 'easeOut',
+      duration: 0.5,
+    },
+  },
+};
 
-export default function HiveGroup({ title, items, visible = false }: HiveGroupProps) {
+export default function HiveGroup({ title, items }: HiveGroupProps) {
   return (
-    <div className="hive">
+    <motion.div
+      className="hive"
+      variants={groupVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <h3 className="hive__group-title">{title}</h3>
       <div className="hive__hexgrid">
         {items.map((item, idx) => {
@@ -22,17 +41,17 @@ export default function HiveGroup({ title, items, visible = false }: HiveGroupPr
           if (!Icon) return null;
 
           return (
-            <div
+            <motion.div
               key={item.title}
-              className={`hive__hex ${visible ? 'animate' : ''}`}
+              className={'hive__hex'}
               style={{ transitionDelay: `${idx * 60}ms` }}
               title={item.description}
             >
               <Icon className="hive__icon" />
-            </div>
+            </motion.div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
