@@ -1,3 +1,5 @@
+'use client';
+
 // styles
 import './index.scss';
 
@@ -6,13 +8,31 @@ import { HeroProps } from './types';
 
 // i18n
 import initTranslations from '@/app/i18n';
+import { TFunction } from 'i18next';
 
-// components
+// react
+import React, { useEffect, useState } from 'react';
+
+//components
 import { Header } from '@/components/layout/Header';
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
 
-export default async function Hero({ locale }: HeroProps) {
-  const { t } = await initTranslations(locale, ['hero']);
+// motion
+import { motion } from 'framer-motion';
+
+const fadeUpMotion = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+
+export default function Hero({ locale }: HeroProps) {
+  const [t, setT] = useState<TFunction | null>(null);
+
+  useEffect(() => {
+    initTranslations(locale, ['hero']).then(({ t }) => {
+      setT(() => t);
+    });
+  }, [locale]);
 
   return (
     <section id="hero" className="section hero">
@@ -20,14 +40,23 @@ export default async function Hero({ locale }: HeroProps) {
         <Header locale={locale} />
       </div>
       <div className="hero__frame">
-        <div className="hero__content">
-          <h1 className="hero__title">
+        <motion.div
+          className="hero__content"
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+        >
+          <motion.h1 className="hero__title" variants={fadeUpMotion}>
             MAT<span className="hero__title--break">EUS</span>
-          </h1>
-          <p className="hero__description">{t('title')}</p>
-          <span className="hero__note">{t('note')}</span>
-        </div>
-        <ScrollIndicator targetId={'services'} />
+          </motion.h1>
+          <motion.p className="hero__description" variants={fadeUpMotion}>
+            {t ? t('title') : ''}
+          </motion.p>
+          <motion.span className="hero__note" variants={fadeUpMotion}>
+            {t ? t('note') : ''}
+          </motion.span>
+        </motion.div>
+        <ScrollIndicator targetId="services" />
       </div>
     </section>
   );
