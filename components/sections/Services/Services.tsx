@@ -16,7 +16,7 @@ export default async function Services({ locale }: ServicesProps) {
   const services = t('services', { returnObjects: true }) as Service[];
 
   return (
-    <section className="section services">
+    <section id="services" className="section services">
       <div className='services__title-container'>
         <h2 className="services__title">{t('title')}</h2>
       </div>
