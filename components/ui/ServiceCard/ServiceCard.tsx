@@ -12,7 +12,10 @@ import { useRef } from 'react';
 // icons
 import { iconMap } from '@/assets/icons/iconExporter';
 
-export default function ServiceCard({ title, description, icon }: ServiceCardProps) {
+// motion
+import { motion } from 'framer-motion';
+
+export default function ServiceCard({ title, description, icon, fromRight = false }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const IconComponent = iconMap[icon];
 
@@ -48,7 +51,12 @@ export default function ServiceCard({ title, description, icon }: ServiceCardPro
   };
 
   return (
-    <div className="service-card">
+    <motion.div
+      className="service-card"
+      initial={{ opacity: 0, x: fromRight ? 100 : -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <h3 className="service-card__title">{title}</h3>
       <div
         className="service-card__content"
@@ -67,6 +75,6 @@ export default function ServiceCard({ title, description, icon }: ServiceCardPro
           />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
