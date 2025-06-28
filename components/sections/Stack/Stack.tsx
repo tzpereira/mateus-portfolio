@@ -52,7 +52,7 @@ export default function Stack({ locale }: StackProps) {
   if (!t || !stackData) return null;
 
   return (
-    <section className="section stack">
+    <section id="stack" className="section stack">
       <div className="stack__title-container">
         <h2 className="stack__title">{t('title')}</h2>
       </div>
