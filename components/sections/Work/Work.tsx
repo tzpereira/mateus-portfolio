@@ -173,7 +173,7 @@ export default function Work({ locale }: WorkProps) {
 
   // Render
   return (
-    <section className="section work">
+    <section id="work" className="section work">
       {works.length > 0 && (
         <>
           <div className="work__title-container">
