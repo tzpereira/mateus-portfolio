@@ -37,7 +37,7 @@ export default function Services({ locale }: ServicesProps) {
   return (
     <section id="services" className="section services">
       <AnimatePresence mode="wait">
-        {isVisible && (
+        {isVisible && t ? (
           <motion.div
             key="services-title"
             className="services__title-container"
@@ -46,14 +46,16 @@ export default function Services({ locale }: ServicesProps) {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            <h2 className="services__title">{t ? t('title') : ''}</h2>
+            <h2 className="services__title">{t('title')}</h2>
           </motion.div>
+        ) : (
+          null
         )}
       </AnimatePresence>
 
       <div className="services__frame">
         <AnimatePresence mode="wait">
-          {isVisible && (
+          {isVisible && services.length > 0 ? (
             <motion.div
               key="services-grid"
               className="services__grid"
@@ -85,6 +87,8 @@ export default function Services({ locale }: ServicesProps) {
                 />
               ))}
             </motion.div>
+          ) : (
+            null
           )}
         </AnimatePresence>
       </div>

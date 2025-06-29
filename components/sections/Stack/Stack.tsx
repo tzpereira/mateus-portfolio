@@ -38,7 +38,7 @@ export default function Stack({ locale }: StackProps) {
 
   return (
     <section id="stack" className="section stack">
-      {isVisible ? (
+      {isVisible && t ? (
         <>
           <motion.div
             className="stack__title-container"
@@ -46,7 +46,7 @@ export default function Stack({ locale }: StackProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="stack__title">{t ? t('title') : ''}</h2>
+            <h2 className="stack__title">{t('title')}</h2>
           </motion.div>
 
           <div className="stack__hive-grid">

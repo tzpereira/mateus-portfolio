@@ -65,7 +65,7 @@ export default function Hero({ locale }: HeroProps) {
 
       <div className="hero__frame">
         <AnimatePresence mode="wait">
-          {isVisible && (
+          {isVisible && t ? (
             <motion.div
               key="hero-content"
               className="hero__content"
@@ -78,18 +78,22 @@ export default function Hero({ locale }: HeroProps) {
                 MAT<span className="hero__title--break">EUS</span>
               </motion.h1>
               <motion.p className="hero__description" variants={fadeUpMotion}>
-                {t ? t('title') : ''}
+                {t('title')}
               </motion.p>
               <motion.span className="hero__note" variants={fadeUpMotion}>
-                {t ? t('note') : ''}
+                {t('note')}
               </motion.span>
             </motion.div>
+          ) : (
+            null
           )}
         </AnimatePresence>
 
         <AnimatePresence mode="wait">
-          {isVisible && (
+          {isVisible ? (
             <ScrollIndicator key="scroll-indicator" targetId="services" />
+          ) : (
+            null
           )}
         </AnimatePresence>
       </div>
