@@ -13,6 +13,9 @@ import React, { useState, useEffect } from 'react';
 import type { TFunction } from 'i18next';
 import initTranslations from '@/app/i18n';
 
+// motion
+import { motion } from 'framer-motion';
+
 // custom components
 import { BurgerMenu } from '@/components/ui/BurgerMenu';
 import { ThemeChanger } from '@/components/ui/ThemeChanger';
@@ -45,11 +48,23 @@ export default function Header({ locale }: HeaderProps) {
 
   return (
     <header className="header">
-      <BurgerMenu menuItems={menuItems} />
-      <div className="header__actions">
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
+        <BurgerMenu menuItems={menuItems} />
+      </motion.div>
+
+      <motion.div
+        className="header__actions"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
         <ThemeChanger />
         <LanguageChanger />
-      </div>
+      </motion.div>
     </header>
   );
 }
