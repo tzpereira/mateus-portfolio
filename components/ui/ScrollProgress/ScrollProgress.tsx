@@ -7,7 +7,7 @@ import './index.scss';
 import { ScrollProgressProps } from './types';
 
 // motion
-import { motion, Variants, easeOut } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const variants: Variants = {
   hidden: { opacity: 0, x: -30 },
