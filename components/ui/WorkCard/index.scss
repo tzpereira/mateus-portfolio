@@ -1,5 +1,5 @@
 .work-card {
-    display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: stretch;
   width: 100%;
@@ -8,19 +8,6 @@
   box-sizing: border-box;
   scroll-snap-align: start;
   user-select: none;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-
-    .work-card__text {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 
   &__image {
     flex: 1 1 60%;
@@ -48,9 +35,6 @@
     align-items: flex-start;
     padding-top: 1rem;
     color: var(--foreground);
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 
     h2 {
       font-size: 2rem;

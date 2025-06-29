@@ -14,13 +14,41 @@ import initTranslations from '@/app/i18n';
 import { useEffect, useState } from 'react';
 
 // motion
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 // components
 import { HiveGroup } from '@/components/ui/HiveGroup';
 
 // hooks
 import { useSectionVisibility } from '@/hooks/useSectionVisibility';
+
+const stackVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    y: -40,
+    transition: { duration: 0.1, ease: 'easeIn' },
+  },
+};
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    x: -80,
+    transition: { duration: 0.1, ease: 'easeIn' },
+  },
+};
 
 export default function Stack({ locale }: StackProps) {
   const [t, setT] = useState<TFunction | null>(null);
@@ -38,28 +66,40 @@ export default function Stack({ locale }: StackProps) {
 
   return (
     <section id="stack" className="section stack">
-      {isVisible && t ? (
-        <>
-          <motion.div
-            className="stack__title-container"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <h2 className="stack__title">{t('title')}</h2>
-          </motion.div>
+      <AnimatePresence mode="wait">
+        {isVisible && t && (
+          <>
+            <motion.div
+              key="stack-title"
+              className="stack__title-container"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={titleVariants}
+            >
+              <h2 className="stack__title">{t('title')}</h2>
+            </motion.div>
 
-          <div className="stack__hive-grid">
-            {stackData && Object.entries(stackData).map(([key, group]) => (
-              <HiveGroup
-                key={key}
-                title={group.title}
-                items={group.children}
-              />
-            ))}
-          </div>
-        </>
-      ) : null}
+            <motion.div
+              key="stack-content"
+              className="stack__hive-grid"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={stackVariants}
+            >
+              {stackData &&
+                Object.entries(stackData).map(([key, group]) => (
+                  <HiveGroup
+                    key={key}
+                    title={group.title}
+                    items={group.children}
+                  />
+                ))}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

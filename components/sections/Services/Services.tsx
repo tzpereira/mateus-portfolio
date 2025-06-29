@@ -22,6 +22,28 @@ import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 // motion
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Variants extraídas
+const titleVariants = {
+  initial: { opacity: 0.1, x: -100 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -100 },
+};
+
+const gridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+    },
+  },
+};
+
 export default function Services({ locale }: ServicesProps) {
   const isVisible = useSectionVisibility('services');
   const [t, setT] = useState<TFunction | null>(null);
@@ -41,16 +63,14 @@ export default function Services({ locale }: ServicesProps) {
           <motion.div
             key="services-title"
             className="services__title-container"
-            initial={{ opacity: 0.1, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            variants={titleVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
           >
             <h2 className="services__title">{t('title')}</h2>
           </motion.div>
-        ) : (
-          null
-        )}
+        ) : null}
       </AnimatePresence>
 
       <div className="services__frame">
@@ -59,25 +79,12 @@ export default function Services({ locale }: ServicesProps) {
             <motion.div
               key="services-grid"
               className="services__grid"
+              variants={gridVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.2,
-                  },
-                },
-                exit: {
-                  transition: {
-                    staggerChildren: 0.1,
-                    staggerDirection: -1,
-                  },
-                },
-              }}
             >
-              {services?.map((service, idx) => (
+              {services.map((service, idx) => (
                 <ServiceCard
                   key={idx}
                   title={service.title}
@@ -87,9 +94,7 @@ export default function Services({ locale }: ServicesProps) {
                 />
               ))}
             </motion.div>
-          ) : (
-            null
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </section>

@@ -23,7 +23,7 @@ import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 // motion
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 
-const containerVariants: Variants = {
+const outerVariants: Variants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.2 },
@@ -33,7 +33,7 @@ const containerVariants: Variants = {
   },
 };
 
-const fadeUpMotion: Variants = {
+const contentVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
@@ -43,7 +43,7 @@ const fadeUpMotion: Variants = {
   exit: {
     opacity: 0,
     y: -40,
-    transition: { duration: 0.2, ease: 'easeIn' },
+    transition: { duration: 0.1, ease: 'easeIn' },
   },
 };
 
@@ -72,15 +72,15 @@ export default function Hero({ locale }: HeroProps) {
               initial="hidden"
               animate="visible"
               exit="exit"
-              variants={containerVariants}
+              variants={outerVariants}
             >
-              <motion.h1 className="hero__title" variants={fadeUpMotion}>
+              <motion.h1 className="hero__title" variants={contentVariants}>
                 MAT<span className="hero__title--break">EUS</span>
               </motion.h1>
-              <motion.p className="hero__description" variants={fadeUpMotion}>
+              <motion.p className="hero__description" variants={contentVariants}>
                 {t('title')}
               </motion.p>
-              <motion.span className="hero__note" variants={fadeUpMotion}>
+              <motion.span className="hero__note" variants={contentVariants}>
                 {t('note')}
               </motion.span>
             </motion.div>

@@ -4,7 +4,8 @@ export type WorkCardProps = {
       description: string;
       icon: string;
     };
-    isVisible: boolean;
+    isCardVisible: boolean;
     scrollDirection: 'up' | 'down' | null;
+    isVisible: boolean;
   };
   

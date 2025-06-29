@@ -12,12 +12,24 @@ import initTranslations from '@/app/i18n';
 // react
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 
+// motion
+import { motion, Variants } from 'framer-motion';
+
 // components
 import { WorkCard } from '@/components/ui/WorkCard';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 
+// hooks
+import { useSectionVisibility } from '@/hooks/useSectionVisibility';
+
 const CARD_HEIGHT_PERCENT = 60;
 const SWIPE_THRESHOLD = 30;
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+  exit: { opacity: 0, x: -80, transition: { duration: 0.1, ease: 'easeIn' } },
+};
 
 export default function Work({ locale }: WorkProps) {
   const [sectionTitle, setSectionTitle] = useState('');
@@ -33,14 +45,13 @@ export default function Work({ locale }: WorkProps) {
   const allowedScrollDirection = useRef<'up' | 'down' | null>(null);
 
   const cardCount = useMemo(() => works.length, [works]);
+  const isVisible = useSectionVisibility('work');
 
-  // Atualiza index e sincroniza ref
   const updateIndex = useCallback((index: number) => {
     setActiveIndex(index);
     activeIndexRef.current = index;
   }, []);
 
-  // Anima scroll para índice
   const animateScrollTo = useCallback((index: number) => {
     if (!containerRef.current) return;
     setIsAnimating(true);
@@ -54,7 +65,6 @@ export default function Work({ locale }: WorkProps) {
     }, 500);
   }, [updateIndex]);
 
-  // Scroll por interação
   const handleUserScroll = useCallback((dir: 'up' | 'down') => {
     if (isAnimating) return;
 
@@ -94,7 +104,6 @@ export default function Work({ locale }: WorkProps) {
     }, 100);
   }, [isAnimating, animateScrollTo, cardCount]);
 
-  // Traduções e dados
   useEffect(() => {
     initTranslations(locale, ['work']).then(({ t }) => {
       setWorks(t('works', { returnObjects: true }) as WorkEntity[]);
@@ -102,29 +111,17 @@ export default function Work({ locale }: WorkProps) {
     });
   }, [locale]);
 
-  // Controle de scroll do body
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = isLocked ? 'hidden' : prev;
     return () => { document.body.style.overflow = prev; };
   }, [isLocked]);
 
-  // Observador de entrada/saída da seção
   useEffect(() => {
-    const section = document.querySelector('.work');
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsLocked(entry.isIntersecting && entry.intersectionRatio === 1);
-        allowedScrollDirection.current = null;
-      },
-      { threshold: [1] }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+    setIsLocked(isVisible);
+    allowedScrollDirection.current = null;
+  }, [isVisible]);
 
-  // Eventos de input (scroll, teclado, toque)
   useEffect(() => {
     if (!isLocked) return;
 
@@ -171,26 +168,34 @@ export default function Work({ locale }: WorkProps) {
     };
   }, [handleUserScroll, isLocked]);
 
-  // Render
   return (
     <section id="work" className="section work">
       {works.length > 0 && (
         <>
-          <div className="work__title-container">
+          <motion.div
+            className="work__title-container"
+            initial="hidden"
+            animate={isVisible ? 'visible' : 'hidden'}
+            exit="exit"
+            variants={titleVariants}
+          >
             <h2 className="work__title">{sectionTitle}</h2>
-          </div>
+          </motion.div>
+
           <div className="work__frame">
             <ScrollProgress
               total={cardCount}
               currentIndex={activeIndex}
               onDotClick={animateScrollTo}
+              isVisible={isVisible}
             />
             <div className="scroll-container" ref={containerRef}>
               {works.map((work, idx) => (
                 <WorkCard
                   key={idx}
                   work={work}
-                  isVisible={idx === activeIndex}
+                  isCardVisible={idx === activeIndex}
+                  isVisible={isVisible}
                   scrollDirection={scrollDirection}
                 />
               ))}

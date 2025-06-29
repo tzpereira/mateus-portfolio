@@ -13,7 +13,27 @@ import { useRef } from 'react';
 import { iconMap } from '@/assets/icons/iconExporter';
 
 // motion
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+
+const cardVariants: Variants = {
+  hiddenLeft: { opacity: 0, x: -100 },
+  hiddenRight: { opacity: 0, x: 100 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+  exitLeft: {
+    opacity: 0,
+    x: -100,
+    transition: { duration: 0.1, ease: 'easeIn' },
+  },
+  exitRight: {
+    opacity: 0,
+    x: 100,
+    transition: { duration: 0.1, ease: 'easeIn' },
+  },
+};
 
 export default function ServiceCard({ title, description, icon, fromRight = false }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -52,10 +72,10 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
   return (
     <motion.div
       className="service-card"
-      initial={{ opacity: 0, x: fromRight ? 100 : -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: fromRight ? 100 : -100 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
+      variants={cardVariants}
+      initial={fromRight ? 'hiddenRight' : 'hiddenLeft'}
+      animate="visible"
+      exit={fromRight ? 'exitRight' : 'exitLeft'}
     >
       <h3 className="service-card__title">{title}</h3>
       <div
