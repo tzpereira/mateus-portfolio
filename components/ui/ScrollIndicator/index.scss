@@ -1,32 +1,38 @@
 .scroll-indicator {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    user-select: none;
-    margin-top: 2rem;
-    cursor: pointer;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  inset-inline: 0;
+  z-index: 10;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
 
-    &__icon-wrapper {
-        animation: bounce 2s ease-in-out infinite;
-    }
+  &__icon-wrapper {
+    animation: bounce 2s ease-in-out infinite;
+  }
 
-    &__arrow {
-        color: var(--foreground);
-        width: 56px;
-        height: 32px;
-        animation: bounce 2s ease-in-out infinite;
-    }
+  &__arrow {
+    color: var(--foreground);
+    width: 56px;
+    height: 32px;
+    animation: bounce 2s ease-in-out infinite;
+  }
 
-    &__text {
-        margin-top: 0.25rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        font-style: italic;
-        color: var(--foreground);
-        text-align: center;
-        width: 100%;
-    }
+  &__text {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--foreground);
+    text-align: center;
+    width: 100%;
+  }
 }
+
 
 @keyframes bounce {
     0%,
