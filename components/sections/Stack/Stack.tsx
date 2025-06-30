@@ -54,7 +54,7 @@ export default function Stack({ locale }: StackProps) {
   const [t, setT] = useState<TFunction | null>(null);
   const [stackData, setStackData] = useState<StackData | null>(null);
 
-  const isVisible = useSectionVisibility('stack');
+  const isVisible = useSectionVisibility('stack', 0.8);
 
   useEffect(() => {
     initTranslations(locale, ['stack']).then(({ t }) => {

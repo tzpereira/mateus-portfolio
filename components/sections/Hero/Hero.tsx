@@ -48,7 +48,7 @@ const contentVariants: Variants = {
 };
 
 export default function Hero({ locale }: HeroProps) {
-  const isVisible = useSectionVisibility('hero');
+  const isVisible = useSectionVisibility('hero', 0.8);
   const [t, setT] = useState<TFunction | null>(null);
 
   useEffect(() => {
@@ -65,12 +65,12 @@ export default function Hero({ locale }: HeroProps) {
 
       <div className="hero__frame">
         <AnimatePresence mode="wait">
-          {isVisible && t ? (
+          {t ? (
             <motion.div
               key="hero-content"
               className="hero__content"
               initial="hidden"
-              animate="visible"
+              animate={isVisible ? 'visible' : 'hidden'}
               exit="exit"
               variants={outerVariants}
             >

@@ -16,7 +16,7 @@ export default function BurgerMenu({ menuItems }: BurgerMenuProps) {
   const closeMenu = () => setIsOpen(false);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    document.body.style.overflowY = isOpen ? 'hidden' : 'scroll';
   }, [isOpen]);
 
   return (

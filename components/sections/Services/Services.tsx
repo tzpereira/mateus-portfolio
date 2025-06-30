@@ -45,7 +45,7 @@ const gridVariants = {
 };
 
 export default function Services({ locale }: ServicesProps) {
-  const isVisible = useSectionVisibility('services');
+  const isVisible = useSectionVisibility('services', 0.8);
   const [t, setT] = useState<TFunction | null>(null);
   const [services, setServices] = useState<Service[]>([]);
 

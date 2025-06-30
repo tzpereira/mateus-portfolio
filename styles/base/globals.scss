@@ -11,16 +11,22 @@
   --foreground: #{vars.$color-foreground-dark};
 }
 
-html, body {
+html {
   margin: 0;
   padding: 0;
+  height: 100%;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-jetbrains);
-  width: 100%;
-  height: 100%;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .section {

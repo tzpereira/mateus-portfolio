@@ -45,7 +45,7 @@ export default function Work({ locale }: WorkProps) {
   const allowedScrollDirection = useRef<'up' | 'down' | null>(null);
 
   const cardCount = useMemo(() => works.length, [works]);
-  const isVisible = useSectionVisibility('work');
+  const isVisible = useSectionVisibility('work', 0.95);
 
   const updateIndex = useCallback((index: number) => {
     setActiveIndex(index);

@@ -32,7 +32,7 @@ const rightVariants: Variants = {
 };
 
 export default function Contact({ locale }: ContactProps) {
-  const isVisible = useSectionVisibility('contact');
+  const isVisible = useSectionVisibility('contact', 0.8);
   const [t, setT] = useState<TFunction | null>(null);
 
   useEffect(() => {

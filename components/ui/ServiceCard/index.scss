@@ -75,3 +75,42 @@
     
   }
 }
+
+@media (max-width: 620px) {
+  .services {
+    height: auto;
+    padding: 2rem 0;
+
+    &__frame {
+      height: auto;
+      width: 95vw;
+    }
+
+    &__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &__title-container {
+      width: 95vw;
+    }
+  }
+
+  .service-card {
+    &__content {
+      flex-direction: row-reverse; 
+      width: 95vw;
+      padding: 1.5rem 1rem;
+
+      .service-card__description {
+        font-size: 0.95rem;
+      }
+
+      .service-card__icon {
+        width: 96px;
+        height: 96px;
+      }
+    }
+  }
+}

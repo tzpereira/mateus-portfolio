@@ -11,24 +11,24 @@ export default function useSectionVisibility(className: string, threshold?: numb
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+  
     const section = document.querySelector(`.${className}`);
     if (!section) return;
-
+  
     const isMobile = window.innerWidth <= 620;
     const observerThreshold = threshold ?? (isMobile ? 0.3 : 1);
-
+  
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting && entry.intersectionRatio >= observerThreshold);
       },
       { threshold: [observerThreshold] }
     );
-
+  
     observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-    };
+  
+    return () => observer.disconnect();
   }, [className, threshold]);
 
   return isVisible;
