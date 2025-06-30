@@ -96,6 +96,10 @@
 /* Celulares (≤ 620px) */
 @media (max-width: 620px) {
   .hero {
+    &__frame {
+      justify-content: flex-start;
+    }
+
     &__content {
       align-items: center;
     }
