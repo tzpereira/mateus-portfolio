@@ -130,7 +130,7 @@
       flex-direction: column;
       justify-content: space-between;
       height: 80%;
-      margin-top: 0 ;
+      margin-top: 0;
     }
 
     &__title--break {
@@ -146,6 +146,7 @@
     }
 
     &__description {
+      margin-top: 1rem;
       font-size: 7vw;
     }
 
