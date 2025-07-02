@@ -70,6 +70,10 @@
 /* Wide monitors */
 @media (min-aspect-ratio: 21/9) {
   .hero {
+    &__content {
+      margin-top: 0;
+    }
+    
     &__description {
       font-size: 2vw
     }
@@ -90,9 +94,14 @@
       width: 90vw;
     }
 
+    &__content {
+      margin-top: 0;
+    }
+
     &__title {
       font-size: 18vw;
       letter-spacing: 0.18em;
+      margin: 0;
     }
 
     &__description {
@@ -121,7 +130,7 @@
       flex-direction: column;
       justify-content: space-between;
       height: 80%;
-      padding-bottom: 2rem;
+      margin-top: 0 ;
     }
 
     &__title--break {
