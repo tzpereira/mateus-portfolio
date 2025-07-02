@@ -73,7 +73,7 @@ export default function Contact({ locale }: ContactProps) {
                 <div>
                   <span className="contact__info-subtitle">{t('find_me')}</span>
                   <a
-                    href="/resume.pdf"
+                    href="/assets/files/mateus_resume.pdf"
                     download
                     className="contact__download-resume"
                   >
