@@ -1,6 +1,6 @@
 .language-changer {
-  width: 50px;
-  height: 35px;
+  width: 4rem;
+  height: 2rem;
   background: var(--foreground);
   border-radius: 40px;
   display: flex;
@@ -38,4 +38,13 @@
       color: var(--foreground);
     }
   }
+}
+
+/* Celulares (≤ 620px) */
+@media (max-width: 620px) {
+  .language-changer {
+    width: 2.5rem;
+    height: 2rem;
+  }
+
 }

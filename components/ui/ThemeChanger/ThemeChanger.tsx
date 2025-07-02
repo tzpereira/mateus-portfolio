@@ -21,7 +21,7 @@ const updateTheme = (isDarkEnabled: boolean): void => {
 };
 
 export default function ThemeChanger() {
-  const [isToggled, setIsToggled] = useState(true); // valor default não importa muito
+  const [isToggled, setIsToggled] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
 
   const MoonIcon = iconMap['moon.svg'];
@@ -48,8 +48,8 @@ export default function ThemeChanger() {
     <label className="toggle-wrapper" htmlFor="toggle">
       <div className={`toggle ${isToggled ? 'disabled' : 'enabled'}`}>
         <div className="icons">
-          <SunIcon />
-          <MoonIcon />
+          <SunIcon className='icon_svg'/>
+          <MoonIcon className='icon_svg' />
         </div>
         <input
           id="toggle"

@@ -74,12 +74,15 @@ export default function Hero({ locale }: HeroProps) {
               exit="exit"
               variants={outerVariants}
             >
-              <motion.h1 className="hero__title" variants={contentVariants}>
-                MAT<span className="hero__title--break">EUS</span>
-              </motion.h1>
-              <motion.p className="hero__description" variants={contentVariants}>
-                {t('title')}
-              </motion.p>
+              <motion.div className="hero__text-block" variants={contentVariants}>
+                <motion.h1 className="hero__title">
+                  MAT<span className="hero__title--break">EUS</span>
+                </motion.h1>
+                <motion.p className="hero__description">
+                  {t('title')}
+                </motion.p>
+              </motion.div>
+
               <motion.span className="hero__note" variants={contentVariants}>
                 {t('note')}
               </motion.span>

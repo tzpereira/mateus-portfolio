@@ -41,7 +41,7 @@
     word-break: keep-all;
     margin: 0;
     padding: 0;
-  
+
     &--break {
       display: inline;
     }
@@ -67,9 +67,24 @@
   }
 }
 
+/* Wide monitors */
+@media (min-aspect-ratio: 21/9) {
+  .hero {
+    &__description {
+      font-size: 2vw
+    }
+
+    &__note {
+      max-width: 35vw;
+      font-size: 1vw;
+    }
+  }
+}
+
 /* Tablets (≤ 1240px) */
 @media (max-width: 1240px) {
   .hero {
+
     &__header-frame,
     &__frame {
       width: 90vw;
@@ -102,6 +117,11 @@
 
     &__content {
       align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 80%;
+      padding-bottom: 2rem;
     }
 
     &__title--break {
@@ -111,10 +131,13 @@
 
     &__title {
       font-size: 40vw;
+      letter-spacing: 2.5vw;
+      font-weight: bolder;
+      margin: 0;
     }
 
     &__description {
-      font-size: 5vw;
+      font-size: 7vw;
     }
 
     &__note {

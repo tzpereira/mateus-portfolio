@@ -75,3 +75,24 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* Celulares (≤ 620px) */
+@media (max-width: 620px) {
+  :root {
+    --toggle-width: 4rem;
+    --toggle-height: 2rem;
+    --ball-size: 1.5rem;
+    --ball-margin: 3px;
+    --translate-distance: calc(var(--toggle-width) - var(--ball-size) - var(--ball-margin) * 2);
+  }
+
+  .toggle .icons {
+    overflow: visible;
+  }
+
+  .toggle .icons svg {
+    fill: var(--background);
+    width: 24px;
+    height: 24px;
+  }
+}

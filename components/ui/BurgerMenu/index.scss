@@ -92,3 +92,11 @@
     }
   }
 }
+
+/* Celulares (≤ 620px) */
+@media (max-width: 620px) {
+  .burger-menu__button {
+    width: 2.5rem;
+    height: 1.5rem;
+  }
+}
