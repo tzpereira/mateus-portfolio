@@ -19,6 +19,7 @@
     border-radius: 16px;
     padding: 1.5rem;
     width: 35vw;
+    height: 20vh;
     overflow: hidden;
     z-index: 0;
     transform-style: preserve-3d;
@@ -58,7 +59,7 @@
       z-index: 1;
       overflow: hidden;
       mix-blend-mode: screen;
-    
+
       &::before {
         content: '';
         position: absolute;
@@ -72,45 +73,103 @@
         pointer-events: none;
       }
     }
-    
   }
 }
 
-@media (max-width: 620px) {
-  .services {
-    height: auto;
-    padding: 2rem 0;
-
-    &__frame {
-      height: auto;
-      width: 95vw;
-    }
-
-    &__grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    &__title-container {
-      width: 95vw;
-    }
-  }
-
+/* Wide monitors (21:9) */
+@media (min-aspect-ratio: 21/9) {
   .service-card {
+
+    &__title {
+      font-size: 1rem;
+    }
+
     &__content {
-      flex-direction: row-reverse; 
-      width: 95vw;
-      padding: 1.5rem 1rem;
+      height: 20vh;
 
       .service-card__description {
-        font-size: 0.95rem;
+        flex: 8;
+        font-size: 0.75rem;
+        line-height: 1.4;
       }
 
       .service-card__icon {
-        width: 96px;
-        height: 96px;
+        flex: 2;
+        width: 12vh;
+        height: 12vh;
       }
+    }
+  }
+}
+
+/* Tablets (≤ 1240px) */
+@media (max-width: 1320px) {
+  .service-card {
+    height: 20vh;
+
+    &__title {
+      font-size: 1rem;
+    }
+
+    &__content {
+
+      .service-card__description {
+        flex: 8;
+        font-size: 0.6rem;
+        line-height: 1.4;
+      }
+
+      .service-card__icon {
+        flex: 2;
+        width: 8vh;
+        height: 8vh;
+      }
+    }
+  }
+}
+
+/* Celulares (≤ 790px) */
+@media (max-width: 790px) {
+  .service-card {
+    height: 16vh;
+
+    &__title {
+      font-size: 1rem;
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      width: 95vw;
+
+      .service-card__description {
+        flex: 8;
+        font-size: 0.6rem;
+        line-height: 1.4;
+      }
+
+      .service-card__icon {
+        flex: 2;
+        width: 8vh;
+        height: 8vh;
+      }
+    }
+
+    &:nth-child(odd) .service-card__content {
+      flex-direction: row;
+    }
+
+    &:nth-child(even) .service-card__content {
+      flex-direction: row-reverse;
+    }
+
+    &:nth-child(odd) .service-card__description {
+      text-align: left;
+    }
+
+    &:nth-child(even) .service-card__description {
+      text-align: right;
     }
   }
 }
