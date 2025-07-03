@@ -28,6 +28,7 @@
     width: 80vw;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-top: 2rem;
   }
 
@@ -58,12 +59,12 @@
   }
 
   &__note {
-    max-width: 25vw;
-    font-size: 1.3vw;
-    font-weight: 100;
+    max-width: 35vw;
+    font-size: 1vw;
+    font-weight: 200;
     text-align: left;
     opacity: 0.8;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 }
 
@@ -79,8 +80,8 @@
     }
 
     &__note {
-      max-width: 35vw;
-      font-size: 1vw;
+      max-width: 45vw;
+      font-size: 0.7vw;
     }
   }
 }
