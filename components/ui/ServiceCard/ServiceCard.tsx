@@ -73,6 +73,7 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     const card = cardRef.current;
     if (!isMobile || !card) return;
 
+
     const maxParallax = 10; // px
 
     const applyParallax = (beta: number, gamma: number) => {
@@ -82,7 +83,7 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
       const normY = Math.max(-1, Math.min(1, beta / 45));
       const translateX = normX * maxParallax;
       const translateY = normY * maxParallax;
-      card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
+      card.style.transform = `translate(${translateX}px, ${translateY}px)`;
     };
 
     const handleOrientation = (e: DeviceOrientationEvent) => {
