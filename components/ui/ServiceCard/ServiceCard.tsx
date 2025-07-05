@@ -90,10 +90,10 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
 
     if (
       typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof (DeviceOrientationEvent as any).requestPermission === 'function'
+      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
     ) {
       // iOS 13+
-      (DeviceOrientationEvent as any).requestPermission()
+      (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
         .then((response: string) => {
           if (response === 'granted') {
             window.addEventListener('deviceorientation', handleOrientation, true);
