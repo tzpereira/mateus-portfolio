@@ -21,6 +21,7 @@ import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 
 // motion
 import { motion, AnimatePresence } from 'framer-motion';
+import { iconMap } from '@/assets/icons/iconExporter';
 
 // Variants extraídas
 const titleVariants = {
@@ -56,6 +57,23 @@ export default function Services({ locale }: ServicesProps) {
     });
   }, [locale]);
 
+  const GyroIcon = iconMap['gyroscope.svg'];
+  // Handler para pedir permissão nativa
+  const handleGyroPermission = () => {
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
+    ) {
+      (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
+        .then((response: string) => {
+          if (response === 'granted') {
+            // Permissão concedida, nada a fazer aqui
+          }
+        })
+        .catch(console.error);
+    }
+  };
+
   return (
     <section id="services" className="section services">
       <AnimatePresence mode="wait">
@@ -67,8 +85,21 @@ export default function Services({ locale }: ServicesProps) {
             initial="initial"
             animate="animate"
             exit="exit"
+            style={{ display: 'flex', alignItems: 'center', gap: 12 }}
           >
-            <h2 className="services__title">{t('title')}</h2>
+            <h2 className="services__title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {t('title')}
+              {GyroIcon && (
+                <button
+                  type="button"
+                  aria-label="Ativar giroscópio"
+                  onClick={handleGyroPermission}
+                  style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                >
+                  <GyroIcon width={22} height={22} style={{ opacity: 0.7 }} />
+                </button>
+              )}
+            </h2>
           </motion.div>
         ) : null}
       </AnimatePresence>
