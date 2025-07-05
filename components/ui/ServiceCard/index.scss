@@ -105,7 +105,7 @@
 /* Tablets (≤ 1240px) */
 @media (max-width: 1320px) {
   .service-card {
-    height: 20vh;
+    height: 22vh;
 
     &__title {
       font-size: 1rem;
@@ -131,7 +131,7 @@
 /* Celulares (≤ 790px) */
 @media (max-width: 790px) {
   .service-card {
-    height: 16vh;
+    height: 18vh;
 
     &__title {
       font-size: 1rem;
@@ -141,7 +141,7 @@
       display: flex;
       align-items: center;
       text-align: center;
-      width: 95vw;
+      width: 90vw;
 
       .service-card__description {
         flex: 8;
@@ -156,19 +156,27 @@
       }
     }
 
+    &:nth-child(odd) .service-card__title {
+      flex-direction: row;
+      margin-left: 0.5rem;
+      text-align: left;
+
+    }
+
+    &:nth-child(even) .service-card__title {
+      flex-direction: row-reverse;
+      margin-right: 0.5rem;
+      text-align: right;
+    }
+
     &:nth-child(odd) .service-card__content {
       flex-direction: row;
+      text-align: left;
+
     }
 
     &:nth-child(even) .service-card__content {
       flex-direction: row-reverse;
-    }
-
-    &:nth-child(odd) .service-card__description {
-      text-align: left;
-    }
-
-    &:nth-child(even) .service-card__description {
       text-align: right;
     }
   }
