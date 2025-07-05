@@ -112,6 +112,46 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     };
   }, []);
 
+  useEffect(() => {
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    const card = cardRef.current;
+    if (!isMobile || !card) return;
+
+    const maxTilt = 50;
+
+    const applyTilt = (beta: number, gamma: number) => {
+      const rotateX = (beta / 90) * maxTilt;
+      const rotateY = -(gamma / 90) * maxTilt;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    };
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.beta != null && e.gamma != null) {
+        applyTilt(e.beta, e.gamma);
+      }
+    };
+
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
+    ) {
+      // iOS 13+
+      (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
+        .then((response: string) => {
+          if (response === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation, true);
+          }
+        })
+        .catch(console.error);
+    } else {
+      window.addEventListener('deviceorientation', handleOrientation, true);
+    }
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+    };
+  }, []);
+
   return (
     <motion.div
       className="service-card"
