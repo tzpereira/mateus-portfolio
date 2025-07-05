@@ -74,7 +74,7 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     const card = cardRef.current;
     if (!isMobile || !card) return;
 
-    const maxTilt = 8;
+    const maxTilt = 50;
 
     const applyTilt = (beta: number, gamma: number) => {
       const rotateX = (beta / 90) * maxTilt;
