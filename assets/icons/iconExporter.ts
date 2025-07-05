@@ -1,3 +1,5 @@
+// gyroscope icon
+import Gyroscope from './service_icons/gyroscope.svg';
 // theme icons
 import Moon from './theme_icons/moon.svg'
 import Sun from './theme_icons/sun.svg'
@@ -41,6 +43,7 @@ import Zend from './stack_icons/Zend-Framework.svg';
 
 
 export const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  'gyroscope.svg': Gyroscope,
   'moon.svg': Moon,
   'sun.svg': Sun,
   'ai.svg': Ai,
