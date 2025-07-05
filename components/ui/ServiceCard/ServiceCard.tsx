@@ -7,7 +7,7 @@ import './index.scss';
 import { ServiceCardProps } from './types';
 
 // react
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 // icons
 import { iconMap } from '@/assets/icons/iconExporter';
@@ -68,6 +68,46 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
     card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
   };
+
+  useEffect(() => {
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    const card = cardRef.current;
+    if (!isMobile || !card) return;
+
+    const maxTilt = 8;
+
+    const applyTilt = (beta: number, gamma: number) => {
+      const rotateX = (beta / 90) * maxTilt;
+      const rotateY = -(gamma / 90) * maxTilt;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    };
+
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.beta != null && e.gamma != null) {
+        applyTilt(e.beta, e.gamma);
+      }
+    };
+
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof (DeviceOrientationEvent as any).requestPermission === 'function'
+    ) {
+      // iOS 13+
+      (DeviceOrientationEvent as any).requestPermission()
+        .then((response: string) => {
+          if (response === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation, true);
+          }
+        })
+        .catch(console.error);
+    } else {
+      window.addEventListener('deviceorientation', handleOrientation, true);
+    }
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+    };
+  }, []);
 
   return (
     <motion.div
