@@ -52,7 +52,7 @@ export default function Services({ locale }: ServicesProps) {
   }, [locale]);
 
   const GyroIcon = iconMap['gyroscope.svg'];
-  // Handler para pedir permissão nativa
+  // Handler para pedir permissão nativa e disparar evento global
   const handleGyroPermission = () => {
     if (
       typeof DeviceOrientationEvent !== 'undefined' &&
@@ -61,10 +61,14 @@ export default function Services({ locale }: ServicesProps) {
       (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
         .then((response: string) => {
           if (response === 'granted') {
-            // Permissão concedida, nada a fazer aqui
+            // Dispara evento global para ativar giroscópio nos cards
+            window.dispatchEvent(new Event('enable-gyro'));
           }
         })
         .catch(console.error);
+    } else {
+      // Dispara evento para Android/outros navegadores
+      window.dispatchEvent(new Event('enable-gyro'));
     }
   };
 

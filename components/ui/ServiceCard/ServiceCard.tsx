@@ -44,33 +44,30 @@ export default function ServiceCard({ icon, title, description, fromRight }: Ser
   // Corrige o tipo do ref para o hook
   const isCardVisible = useCardVisibility(cardRef as React.RefObject<Element>, '0px', 0.2);
 
-  // Mouse parallax (desktop)
+
+  // Mouse parallax (desktop only)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
     const card = cardRef.current;
     if (!card) return;
-
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-
     const distX = (x - centerX) / centerX;
     const distY = (y - centerY) / centerY;
-
     const maxTilt = 8;
     const rotateX = distY * maxTilt;
     const rotateY = distX * -maxTilt;
-
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
     card.style.transition = 'transform 0.1s ease-out';
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     const card = cardRef.current;
     if (!card) return;
-
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
     card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
   };
@@ -93,30 +90,37 @@ export default function ServiceCard({ icon, title, description, fromRight }: Ser
       card.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
     };
 
-    const handleOrientation = (e: DeviceOrientationEvent) => {
-      if (e.beta != null && e.gamma != null) {
-        applyParallax(e.beta, e.gamma);
-      }
-    };
+    let permissionGranted = false;
+    let orientationHandler: ((e: DeviceOrientationEvent) => void) | null = null;
 
+    // Handler para ativar o giroscópio via botão (Services)
+    function enableGyro() {
+      if (permissionGranted) return;
+      permissionGranted = true;
+      orientationHandler = (e: DeviceOrientationEvent) => {
+        if (e.beta != null && e.gamma != null) {
+          applyParallax(e.beta, e.gamma);
+        }
+      };
+      window.addEventListener('deviceorientation', orientationHandler, true);
+    }
+
+    // Escuta evento customizado disparado pelo botão de permissão
+    window.addEventListener('enable-gyro', enableGyro);
+
+    // Se não for iOS, ativa direto
     if (
       typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
+      !((DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission)
     ) {
-      // iOS 13+
-      (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
-        .then((response: string) => {
-          if (response === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation, true);
-          }
-        })
-        .catch(console.error);
-    } else {
-      window.addEventListener('deviceorientation', handleOrientation, true);
+      enableGyro();
     }
 
     return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
+      window.removeEventListener('enable-gyro', enableGyro);
+      if (orientationHandler) {
+        window.removeEventListener('deviceorientation', orientationHandler, true);
+      }
     };
   }, []);
 
