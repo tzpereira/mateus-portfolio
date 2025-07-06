@@ -131,7 +131,7 @@
 /* Celulares (≤ 790px) */
 @media (max-width: 790px) {
   .service-card {
-    height: 18vh;
+    height: 25vh;
 
     &__title {
       font-size: 1rem;
@@ -145,14 +145,14 @@
 
       .service-card__description {
         flex: 8;
-        font-size: 0.6rem;
+        font-size: 0.75rem;
         line-height: 1.4;
       }
 
       .service-card__icon {
         flex: 2;
-        width: 8vh;
-        height: 8vh;
+        min-width: 10vh;
+        min-height: 10vh;
       }
     }
 

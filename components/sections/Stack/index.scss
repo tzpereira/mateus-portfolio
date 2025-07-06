@@ -26,3 +26,11 @@
     height: 60vh;
   }
 }
+
+@media (max-width: 790px) {
+  .stack {
+    height: auto;
+    min-height: unset;
+    padding: 2rem 0;
+  }
+}

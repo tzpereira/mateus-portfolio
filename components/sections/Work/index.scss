@@ -42,3 +42,11 @@
     transition: transform 1s ease, opacity 1s ease;
   }
 }
+
+@media (max-width: 790px) {
+  .work {
+    height: auto;
+    min-height: unset;
+    padding: 2rem 0;
+  }
+}

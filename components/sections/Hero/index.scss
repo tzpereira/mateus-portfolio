@@ -74,7 +74,7 @@
     &__content {
       margin-top: 0;
     }
-    
+
     &__description {
       font-size: 2vw
     }
@@ -118,9 +118,13 @@
   }
 }
 
-/* Celulares (≤ 620px) */
-@media (max-width: 620px) {
+/* Celulares (≤ 790px) */
+@media (max-width: 790px) {
   .hero {
+    height: auto;
+    min-height: unset;
+    padding: 2rem 0;
+
     &__frame {
       justify-content: flex-start;
     }
