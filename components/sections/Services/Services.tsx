@@ -30,21 +30,6 @@ const titleVariants = {
   exit: { opacity: 0, x: -100 },
 };
 
-const gridVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-  exit: {
-    transition: {
-      staggerChildren: 0.1,
-      staggerDirection: -1,
-    },
-  },
-};
-
 export default function Services({ locale }: ServicesProps) {
   const [t, setT] = useState<TFunction | null>(null);
   const [services, setServices] = useState<Service[]>([]);
