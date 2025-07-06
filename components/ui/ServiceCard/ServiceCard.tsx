@@ -8,6 +8,7 @@ import { ServiceCardProps } from './types';
 
 // react
 import { useRef, useEffect } from 'react';
+import { useCardVisibility } from '@/hooks/useCardVisibility';
 
 // icons
 import { iconMap } from '@/assets/icons/iconExporter';
@@ -35,10 +36,15 @@ const cardVariants: Variants = {
   },
 };
 
-export default function ServiceCard({ title, description, icon, fromRight = false }: ServiceCardProps) {
+
+export default function ServiceCard({ icon, title, description, fromRight }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const IconComponent = iconMap[icon];
+  const isMobile = typeof window !== 'undefined' && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  // Corrige o tipo do ref para o hook
+  const isCardVisible = useCardVisibility(cardRef as React.RefObject<Element>, '0px', 0.2);
 
+  // Mouse parallax (desktop)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
     if (!card) return;
@@ -68,6 +74,8 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
     card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
   };
+
+  // Mobile parallax (apenas 2D translate, não tilt)
   useEffect(() => {
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
     const card = cardRef.current;
@@ -112,58 +120,18 @@ export default function ServiceCard({ title, description, icon, fromRight = fals
     };
   }, []);
 
-  useEffect(() => {
-    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    const card = cardRef.current;
-    if (!isMobile || !card) return;
-
-    const maxTilt = 50;
-
-    const applyTilt = (beta: number, gamma: number) => {
-      const rotateX = (beta / 90) * maxTilt;
-      const rotateY = -(gamma / 90) * maxTilt;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-    };
-
-    const handleOrientation = (e: DeviceOrientationEvent) => {
-      if (e.beta != null && e.gamma != null) {
-        applyTilt(e.beta, e.gamma);
-      }
-    };
-
-    if (
-      typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> }).requestPermission === 'function'
-    ) {
-      // iOS 13+
-      (DeviceOrientationEvent as unknown as { requestPermission: () => Promise<string> }).requestPermission()
-        .then((response: string) => {
-          if (response === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation, true);
-          }
-        })
-        .catch(console.error);
-    } else {
-      window.addEventListener('deviceorientation', handleOrientation, true);
-    }
-
-    return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-    };
-  }, []);
-
   return (
     <motion.div
       className="service-card"
+      ref={cardRef}
       variants={cardVariants}
       initial={fromRight ? 'hiddenRight' : 'hiddenLeft'}
-      animate="visible"
+      animate={isMobile ? (isCardVisible ? 'visible' : (fromRight ? 'hiddenRight' : 'hiddenLeft')) : 'visible'}
       exit={fromRight ? 'exitRight' : 'exitLeft'}
     >
       <h3 className="service-card__title">{title}</h3>
       <div
         className="service-card__content"
-        ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >

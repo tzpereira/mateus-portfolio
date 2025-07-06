@@ -46,9 +46,18 @@ const gridVariants = {
 };
 
 export default function Services({ locale }: ServicesProps) {
-  const isVisible = useSectionVisibility('services', 0.8);
   const [t, setT] = useState<TFunction | null>(null);
   const [services, setServices] = useState<Service[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const isVisibleDesktop = useSectionVisibility('services', 0.8);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.matchMedia('(max-width: 790px)').matches);
+    }
+  }, []);
+
+  const isVisible = isMobile ? true : isVisibleDesktop;
 
   useEffect(() => {
     initTranslations(locale, ['services']).then(({ t }) => {
@@ -105,15 +114,10 @@ export default function Services({ locale }: ServicesProps) {
       </AnimatePresence>
 
       <div className="services__frame">
-        <AnimatePresence mode="wait">
           {isVisible && services.length > 0 ? (
-            <motion.div
+            <div
               key="services-grid"
               className="services__grid"
-              variants={gridVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
             >
               {services.map((service, idx) => (
                 <ServiceCard
@@ -124,9 +128,8 @@ export default function Services({ locale }: ServicesProps) {
                   fromRight={idx % 2 === 1}
                 />
               ))}
-            </motion.div>
+            </div>
           ) : null}
-        </AnimatePresence>
       </div>
     </section>
   );
