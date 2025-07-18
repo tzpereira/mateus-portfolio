@@ -60,11 +60,12 @@
 
   &__note {
     max-width: 35vw;
-    font-size: 1vw;
+    font-size: 0.9vw;
     font-weight: 200;
     text-align: left;
     opacity: 0.8;
     margin-top: 1rem;
+    white-space: pre-line;
   }
 }
 
