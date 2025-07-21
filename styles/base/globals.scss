@@ -3,12 +3,14 @@
 :root {
   --background: #{vars.$color-background-light};
   --foreground: #{vars.$color-foreground-light};
+  --ascii: #{vars.$color-ascii-light};
   --font-family: var(--font-jetbrains, #{vars.$font-jetbrains});
 }
 
 .dark {
   --background: #{vars.$color-background-dark};
   --foreground: #{vars.$color-foreground-dark};
+  --ascii: #{vars.$color-ascii-dark};
 }
 
 html {

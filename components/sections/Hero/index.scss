@@ -127,20 +127,21 @@
     }
 
     &__title {
-      font-size: 18vw;
+      font-size: 10.5vw;
       letter-spacing: 0.18em;
       margin: 0;
     }
 
     &__description {
-      font-size: 4vw;
+      font-size: 2vw;
       text-align: center;
+      margin-top: 0.5rem;
     }
 
     &__note {
       max-width: 80vw;
-      font-size: 1.5vw;
-      text-align: center;
+      font-size: 1vw;
+      margin-top: 1rem;
     }
   }
 }
