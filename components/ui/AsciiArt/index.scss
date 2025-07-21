@@ -1,7 +1,23 @@
 .ascii-art {
-  font-size: calc(5 / 1920 * 100vw);
+  font-size: 5px;
   line-height: 1;
   white-space: pre;
   margin: 0;
   color: var(--ascii);
+
+  @media (max-width: 1600px) {
+    font-size: 4px;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 3px;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 2px;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 1px;
+  }
 }
