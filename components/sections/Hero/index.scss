@@ -33,7 +33,7 @@
   }
 
   &__ascii-art-container {
-    flex: 1;
+    width: 45vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,13 +49,15 @@
     align-items: flex-start;
     text-align: left;
     height: 55vh;
+    width: 40vw;
     margin: 0;
     padding: 0;
   }
 
   &__title {
+    max-width: 40vw;
     margin-bottom: 1rem;
-    font-size: 11vw;
+    font-size: 10.5vw;
     font-weight: 900;
     font-style: italic;
     text-align: center;
@@ -71,9 +73,10 @@
   }
 
   &__description {
+    max-width: 35vw;
     margin-bottom: 1rem;
-    font-size: 1.75vw;
-    letter-spacing: 0.4vw;
+    font-size: 2vw;
+    letter-spacing: 0.5vw;
     font-weight: 700;
     font-style: italic;
     text-align: right;
@@ -83,7 +86,7 @@
   }
 
   &__note {
-    max-width: 40vw;
+    max-width: 35vw;
     font-size: 0.9vw;
     font-weight: 200;
     text-align: left;
