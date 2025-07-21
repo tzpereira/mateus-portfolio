@@ -1,5 +1,5 @@
 'use client';
-import { pre } from 'framer-motion/client';
+
 // styles
 import './index.scss';
 
