@@ -25,20 +25,42 @@
   }
 
   &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 80vw;
+    height: 100%;
+  }
+
+  &__ascii-art-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__text-block {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-top: 2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    height: 55vh;
+    margin: 0;
+    padding: 0;
   }
 
   &__title {
-    font-size: 18vw;
+    margin-bottom: 1rem;
+    font-size: 11vw;
     font-weight: 900;
     font-style: italic;
     text-align: center;
     line-height: 1;
-    letter-spacing: 3vw;
+    letter-spacing: 1.2vw;
     word-break: keep-all;
     margin: 0;
     padding: 0;
@@ -49,23 +71,24 @@
   }
 
   &__description {
-    font-size: 2.5vw;
+    margin-bottom: 1rem;
+    font-size: 1.75vw;
+    letter-spacing: 0.4vw;
     font-weight: 700;
     font-style: italic;
     text-align: right;
     line-height: 1;
-    margin: 0;
+    margin-top: 1rem;
     padding: 0;
   }
 
   &__note {
-    max-width: 35vw;
+    max-width: 40vw;
     font-size: 0.9vw;
     font-weight: 200;
     text-align: left;
     opacity: 0.8;
-    margin-top: 1rem;
-    white-space: pre-line;
+    margin-top: 2rem;
   }
 }
 

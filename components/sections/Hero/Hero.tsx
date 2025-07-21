@@ -14,6 +14,7 @@ import { TFunction } from 'i18next';
 import React, { useEffect, useState } from 'react';
 
 // components
+import { AsciiArt } from '@/components/ui/AsciiArt';
 import { Header } from '@/components/layout/Header';
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
 
@@ -81,11 +82,13 @@ export default function Hero({ locale }: HeroProps) {
                 <motion.p className="hero__description">
                   {t('title')}
                 </motion.p>
+                <motion.span className="hero__note" variants={contentVariants}>
+                  {t('note')}
+                </motion.span>
               </motion.div>
-
-              <motion.span className="hero__note" variants={contentVariants}>
-                {t('note')}
-              </motion.span>
+              <motion.div className="hero__ascii-art-container" variants={contentVariants}>
+                  <AsciiArt />
+              </motion.div>
             </motion.div>
           ) : (
             null
