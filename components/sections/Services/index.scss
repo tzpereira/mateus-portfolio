@@ -50,6 +50,16 @@
   }
 }
 
+/* Tablets (≤ 1240px) */
+@media (max-width: 1240px) {
+  .services {
+    &__frame {
+      height: auto;
+      width: 90vw;
+    }
+  }
+}
+
 /* Celulares (≤ 790px) */
 @media (max-width: 790px) {
   .services {
