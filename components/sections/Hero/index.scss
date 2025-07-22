@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  width: 100%; /* Substituído 100vw por 100% para evitar overflow */
+  overflow-x: hidden; /* Garante que o scroll horizontal seja desativado */
 
   &__header-frame {
     width: 80vw;
@@ -29,24 +29,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80vw;
+    width: 100%; /* Substituído 80vw por 100% para alinhar com o contêiner */
     height: 100%;
 
     &__ascii-art-container {
-      margin-bottom: 0;
-    }
-
-    &__text-block {
-      margin-top: 0;
+      margin: 0;
     }
   }
 
   &__ascii-art-container {
-    width: 45vw;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
     margin: 0;
     padding: 0;
   }
@@ -148,7 +143,6 @@
     }
 
     &__ascii-art-container {
-      margin-left: 2rem;
       max-width: 90vw;
     }
 
@@ -214,7 +208,6 @@
     }
 
     &__ascii-art-container {
-      margin-left: 2rem;
       max-width: 90vw;
     }
 

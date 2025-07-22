@@ -147,10 +147,21 @@ const AsciiArtString = String.raw `
                                                                                                                                                                                                                                                                                                                
 `;         
 
-export default function AsciiArt() {
+const cleanAsciiArt = (art: string) => {
+  return art
+    .split('\n')
+    .map((line) => line.trimEnd())
+    .join('\n');
+};
+
+const AsciiArt = () => {
+  const cleanedArt = cleanAsciiArt(AsciiArtString);
+
   return (
     <pre className="ascii-art">
-      {AsciiArtString}
+      {cleanedArt}
     </pre>
   );
-}
+};
+
+export default AsciiArt
