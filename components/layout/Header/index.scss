@@ -12,3 +12,10 @@
   gap: 2rem;
   align-items: center;
 }
+
+/* Celulares (≤ 790px) */
+@media (max-width: 790px) {
+  .header__actions {
+    gap: 1rem;
+  }
+}
