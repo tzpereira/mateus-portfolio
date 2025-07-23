@@ -45,7 +45,17 @@ export default function Work({ locale }: WorkProps) {
   const allowedScrollDirection = useRef<'up' | 'down' | null>(null);
 
   const cardCount = useMemo(() => works.length, [works]);
-  const isVisible = useSectionVisibility('work', 0.95);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const isVisibleDesktop = useSectionVisibility('work', 0.95);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.matchMedia('(max-width: 790px)').matches);
+    }
+  }, []);
+
+  const isVisible = isMobile ? true : isVisibleDesktop;
 
   const updateIndex = useCallback((index: number) => {
     setActiveIndex(index);
@@ -183,23 +193,93 @@ export default function Work({ locale }: WorkProps) {
           </motion.div>
 
           <div className="work__frame">
-            <ScrollProgress
-              total={cardCount}
-              currentIndex={activeIndex}
-              onDotClick={animateScrollTo}
-              isVisible={isVisible}
-            />
-            <div className="scroll-container" ref={containerRef}>
-              {works.map((work, idx) => (
-                <WorkCard
-                  key={idx}
-                  work={work}
-                  isCardVisible={idx === activeIndex}
+            {isVisible && !isMobile ? (
+              <>
+                <ScrollProgress
+                  total={cardCount}
+                  currentIndex={activeIndex}
+                  onDotClick={animateScrollTo}
                   isVisible={isVisible}
-                  scrollDirection={scrollDirection}
                 />
-              ))}
-            </div>
+                <div className="scroll-container" ref={containerRef}>
+                  {works.map((work, idx) => (
+                    <WorkCard
+                      key={idx}
+                      work={work}
+                      isCardVisible={idx === activeIndex}
+                      isVisible={isVisible}
+                      scrollDirection={scrollDirection}
+                    />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                {isMobile && (
+                  <div className="mobile-container">
+                    <motion.div
+                      className="mobile-container__card"
+                      initial={{ x: 100, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -100, opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <WorkCard
+                        work={works[activeIndex]}
+                        isCardVisible={true}
+                        isVisible={isVisible}
+                        scrollDirection={scrollDirection}
+                      />
+                    </motion.div>
+                    <div className="mobile-container__arrows">
+                      <button
+                        className="mobile-container__arrow"
+                        onClick={() => updateIndex(Math.max(activeIndex - 1, 0))}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                          className="mobile-container__arrow-icon"
+                          width="56"
+                          height="32"
+                        >
+                          <line x1="5" y1="12" x2="22" y2="12" />
+                          <polyline points="12 5 5 12 12 19" />
+                        </svg>
+                      </button>
+                      <span className="mobile-container__info">
+                        {activeIndex + 1} / {cardCount}
+                      </span>
+                      <button
+                        className="mobile-container__arrow"
+                        onClick={() => updateIndex(Math.min(activeIndex + 1, cardCount - 1))}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                          className="mobile-container__arrow-icon"
+                          width="56"
+                          height="32"
+                        >
+                          <line x1="2" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </>
       )}
