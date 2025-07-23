@@ -84,7 +84,6 @@ export default function Services({ locale }: ServicesProps) {
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ display: 'flex', alignItems: 'center', gap: 12 }}
           >
             <h2 className="services__title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {t('title')}
