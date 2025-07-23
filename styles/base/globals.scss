@@ -40,12 +40,6 @@ body {
 
 .section {
   scroll-snap-align: start;
-
-  @media (max-width: 790px) {
-    html {
-      scroll-snap-type: none;
-    }
-  }
 }
 
 * {
