@@ -52,6 +52,7 @@ export default function Services({ locale }: ServicesProps) {
   }, [locale]);
 
   const GyroIcon = iconMap['gyroscope.svg'];
+  
   // Handler para pedir permissão nativa e disparar evento global
   const handleGyroPermission = () => {
     if (
@@ -87,14 +88,15 @@ export default function Services({ locale }: ServicesProps) {
           >
             <h2 className="services__title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {t('title')}
-              {GyroIcon && (
+              {isMobile && GyroIcon && (
                 <button
                   type="button"
+                  className="services__gyro_button"
                   aria-label="Ativar giroscópio"
                   onClick={handleGyroPermission}
-                  style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                 >
                   <GyroIcon width={22} height={22} style={{ opacity: 0.7 }} />
+                  <p className="services__gyro_text">{t('activate-gyro')}</p>
                 </button>
               )}
             </h2>
