@@ -36,6 +36,7 @@
       font-size: 1rem;
       line-height: 1.5;
       font-weight: 200;
+      padding: 0.5rem;
     }
 
     .service-card__icon {
@@ -44,6 +45,7 @@
       max-width: 10rem;
       min-height: 5rem;
       max-height: 10rem;
+      padding: 0.5rem;
       filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
     }
 
@@ -154,6 +156,7 @@
         flex: 2;
         min-width: 10vh;
         min-height: 10vh;
+        padding: 0;
       }
     }
 
