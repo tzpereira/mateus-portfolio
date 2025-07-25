@@ -54,7 +54,16 @@ export default function Stack({ locale }: StackProps) {
   const [t, setT] = useState<TFunction | null>(null);
   const [stackData, setStackData] = useState<StackData | null>(null);
 
-  const isVisible = useSectionVisibility('stack', 0.8);
+  const [isMobile, setIsMobile] = useState(false);
+  const isVisibleDesktop = useSectionVisibility('stack', 0.8);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.matchMedia('(max-width: 790px)').matches);
+    }
+  }, []);
+
+  const isVisible = isMobile ? true : isVisibleDesktop;
 
   useEffect(() => {
     initTranslations(locale, ['stack']).then(({ t }) => {

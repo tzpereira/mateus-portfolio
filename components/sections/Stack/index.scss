@@ -29,8 +29,45 @@
 
 @media (max-width: 790px) {
   .stack {
+    min-height: 100vh;
     height: auto;
-    min-height: unset;
-    padding: 2rem 0;
+    width: 90vw;
+    padding: 0;
+    margin: auto;
+
+    &__title {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    &__frame {
+      height: auto;
+      width: 90vw;
+    }
+
+    &__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &__title-container {
+      width: 90vw;
+      justify-content: center;
+    }
+
+    &__hive-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      height: auto !important;
+      min-width: 0 !important;
+      min-height: unset !important;
+      max-width: 100vw !important;
+      max-height: unset !important;
+      margin: 0 auto !important;
+    }
   }
 }
