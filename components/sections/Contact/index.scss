@@ -1,33 +1,38 @@
-  .contact {
+.contact {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
-    width: 100vw;
-    margin: none;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
 
     &__title-container {
       display: flex;
       justify-content: flex-start;
       width: 80vw;
+      margin: 0 auto;
     }
 
     &__title {
       font-size: 2.5rem;
       font-weight: 600;
       color: var(--foreground);
+      text-align: center;
+      margin: 0;
     }
 
     &__frame {
       display: flex;
       width: 80vw;
       height: 45vh;
-      margin-top: 2rem;
+      margin: 2rem auto 0 auto;
       gap: 2rem;
       justify-content: space-between;
       align-items: flex-end;
       flex-wrap: wrap;
+      padding: 0;
     }
 
     &__intro {
@@ -37,6 +42,8 @@
       gap: 1.25rem;
       height: 100%;
       justify-content: space-between;
+      align-items: flex-start;
+      text-align: left;
     }
 
     &__card {
@@ -44,14 +51,19 @@
       flex-direction: column;
       justify-content: center;
       width: auto;
+      align-items: flex-start;
     }
 
     &__only-links-card {
       width: 25vw;
+      min-width: 220px;
+      max-width: 400px;
     }
 
     &__form-card {
       width: 40vw;
+      min-width: 280px;
+      max-width: 600px;
       height: 100%;
     }
 
@@ -211,10 +223,126 @@
     }
   }
 
-  @media (max-width: 790px) {
-    .contact {
+/* Tablets (≤ 1079px) */
+@media (max-width: 1079px) {
+  .contact {
+    height: auto;
+    min-height: unset;
+    padding: 0;
+    width: 90vw;
+
+    &__title-container {
+      width: 90vw;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: 2rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    &__frame {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90vw;
       height: auto;
-      min-height: unset;
-      padding: 2rem 0;
+      margin: 2rem auto 0 auto;
+      gap: 2rem;
+      padding: 0;
+    }
+
+    &__intro {
+      align-items: center;
+      text-align: center;
+      width: 90vw;
+      margin-bottom: 2rem;
+    }
+
+    &__card {
+      align-items: center;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    &__only-links-card,
+    &__form-card {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
     }
   }
+}
+
+/* Celulares (≤ 790px) */
+@media (max-width: 790px) {
+  .contact {
+    min-height: 100vh;
+    height: auto;
+    width: 90vw;
+    padding: 0;
+    margin: auto;
+
+    &__title-container {
+      width: 90vw;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    &__frame {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90vw;
+      height: auto;
+      margin: 2rem auto 0 auto;
+      gap: 0;
+      padding: 0;
+    }
+
+    &__intro {
+      align-items: center;
+      text-align: center;
+      width: 90vw;
+      margin-bottom: 2rem;
+    }
+
+    &__card {
+      align-items: center;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    &__only-links {
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    &__form {
+      button {
+        margin-top: 2rem;
+        align-self: center;
+        padding: 1rem;
+        min-width: 200px;
+      }
+    }
+
+    &__only-links-card,
+    &__form-card {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+}
