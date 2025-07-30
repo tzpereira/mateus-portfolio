@@ -129,7 +129,9 @@ export default function Contact({ locale }: ContactProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      <Footer locale={locale} />
+      {isVisible && t && (
+          <Footer locale={locale} />
+      )}
     </section>
   );
 }
