@@ -1,10 +1,8 @@
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10vh;
+  position: fixed;
+  bottom: 1rem;
 
-  &___content {
+  &__content {
     font-size: 1rem;
     font-weight: lighter;
   }

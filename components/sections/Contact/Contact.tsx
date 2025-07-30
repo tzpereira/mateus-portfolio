@@ -13,6 +13,9 @@ import { TFunction } from 'i18next';
 // react
 import { useEffect, useState } from 'react';
 
+// components
+import { Footer } from '@/components/layout/Footer';
+
 // motion
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 
@@ -32,8 +35,18 @@ const rightVariants: Variants = {
 };
 
 export default function Contact({ locale }: ContactProps) {
-  const isVisible = useSectionVisibility('contact', 0.8);
   const [t, setT] = useState<TFunction | null>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const isVisibleDesktop = useSectionVisibility('contact', 0.8);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.matchMedia('(max-width: 790px)').matches);
+    }
+  }, []);
+
+  const isVisible = isMobile ? true : isVisibleDesktop;
 
   useEffect(() => {
     initTranslations(locale, ['contact']).then(({ t }) => {
@@ -116,6 +129,7 @@ export default function Contact({ locale }: ContactProps) {
           </motion.div>
         )}
       </AnimatePresence>
+      <Footer locale={locale} />
     </section>
   );
 }

@@ -30,7 +30,6 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           <Work locale={locale} />
           <Stack locale={locale}/>
           <Contact locale={locale} />
-          <Footer locale={locale} />
         </main>
       </Loading>
     </TranslationProvider>
