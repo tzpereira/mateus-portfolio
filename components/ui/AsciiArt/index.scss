@@ -1,7 +1,12 @@
 .ascii-art {
-  font-size: clamp(2px, 0.26vw, 11px);
+  font-size: clamp(2px, 0.25vw, 12px);
   line-height: 1;
-  white-space: pre;
-  margin: 0;
+  font-family: monospace;
+  color: var(--ascii);
+}
+
+.ascii-art.safari {
+  line-height: 1.1 !important;
+  font-family: monospace;
   color: var(--ascii);
 }

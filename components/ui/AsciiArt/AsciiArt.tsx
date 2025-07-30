@@ -154,11 +154,13 @@ const cleanAsciiArt = (art: string) => {
     .join('\n');
 };
 
+const isSafari = typeof window !== 'undefined' && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 const AsciiArt = () => {
   const cleanedArt = cleanAsciiArt(AsciiArtString);
 
   return (
-    <pre className="ascii-art">
+    <pre className={`ascii-art${isSafari ? ' safari' : ''}`}>
       {cleanedArt}
     </pre>
   );
