@@ -13,9 +13,6 @@ import { TFunction } from 'i18next';
 // react
 import { useEffect, useState } from 'react';
 
-// components
-import { Footer } from '@/components/layout/Footer';
-
 // motion
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 
@@ -129,9 +126,6 @@ export default function Contact({ locale }: ContactProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      {isVisible && t && (
-          <Footer locale={locale} />
-      )}
     </section>
   );
 }
