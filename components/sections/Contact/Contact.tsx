@@ -96,7 +96,7 @@ export default function Contact({ locale }: ContactProps) {
                     <div className="contact__links">
                       <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">{t('whatsapp')}</a>
                       <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">{t('linkedin')}</a>
-                      <a href="https://github.com/mateuspdasilva" target="_blank" rel="noreferrer">{t('github')}</a>
+                      <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">{t('github')}</a>
                     </div>
                     <div className="glass-reflection" />
                   </div>
