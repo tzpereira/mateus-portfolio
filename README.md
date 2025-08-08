@@ -2,6 +2,8 @@
 
 Hey! This is the repository for my personal portfolio. It’s more than just a pretty site — it’s where I show what I’m capable of as a developer, both technically and creatively. Built with [Next.js](https://nextjs.org), it brings together a bunch of things I enjoy experimenting with on the modern web.
 
+![alt text](./assets/image/work_image/portfolio.png)
+
 ## ✨ What Stands Out
 
 The goal here was to create a smooth, responsive, and immersive experience. The layout adjusts perfectly on any screen, but the highlight is in the details: advanced interactions like **scroll hijacking**, **parallax based on gyroscope and mouse**, and seamless transitions using [Framer Motion](https://www.framer.com/motion/). Everything is meant to feel reactive and alive.
