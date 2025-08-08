@@ -10,6 +10,11 @@
         "title": "API Bench CLI",
         "description": "A command-line tool for benchmarking APIs. This tool allows you to perform benchmarking tests on any API endpoint by sending multiple requests and analyzing the response times.",
         "icon": "api-bench.png"
+      },
+      {
+        "title": "This Portfolio",
+        "description": "A personal portfolio website showcasing my projects and skills.",
+        "icon": "portfolio.png"
       }
     ]
   }

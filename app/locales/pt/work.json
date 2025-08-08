@@ -10,6 +10,11 @@
       "title": "API Bench CLI",
       "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
+    },
+    {
+      "title": "Este Portfólio",
+      "description": "Um site de portfólio pessoal que exibe meus projetos e habilidades.",
+      "icon": "portfolio.png"
     }
   ]
 }
