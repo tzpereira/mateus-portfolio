@@ -12,16 +12,17 @@
   &__image {
     flex: 1 1 60%;
     display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
-    max-width: auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 60vh;
     max-height: 60vh;
 
     img {
-      width: auto;
-      height: 60vh;
+      width: 100%;
+      height: fit-content;
       object-fit: contain;
       object-position: center;
+      border-radius: 0.5rem;
     }
   }
 

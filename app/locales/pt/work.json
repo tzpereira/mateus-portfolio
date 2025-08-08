@@ -2,17 +2,12 @@
   "title": "PROJETOS",
   "works": [
     {
+      "title": "Bitcoin Price Forecasting",
+      "description": "Um projeto que utiliza machine learning para prever os preços do Bitcoin. Utiliza dados históricos e algoritmos para prever os movimentos futuros dos preços.",
+      "icon": "bitcoin-price-forecasting.png"
+    },
+    {
       "title": "API Bench CLI",
-      "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
-      "icon": "api-bench.png"
-    },
-    {
-      "title": "API Bench CLI 2",
-      "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
-      "icon": "api-bench.png"
-    },
-    {
-      "title": "API Bench CLI 3",
       "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
     }
