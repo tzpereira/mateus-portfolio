@@ -94,11 +94,26 @@
       flex-direction: column;
       gap: 0.5rem;
 
+
+      .contact__icon {
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: middle;
+        margin-right: 0.7em;
+        display: inline-block;
+        object-fit: contain;
+        position: relative;
+        top: 0.1em;
+      }
+
       a {
         font-family: monospace;
         font-size: 1.2rem;
         color: var(--foreground);
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
 
         &:hover {
           text-decoration: underline;
@@ -324,7 +339,7 @@
     &__only-links {
       justify-content: center;
       align-items: center;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     &__form {

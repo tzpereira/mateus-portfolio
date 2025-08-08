@@ -19,6 +19,13 @@ import { motion, Variants, AnimatePresence } from 'framer-motion';
 // hooks
 import { useSectionVisibility } from '@/hooks/useSectionVisibility';
 
+// images
+import { imageMap } from '@/assets/image/imageExporter';
+
+// next
+import Image from 'next/image';
+import { i } from 'framer-motion/client';
+
 const leftVariants: Variants = {
   hidden: { opacity: 0, x: -100 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
@@ -94,9 +101,18 @@ export default function Contact({ locale }: ContactProps) {
                 <div className="contact__card contact__only-links-card">
                   <div className="contact__card-content contact__only-links">
                     <div className="contact__links">
-                      <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">{t('whatsapp')}</a>
-                      <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">{t('linkedin')}</a>
-                      <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">{t('github')}</a>
+                        <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['communication.png']} alt="WhatsApp Icon" className="contact__icon" />
+                          {t('whatsapp')}
+                        </a>
+                        <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['business.png']} alt="LinkedIn Icon" className="contact__icon" />
+                          {t('linkedin')}
+                        </a>
+                        <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['social.png']} alt="GitHub Icon" className="contact__icon" />
+                          {t('github')}
+                        </a>
                     </div>
                     <div className="glass-reflection" />
                   </div>
