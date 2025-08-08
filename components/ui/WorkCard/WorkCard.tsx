@@ -11,6 +11,9 @@ import { imageMap } from '@/assets/image/imageExporter';
 // framer motion
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 
+// components
+import Image from 'next/image';
+
 const textVariants: Variants = {
   hidden: { opacity: 0, x: -200 },
   visible: {
@@ -60,12 +63,19 @@ export default function WorkCard({ work, isCardVisible, scrollDirection, isVisib
             <motion.div
               key="image"
               className="work-card__image"
-              initial="hidden"
               animate="visible"
               exit="exit"
               variants={imageVariants}
             >
-              {imageMap[work.icon] && <img src={imageMap[work.icon].src} alt={work.title} />}
+              {imageMap[work.icon] && (
+                <Image
+                  src={imageMap[work.icon]}
+                  alt={work.title}
+                  fill={false}
+                  sizes="(max-width: 790px) 90vw, 60vw"
+                  priority
+                />
+              )}
             </motion.div>
           </>
         )}
