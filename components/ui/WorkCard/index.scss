@@ -47,10 +47,6 @@
   }
 }
 
-.work-card:nth-of-type(3) .work-card__image img {
-  border: 0.5px solid var(--foreground);
-}
-
 @media (max-width: 790px) {
   .work-card {
     flex-direction: column;
