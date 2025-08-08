@@ -24,7 +24,9 @@ import { imageMap } from '@/assets/image/imageExporter';
 
 // next
 import Image from 'next/image';
-import { i } from 'framer-motion/client';
+
+// components
+import { Footer } from '@/components/layout/Footer';
 
 const leftVariants: Variants = {
   hidden: { opacity: 0, x: -100 },
@@ -142,6 +144,7 @@ export default function Contact({ locale }: ContactProps) {
           </motion.div>
         )}
       </AnimatePresence>
+      {isVisible && t && <Footer locale={locale} />}
     </section>
   );
 }
