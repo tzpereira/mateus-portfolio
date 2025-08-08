@@ -71,7 +71,16 @@
   .services {
     &__frame {
       height: auto;
-      width: 90vw;
+      width: 80vw;
+    }
+  }
+}
+
+@media (max-width: 1079px) {
+  .services {
+    &__title-container {
+      width: 80vw;
+      justify-content: center;
     }
   }
 }
