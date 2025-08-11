@@ -146,7 +146,12 @@ export default function Work({ locale }: WorkProps) {
   }, [isLocked]);
 
   useEffect(() => {
-    setIsLocked(isVisible);
+    // Só trava o scroll no desktop quando a section Work está visível
+    if (!isMobile && isVisible) {
+      setIsLocked(true);
+    } else {
+      setIsLocked(false);
+    }
     allowedScrollDirection.current = null;
 
     // Quando a seção Work fica visível novamente, restaura o índice e o scroll
@@ -163,7 +168,7 @@ export default function Work({ locale }: WorkProps) {
     if (!isVisible) {
       lastActiveIndex.current = activeIndexRef.current;
     }
-  }, [isVisible, works.length, updateIndex]);
+  }, [isVisible, works.length, updateIndex, isMobile]);
 
   useEffect(() => {
     if (!isLocked) return;
