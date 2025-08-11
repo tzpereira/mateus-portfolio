@@ -330,6 +330,10 @@
       margin-bottom: 2rem;
     }
 
+     &__info-description {
+      margin-bottom: 2rem;
+     }
+
     &__card {
       align-items: center;
       width: 100%;
@@ -345,19 +349,30 @@
     &__form {
       button {
         margin-top: 2rem;
+        margin-bottom: 1rem;
         align-self: center;
         padding: 1rem;
         min-width: 200px;
       }
     }
 
-    &__only-links-card,
+    &__download-resume {
+      margin-bottom: 2rem;
+    }
+
+    &__only-links-card {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+
     &__form-card {
       width: 100%;
       min-width: unset;
       max-width: unset;
-      margin-bottom: 0;
-      margin-top: 0;
+      margin-bottom: 3rem;
     }
   }
 }
