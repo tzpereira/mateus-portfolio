@@ -9,8 +9,11 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Mateus da Silva',
-  description: 'Portfolio',
+  title: "Mateus",
+  description: "Software Engineer",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -19,11 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jetBrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${jetBrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <body>
-      <ThemeProvider attribute="class" enableSystem>
-        {children}
-      </ThemeProvider>
+        <ThemeProvider attribute="class" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
