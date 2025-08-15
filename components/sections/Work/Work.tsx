@@ -125,7 +125,7 @@ export default function Work({ locale }: WorkProps) {
         } else {
           setIsLocked(true);
         }
-      }, 800);
+      }, 500);
     },
     [isAnimating, animateScrollTo, cardCount]
   );
