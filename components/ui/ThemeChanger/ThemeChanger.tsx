@@ -20,7 +20,7 @@ const updateTheme = (isDarkEnabled: boolean): void => {
   localStorage.setItem(THEME_KEY, theme);
 };
 
-export default function ThemeChanger() {
+export default function   ThemeChanger() {
   const [isToggled, setIsToggled] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -29,7 +29,7 @@ export default function ThemeChanger() {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem(THEME_KEY);
-    const prefersDark = storedTheme ? storedTheme === 'dark' : true;
+    const prefersDark = storedTheme ? storedTheme === 'dark' : false;
     setIsToggled(prefersDark);
     setHasMounted(true);
   }, []);
