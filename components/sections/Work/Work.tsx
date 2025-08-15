@@ -125,7 +125,7 @@ export default function Work({ locale }: WorkProps) {
         } else {
           setIsLocked(true);
         }
-      }, 100);
+      }, 800);
     },
     [isAnimating, animateScrollTo, cardCount]
   );
@@ -260,7 +260,7 @@ export default function Work({ locale }: WorkProps) {
                       initial={{ x: 100, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: -100, opacity: 0 }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.8 }}
                     >
                       <WorkCard
                         work={works[activeIndex]}
