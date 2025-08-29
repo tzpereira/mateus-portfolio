@@ -2,6 +2,11 @@
   "title": "PROJETOS",
   "works": [
     {
+      "title": "Bandit Brain",
+      "description": "Bandit Brain é uma plataforma robusta de experimentação e recomendação baseada em algoritmos de Bandit de Múltiplas Braços (MAB).",
+      "icon": "bandit-brain.png"
+    },
+    {
       "title": "Bitcoin Price Forecasting",
       "description": "Um projeto que utiliza machine learning para prever os preços do Bitcoin. Utiliza dados históricos e algoritmos para prever os movimentos futuros dos preços.",
       "icon": "bitcoin-price-forecasting.png"
@@ -10,11 +15,6 @@
       "title": "API Bench CLI",
       "description": "Uma ferramenta de linha de comando para realizar testes de desempenho em APIs. Permite enviar múltiplas requisições para um endpoint e analisar os tempos de resposta.",
       "icon": "api-bench.png"
-    },
-    {
-      "title": "Este Portfólio",
-      "description": "Um site de portfólio pessoal que exibe meus projetos e habilidades.",
-      "icon": "portfolio.png"
     }
   ]
 }
