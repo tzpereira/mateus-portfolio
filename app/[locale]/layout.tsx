@@ -33,16 +33,13 @@ export const metadata = {
     images: [
       {
         url: "/assets/image/generic/mateus.png",
-        width: 1200,
-        height: 630,
+        width: 1600,
+        height: 900,
         alt: "Mateus Pereira Portfolio"
       }
     ],
     locale: "en_US",
     type: "website"
-  },
-  alternates: {
-    canonical: "https://mateusdasilva.vercel.app/"
   }
 };
 
