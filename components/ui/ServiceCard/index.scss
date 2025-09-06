@@ -18,7 +18,7 @@
     -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
     width: 35vw;
-    height: 20vh;
+    height: 22vh;
     overflow: hidden;
     z-index: 0;
     transform-style: preserve-3d;
@@ -41,10 +41,10 @@
 
     .service-card__icon {
       flex: 1;
-      min-width: 5rem;
-      max-width: 10rem;
-      min-height: 5rem;
-      max-height: 10rem;
+      min-width: 10vh;
+      max-width: 22vh;
+      min-height: 10vh;
+      max-height: 22vh;
       padding: 0.5rem;
       filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
     }
