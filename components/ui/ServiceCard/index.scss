@@ -122,8 +122,8 @@
 
       .service-card__icon {
         flex: 2;
-        width: 8vh;
-        height: 8vh;
+        min-width: 10vh;
+        min-height: 10vh;
       }
     }
   }
@@ -132,10 +132,10 @@
 /* Celulares (≤ 790px) */
 @media (max-width: 790px) {
   .service-card {
-    height: 25vh;
+    height: 33vh;
 
     &__title {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     &__content {
@@ -144,18 +144,19 @@
       text-align: center;
       width: 90vw;
       padding: 1rem;
+      height: 33vh;
 
       .service-card__description {
         flex: 8;
-        font-size: 0.75rem;
+        font-size: 0.675rem;
         line-height: 1.4;
         font-weight: lighter;
       }
 
       .service-card__icon {
         flex: 2;
-        min-width: 10vh;
-        min-height: 10vh;
+        min-width: 12vh;
+        min-height: 12vh;
         padding: 0;
       }
     }

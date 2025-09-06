@@ -1,25 +1,25 @@
 {
   "title": "SERVIÇOS",
-  "activate-gyro": "(ativar giroscópio)",
+  "activate-gyro": "(giroscópio)",
   "services": [
     {
-      "title": "Estratégia e Consultoria Técnica",
-      "description": "Ofereço orientação estratégica para equipes e fundadores, ajudando a definir caminhos ideais para escalar, ganhar velocidade e crescer de forma sustentável.",
+      "title": "Estratégia e Consultoria em Tecnologia",
+      "description": "Transforme tecnologia em motor de crescimento. Juntos, vamos traduzir seus objetivos de negócio em estratégias claras e arquiteturas escaláveis — para que seus sistemas entreguem performance, segurança e sucesso duradouro, sem complexidade desnecessária.",
       "icon": "cardinal-points.svg"
     },
     {
-      "title": "Integração de IA e Automação",
-      "description": "Aprimore seus fluxos com integração inteligente de IA e automações personalizadas — desde APIs da OpenAI até bots internos e pipelines de dados.",
+      "title": "Soluções de IA e Machine Learning",
+      "description": "Aumente a eficiência e descubra novas oportunidades. De bots personalizados a pipelines inteligentes de dados, modelos de previsão e recursos com OpenAI, desenvolvo soluções de IA que simplificam operações e geram resultados mensuráveis.",
       "icon": "ai.svg"
     },
     {
-      "title": "Software Sob Medida",
-      "description": "Criação de soluções personalizadas: de sistemas backend e APIs a aplicações web completas e ferramentas de automação, sempre com código limpo e arquitetura robusta.",
+      "title": "Desenvolvimento de Software Sob Medida",
+      "description": "Software que se adapta a você — e não o contrário. De APIs backend a aplicações web completas, construo soluções sob medida com bases sólidas em arquitetura, segurança e performance — prontas para evoluir junto com o seu negócio.",
       "icon": "binary.svg"
     },
     {
-      "title": "Resgate e Suporte de Código",
-      "description": "Recupero sistemas ineficientes por meio de otimização de performance, eliminação de dívidas técnicas, modernização do stack e redução de bugs.",
+      "title": "Resgate e Modernização de Legado",
+      "description": "Não deixe o legado te limitar. Ajudo a modernizar e estabilizar seus sistemas — resolvendo dívidas técnicas, melhorando performance e atualizando stacks — para que seu software seja confiável, escalável e preparado para o futuro.",
       "icon": "support.svg"
     }
   ]

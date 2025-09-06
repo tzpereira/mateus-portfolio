@@ -1,26 +1,26 @@
-{
-  "title": "SERVICES",
-  "activate-gyro": "(activate gyro)",
-  "services": [
-    {
-      "title": "Tech Strategy & Consulting",
-      "description": "I provide strategic guidance for teams and founders, helping them define optimal paths to achieve scalability, speed, and sustainable growth.",
-      "icon": "cardinal-points.svg"
-    },
-    {
-      "title": "AI Integration & Automation",
-      "description": "Enhance your workflows with smart AI integration and custom automations—from OpenAI APIs to internal bots and data pipelines.",
-      "icon": "ai.svg"
-    },
-    {
-      "title": "Custom Software",
-      "description": "Building custom solutions: from backend systems and APIs to full web apps and automation tools, always with clean code and robust architecture.",
-      "icon": "binary.svg"
-    },
-    {
-      "title": "Codebase Rescue & Support",
-      "description": "I recover underperforming systems through performance optimization, technical debt elimination, stack modernization, and bug reduction.",
-      "icon": "support.svg"
-    }
-  ]
-}
+  {
+    "title": "SERVICES",
+    "activate-gyro": "(gyro)",
+    "services": [
+      {
+        "title": "Technology Strategy & Consulting",
+        "description": "Turn technology into a growth engine. Together, we’ll translate your business goals into clear strategies and scalable architectures—so your systems deliver performance, security, and long-term success without unnecessary complexity.",
+        "icon": "cardinal-points.svg"
+      },
+      {
+        "title": "AI & Machine Learning Solutions",
+        "description": "Boost efficiency and unlock new opportunities. From custom bots to intelligent data pipelines, forecasting models, and OpenAI-powered features, I design AI solutions that simplify operations and drive measurable results.",
+        "icon": "ai.svg"
+      },
+      {
+        "title": "Tailored Software Development",
+        "description": "Software that adapts to you—not the other way around. From backend APIs to full-stack web applications, I build tailored solutions with strong foundations in architecture, security, and performance—ready to evolve as your business grows.",
+        "icon": "binary.svg"
+      },
+      {
+        "title": "Legacy Code Rescue & Modernization",
+        "description": "Don’t let legacy code hold you back. I help modernize and stabilize your systems—resolving technical debt, improving performance, and updating stacks—so your software becomes reliable, scalable, and future-proof.",
+        "icon": "support.svg"
+      }
+    ]
+  }
