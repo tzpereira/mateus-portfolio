@@ -10,7 +10,7 @@ import { WorkEntity, WorkProps } from './types';
 import initTranslations from '@/app/i18n';
 
 // react
-import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 // motion
 import { motion, Variants } from 'framer-motion';
