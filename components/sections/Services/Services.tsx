@@ -34,7 +34,7 @@ export default function Services({ locale }: ServicesProps) {
   const [t, setT] = useState<TFunction | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [isMobile, setIsMobile] = useState(false);
-  const isVisibleDesktop = useSectionVisibility('services', 0.8);
+  const isVisibleDesktop = useSectionVisibility('services', 0.2);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -85,20 +85,21 @@ export default function Services({ locale }: ServicesProps) {
             animate="animate"
             exit="exit"
           >
-            <h2 className="services__title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h2 className="services__title">
               {t('title')}
-              {isMobile && GyroIcon && (
-                <button
-                  type="button"
-                  className="services__gyro_button"
-                  aria-label="Ativar giroscópio"
-                  onClick={handleGyroPermission}
-                >
-                  <GyroIcon width={22} height={22} style={{ opacity: 0.7 }} />
-                  <p className="services__gyro_text">{t('activate-gyro')}</p>
-                </button>
-              )}
             </h2>
+            {isMobile && GyroIcon && (
+              <button
+                type="button"
+                className="services__gyro_button"
+                aria-label="Ativar giroscópio"
+                onClick={handleGyroPermission}
+                style={{ marginTop: 8 }}
+              >
+                <GyroIcon width={22} height={22} style={{ opacity: 0.7 }} />
+                <p className="services__gyro_text">{t('activate-gyro')}</p>
+              </button>
+            )}
           </motion.div>
         ) : null}
       </AnimatePresence>
