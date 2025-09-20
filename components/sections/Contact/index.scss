@@ -6,6 +6,7 @@
     height: 100vh;
     width: 100%;
     margin: 0;
+    padding-bottom: 5rem;
     overflow-x: hidden;
 
     &__title-container {
@@ -40,7 +41,6 @@
       flex-direction: column;
       gap: 1.25rem;
       height: 100%;
-      justify-content: space-between;
       align-items: flex-start;
       text-align: left;
     }
@@ -54,9 +54,10 @@
     }
 
     &__only-links-card {
-      width: 25vw;
-      min-width: 10vw;
-      max-width: 25vw;
+      width: 40vw;
+      min-width: 12vw;
+      max-width: 40vw;
+      margin-top: 1.5rem;
     }
 
     &__form-card {
@@ -84,20 +85,18 @@
 
     &__only-links {
       justify-content: center;
-      align-items: flex-start;
       padding: 2rem;
     }
 
     &__links {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      flex-direction: row;
+      justify-content: space-between;
 
-
-      .contact__icon {
+      & .contact__icon {
         width: 1.5em;
         height: 1.5em;
-        vertical-align: middle;
+        vertical-align: text-bottom;
         margin-right: 0.7em;
         display: inline-block;
         object-fit: contain;
@@ -112,7 +111,7 @@
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 0.5em;
+        gap: 0.2em;
 
         &:hover {
           text-decoration: underline;
@@ -128,7 +127,7 @@
     }
 
     &__info-description {
-      font-size: 2rem;
+      font-size: 3.75rem;
       font-weight: 600;
       margin: 0;
       color: var(--foreground);
@@ -142,7 +141,7 @@
     }
 
     &__download-resume {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       display: inline-block;
       font-family: monospace;
       font-size: 1.5rem;
@@ -209,31 +208,6 @@
           color: var(--background);
           border: 0.5px solid color-mix(in srgb, var(--background), transparent 0%);
         }
-      }
-    }
-
-    .glass-reflection {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      border-radius: inherit;
-      z-index: 1;
-      mix-blend-mode: screen;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
-        transform: rotate(15deg);
-        animation: reflect-move 6s ease-in-out infinite;
-        pointer-events: none;
       }
     }
   }
@@ -331,6 +305,7 @@
     }
 
      &__info-description {
+      font-size: 2.5rem;
       margin-bottom: 2rem;
      }
 
@@ -360,12 +335,19 @@
       margin-bottom: 2rem;
     }
 
+    &__links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
     &__only-links-card {
       width: 100%;
       min-width: unset;
       max-width: unset;
-      margin-bottom: 1rem;
-      margin-top: 0;
+      margin-bottom: 0;
+      margin-top: 1.5rem;
     }
 
     &__form-card {

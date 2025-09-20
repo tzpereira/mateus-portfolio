@@ -44,7 +44,9 @@ export default function Contact({ locale }: ContactProps) {
   const [t, setT] = useState<TFunction | null>(null);
 
   const [isMobile, setIsMobile] = useState(false);
-  const isVisibleDesktop = useSectionVisibility('contact', 0.8);
+  const isVisibleDesktop = useSectionVisibility('contact', 0.2);
+  const shouldShowFooterDesktop = useSectionVisibility('contact', 0.9);
+  const shouldShowFooter = isMobile ? true : shouldShowFooterDesktop;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -87,7 +89,6 @@ export default function Contact({ locale }: ContactProps) {
                 className="contact__intro"
                 variants={leftVariants}
               >
-                <h3 className="contact__info-title">{t('talk_title')}</h3>
                 <p className="contact__info-description">{t('talk_text')}</p>
                 <div>
                   <span className="contact__info-subtitle">{t('find_me')}</span>
@@ -98,26 +99,6 @@ export default function Contact({ locale }: ContactProps) {
                   >
                     {t('download_resume')}
                   </a>
-                </div>
-
-                <div className="contact__card contact__only-links-card">
-                  <div className="contact__card-content contact__only-links">
-                    <div className="contact__links">
-                        <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['communication.png']} alt="WhatsApp Icon" className="contact__icon" />
-                          {t('whatsapp')}
-                        </a>
-                        <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['business.png']} alt="LinkedIn Icon" className="contact__icon" />
-                          {t('linkedin')}
-                        </a>
-                        <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['social.png']} alt="GitHub Icon" className="contact__icon" />
-                          {t('github')}
-                        </a>
-                    </div>
-                    <div className="glass-reflection" />
-                  </div>
                 </div>
               </motion.div>
 
@@ -139,12 +120,31 @@ export default function Contact({ locale }: ContactProps) {
                   </form>
                   <div className="glass-reflection" />
                 </div>
+                <div className="contact__card contact__only-links-card">
+                  <div className="contact__card-content contact__only-links">
+                    <div className="contact__links">
+                        <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['communication.png']} alt="WhatsApp Icon" className="contact__icon" />
+                          {t('whatsapp')}
+                        </a>
+                        <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['business.png']} alt="LinkedIn Icon" className="contact__icon" />
+                          {t('linkedin')}
+                        </a>
+                        <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">
+                          <Image src={imageMap['social.png']} alt="GitHub Icon" className="contact__icon" />
+                          {t('github')}
+                        </a>
+                    </div>
+                    <div className="glass-reflection" />
+                  </div>
+                </div>
               </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      {isVisible && t && <Footer locale={locale} />}
+      {shouldShowFooter && t && <Footer locale={locale} />}
     </section>
   );
 }
