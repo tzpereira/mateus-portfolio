@@ -55,7 +55,7 @@ export default function Stack({ locale }: StackProps) {
   const [stackData, setStackData] = useState<StackData | null>(null);
 
   const [isMobile, setIsMobile] = useState(false);
-  const isVisibleDesktop = useSectionVisibility('stack', 0.8);
+  const isVisibleDesktop = useSectionVisibility('stack', 0.2);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

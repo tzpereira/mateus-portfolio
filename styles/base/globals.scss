@@ -20,12 +20,6 @@ html {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-jetbrains);
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-
-  @media screen and (max-width: 790px) {
-    scroll-snap-type: unset;
-  }
 }
 
 body {

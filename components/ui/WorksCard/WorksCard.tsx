@@ -42,7 +42,7 @@ const imageVariants: Variants = {
   },
 };
 
-export default function WorkCard({ work, isCardVisible, scrollDirection, isVisible }: WorkCardProps) {
+export default function WorksCard({ work, isCardVisible, scrollDirection, isVisible }: WorkCardProps) {
   return (
     <div className={`work-card ${isCardVisible ? `visible ${scrollDirection || ''}` : ''}`}>
       <AnimatePresence mode="wait">
@@ -72,7 +72,7 @@ export default function WorkCard({ work, isCardVisible, scrollDirection, isVisib
                   src={imageMap[work.icon]}
                   alt={work.title}
                   fill={false}
-                  sizes="(max-width: 790px) 90vw, 60vw"
+                  sizes="(max-width: 600px) 90vw, 60vw"
                   priority
                 />
               )}

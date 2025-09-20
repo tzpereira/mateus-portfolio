@@ -16,7 +16,6 @@ import React, { useEffect, useState } from 'react';
 // components
 import { AsciiArt } from '@/components/ui/AsciiArt';
 import { Header } from '@/components/layout/Header';
-import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
 
 // hooks
 import { useSectionVisibility } from '@/hooks/useSectionVisibility';
@@ -49,7 +48,7 @@ const contentVariants: Variants = {
 };
 
 export default function Hero({ locale }: HeroProps) {
-  const isVisible = useSectionVisibility('hero', 0.8);
+  const isVisible = useSectionVisibility('hero', 0.2);
   const [t, setT] = useState<TFunction | null>(null);
 
   useEffect(() => {
@@ -90,14 +89,6 @@ export default function Hero({ locale }: HeroProps) {
                   <AsciiArt />
               </motion.div>
             </motion.div>
-          ) : (
-            null
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          {isVisible ? (
-            <ScrollIndicator key="scroll-indicator" targetId="services" />
           ) : (
             null
           )}

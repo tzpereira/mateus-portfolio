@@ -9,6 +9,7 @@
 
   &__title-container {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     width: 80vw;
   }
@@ -92,9 +93,21 @@
     min-height: fit-content;
     padding: 0;
 
+    &__title-container {
+      width: 90vw;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
     &__title {
       font-size: 2rem;
       text-align: center;
+      margin-bottom: 0;
+    }
+
+    &__gyro_button {
+      align-self: center;
     }
 
     &__frame {
@@ -107,11 +120,7 @@
       flex-direction: column;
       gap: 2rem;
       margin-bottom: 10rem !important;
-    }
-
-    &__title-container {
-      width: 90vw;
-      justify-content: center;
+      margin-top: 2rem;
     }
   }
 }
