@@ -2,14 +2,14 @@
   "title": "Projetos Selecionados",
   "works": [
     {
-      "title": "Bandit Brain",
-      "description": "Bandit Brain é uma plataforma robusta de experimentação e recomendação baseada em algoritmos de Bandit de Múltiplas Braços (MAB).",
-      "icon": "bandit-brain.png"
-    },
-    {
       "title": "Bitcoin Price Forecasting",
       "description": "Um projeto que utiliza machine learning para prever os preços do Bitcoin. Utiliza dados históricos e algoritmos para prever os movimentos futuros dos preços.",
       "icon": "bitcoin-price-forecasting.png"
+    },
+    {
+      "title": "Bandit Brain",
+      "description": "Bandit Brain é uma plataforma robusta de experimentação e recomendação baseada em algoritmos de Bandit de Múltiplas Braços (MAB).",
+      "icon": "bandit-brain.png"
     },
     {
       "title": "API Bench CLI",
