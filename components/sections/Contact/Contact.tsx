@@ -93,11 +93,11 @@ export default function Contact({ locale }: ContactProps) {
                 <div>
                   <span className="contact__info-subtitle">{t('find_me')}</span>
                   <a
-                    href="/assets/files/mateus_resume.pdf"
+                    href="/assets/files/mateus_cv.pdf"
                     download
-                    className="contact__download-resume"
+                    className="contact__download-cv"
                   >
-                    {t('download_resume')}
+                    {t('download_cv')}
                   </a>
                 </div>
               </motion.div>
