@@ -19,6 +19,7 @@ import Docker from './stack_icons/Docker.svg';
 import Git from './stack_icons/Git.svg';
 import Go from './stack_icons/Go.svg';
 import Grafana from './stack_icons/Grafana.svg';
+import Kafka from './stack_icons/Kafka.svg';
 import Linux from './stack_icons/Linux.svg';
 import MySQL from './stack_icons/MySQL.svg';
 import NextJS from './stack_icons/Next.js.svg';
@@ -58,6 +59,7 @@ export const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = 
   'Git.svg': Git,
   'Go.svg': Go,
   'Grafana.svg': Grafana,
+  'Kafka.svg': Kafka,
   'Linux.svg': Linux,
   'MySQL.svg': MySQL,
   'Next.js.svg': NextJS,

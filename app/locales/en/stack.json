@@ -50,6 +50,11 @@
           "icon": "Polars.svg"
         },
         {
+          "title": "Kafka",
+          "description": "Distributed event streaming platform used for building real-time data pipelines and applications.",
+          "icon": "Kafka.svg"
+        },
+        {
           "title": "Node.js",
           "description": "JavaScript runtime environment for building scalable network applications.",
           "icon": "Node.js.svg"
