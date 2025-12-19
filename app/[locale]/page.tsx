@@ -12,6 +12,10 @@ import { Contact } from "@/components/sections/Contact";
 // Layout
 import { Loading } from "@/components/layout/Loading"
 
+
+// Effect
+import { SnowfallEffect } from '@/components/effects/SnowfallEffect';
+
 export default async function Home(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
 
@@ -24,6 +28,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
       resources={resources}>
       <Loading>
         <main className="main">
+          <SnowfallEffect />
           <Hero locale={locale} />
           <Services locale={locale} />
           <Work locale={locale} />
