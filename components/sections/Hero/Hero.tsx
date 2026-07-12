@@ -6,10 +6,10 @@ import { Magnetic } from '@/components/ui/Magnetic';
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const DISCIPLINES = [
-  { word: 'product', cls: 'w1' },
   { word: 'backend', cls: 'w2' },
+  { word: 'AI', cls: 'w1' },
   { word: 'data', cls: 'w3' },
-  { word: 'AI', cls: 'w5' },
+  { word: 'full product', cls: 'w5' },
 ];
 
 /* uniform "+" grid, exactly like the ref — aligned marks, varied gray tones.
@@ -167,33 +167,31 @@ export default function Hero() {
     <section className="hero" id="top" aria-label="Introduction" ref={sectionRef} onPointerMove={handleGlow}>
       <div className="hero-glow" aria-hidden="true" />
       <div className="container hero-inner">
-        <motion.p className="hero-hey" aria-hidden="true" {...fadeUp(0)}>
-          Hey,
-        </motion.p>
+        <motion.h1 className="hero-line" {...fadeUp(0)}>
+          From <strong className="hl-bold">ambiguity</strong>
+          <br />
+          to <strong className="hl-bold">production.</strong>
+        </motion.h1>
 
         {/* no fade wrapper — the messy phase must be visible from first paint */}
         <PlusGrid grid={GRID_DESKTOP} variant="is-desktop" />
         <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
 
-        <motion.h1 className="hero-line" {...fadeUp(0.24)}>
-          I turn <em className="hl-em">ambiguity</em> into production software —{' '}
+        <motion.p className="hero-copy" {...fadeUp(0.28)}>
+          I design, build and ship complete software products
+          <br />
           {DISCIPLINES.map(({ word, cls }, i) => (
             <span key={cls}>
               <span className={`hl-w ${cls}`}>{word}</span>
-              {i < DISCIPLINES.length - 1 ? ', ' : ' '}
+              {i < DISCIPLINES.length - 2 ? ', ' : i === DISCIPLINES.length - 2 ? ' and ' : '.'}
             </span>
           ))}
-          — all done by <em className="hl-em">one engineer</em>.
-        </motion.h1>
-
-        <motion.p className="hero-tag" {...fadeUp(0.34)}>
-          owning the whole arc, discovery to deployment, is my superpower
         </motion.p>
 
-        <motion.div className="hero-actions" {...fadeUp(0.44)}>
+        <motion.div className="hero-actions" {...fadeUp(0.4)}>
           <Magnetic>
             <a className="btn-ghost" href="#projects">
-              See my work
+              See work
             </a>
           </Magnetic>
           <Magnetic>

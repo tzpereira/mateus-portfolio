@@ -1,6 +1,6 @@
 /* ============================================================
    Mateus P. S. — Full-Stack / Product Software Engineer
-   System: Michroma (Arc'teryx-style display) + Helvetica body + Geist Mono
+   System: Helvetica only, everywhere (no display/mono web fonts)
    Aesthetic: editorial tech · neutral paper · indigo accent · generative graphics
    ============================================================ */
 
@@ -67,9 +67,9 @@
   --maxw: 1240px;
   --gutter: 40px;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  /* display — Michroma ≈ the Arc'teryx wordmark (Handel Gothic family) */
-  --font-display: var(--font-michroma), "Handel Gothic", "Eurostile", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  /* no separate display/mono web fonts anymore — every element renders Helvetica */
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   /* soft floating-card shadows (editorial), aliased onto legacy names */
   --shadow-card:  0 1px 2px rgba(20,20,30,0.05), 0 18px 40px -24px rgba(20,20,30,0.28);
@@ -540,17 +540,6 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   width: 100%;
 }
 
-/* "Hey," — display opener with wordmark stature */
-.hero-hey {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(44px, 4.8vw, 66px);
-  line-height: 1;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0 0 32px;
-}
-
 /* the "+" grid — full section width, short enough to keep the fold */
 .hero-plus { color: var(--ink); margin: 0 0 32px; }
 .hero-plus svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -577,37 +566,32 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   .hero-plus .pm { animation: none; }
 }
 
-/* the sentence — sans, with each craft in its own hue */
+/* the headline — Helvetica throughout, thin by default, bold on the emphasis words */
 .hero h1.hero-line {
   font-family: var(--font-sans);
-  font-size: clamp(28px, 2.9vw, 38px);
-  line-height: 1.32;
-  letter-spacing: -0.024em;
-  font-weight: 500;
-  color: var(--ink);
-  max-width: 900px;
-  margin: 0 0 18px;
-}
-.hero-line .hl-em {
-  font-family: var(--font-display);
-  font-style: normal;
+  font-size: clamp(48px, 8.5vw, 100px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
   font-weight: 400;
-  letter-spacing: 0;
-  font-size: 0.82em;
+  color: var(--ink);
+  margin: 0 0 40px;
 }
-.hero-line .w1 { color: var(--word-1); }
-.hero-line .w2 { color: var(--word-2); }
-.hero-line .w3 { color: var(--word-3); }
-.hero-line .w5 { color: var(--word-5); }
+.hero-line .hl-bold { font-weight: 700; }
 
-/* quiet aside under the sentence — technical caption */
-.hero-tag {
-  font-family: var(--font-display);
-  font-size: clamp(11px, 1.1vw, 13px);
-  letter-spacing: 0.04em;
-  color: var(--ink-3);
+/* the sentence under the grid — plain Helvetica, each craft in its own hue */
+.hero-copy {
+  font-family: var(--font-sans);
+  font-size: clamp(19px, 2.4vw, 28px);
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  color: var(--ink-2);
   margin: 0 0 36px;
 }
+.hero-copy .hl-w { font-weight: 700; }
+.hero-copy .w1 { color: var(--word-1); }
+.hero-copy .w2 { color: var(--word-2); }
+.hero-copy .w3 { color: var(--word-3); }
+.hero-copy .w5 { color: var(--word-5); }
 
 /* hero CTAs — a size up from the global buttons, to match the scale */
 .hero-actions .btn-primary,
@@ -1435,19 +1419,23 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   .ai-board::after { display: none; }
 }
 
-/* mobile stage strip under the prism (hidden on desktop — svg labels do the job) */
+/* mobile stage strip under the prism (hidden on desktop — svg labels do the job).
+   Must always read as one row (POSSIBILITIES → JUDGMENT → DIRECTION → IMPACT) —
+   never wrap, shrink to fit instead. */
 .ai-flow-stages {
   display: none;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 6px 12px;
+  gap: 6px;
   margin-top: 14px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  letter-spacing: 0.04em;
   color: var(--ink-2);
+  white-space: nowrap;
 }
-.ai-flow-stages i { font-style: normal; color: var(--accent); margin-left: 12px; }
+.ai-flow-stages span { display: inline-flex; align-items: center; white-space: nowrap; }
+.ai-flow-stages i { font-style: normal; color: var(--accent); margin-left: 6px; }
 
 /* leverage / ownership item hover */
 .ai-item .ai-ic { transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease); }
@@ -1491,6 +1479,7 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   .iso-label .db-items, .side-left .iso-label .db-items { justify-content: center; }
   /* Process orbits: the component crops the viewBox on mobile — the diagram
      fits the viewport whole, ring edges bleed off both sides, no scroll */
+  .process .sec-head { margin-bottom: 76px; }
   .po-wrap { overflow: visible; }
   .po-svg { min-width: 0; }
   /* AI prism: scale the whole narrative to fit — smaller, never cut.
@@ -1500,13 +1489,20 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   .ai-flow-svg .flow-k,
   .ai-flow-svg .flow-sub { display: none; }
   .ai-flow-stages { display: flex; }
-  /* hero: swap to the 15-col grid so the marks keep real size */
-  .hero { padding-top: calc(64px + 12px); }
-  .hero-hey { font-size: 46px; margin-bottom: 24px; }
-  .hero-plus { margin-bottom: 24px; }
+  /* hero: swap to the 15-col grid so the marks keep real size. Content is
+     shorter than a full screen now — top-align instead of forcing 100svh
+     centering, which left big empty gaps above/below on mobile. Extra
+     breathing room top (clear of the fixed header) and bottom (mobile
+     browser chrome — the address-bar strip — sits over the fold and
+     hides content right at the bottom edge otherwise). */
+  .hero { padding: calc(64px + 60px) 0 100px; min-height: auto; align-items: flex-start; }
+  .hero-plus { margin: 16px 0 28px; }
   .hero-plus.is-desktop { display: none; }
   .hero-plus.is-mobile { display: block; }
-  .hero h1.hero-line { font-size: 24px; }
-  .hero-tag { margin-bottom: 28px; }
+  /* as large as the two hard line-breaks ("From ambiguity" / "to production.")
+     allow without an unwanted 3rd wrap — measured per-width via headless
+     binary search (safe max width at 360px=44/620px=81, ~4px margin below that) */
+  .hero h1.hero-line { font-size: clamp(34px, calc(14.2vw - 11px), 77px); margin-bottom: 28px; }
+  .hero-copy { margin-bottom: 28px; }
   .footer-inner { justify-content: flex-start; }
 }

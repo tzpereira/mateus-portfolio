@@ -1,20 +1,5 @@
 import '@/styles/main.scss';
-import { Geist_Mono, Michroma } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
-
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
-  display: 'swap',
-});
-
-// display font — closest Google Fonts match to the Arc'teryx wordmark (Handel Gothic)
-const michroma = Michroma({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-michroma',
-  display: 'swap',
-});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -64,7 +49,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="light"
-      className={`${geistMono.variable} ${michroma.variable}`}
       suppressHydrationWarning
     >
       <head>
