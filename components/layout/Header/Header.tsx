@@ -3,6 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
+// Next.js's viewport.themeColor only tracks OS prefers-color-scheme, not this
+// site's manual toggle — override the rendered meta tags so the iOS status
+// bar / Dynamic Island area matches whichever theme is actually active.
+function syncThemeColorMeta(theme: 'light' | 'dark') {
+  const color = theme === 'dark' ? '#0a0a0f' : '#fbfbfc';
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', color));
+}
+
 const LINKS = [
   { href: '#depth', label: 'Stack' },
   { href: '#projects', label: 'Work' },
@@ -49,6 +57,7 @@ export default function Header() {
     const resolved = stored ?? 'light';
     setTheme(resolved);
     document.documentElement.setAttribute('data-theme', resolved);
+    syncThemeColorMeta(resolved);
   }, []);
 
   // Lock scroll + close on Escape while the mobile menu is open.
@@ -70,6 +79,7 @@ export default function Header() {
       const next = prev === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      syncThemeColorMeta(next);
       return next;
     });
   }, []);
