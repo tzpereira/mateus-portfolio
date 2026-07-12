@@ -1,22 +1,22 @@
-import './index.scss';
-import { FooterProps } from './types';
-import initTranslations from '@/app/i18n';
-import { useEffect, useState } from 'react';
-
-export default function Footer({ locale }: FooterProps) {
-  const [t, setT] = useState(() => (key: string) => key);
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-
-  useEffect(() => {
-    initTranslations(locale, ['footer']).then(({ t }) => {
-      setT(() => t);
-    });
-  }, [locale]);
+export default function Footer() {
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
-      <p className='footer___content'>{t('footer_content')}, {currentYear}</p>
+    <footer className="footer" role="contentinfo">
+      <div className="topo-bg" aria-hidden="true" />
+      <div className="container footer-inner">
+        <span className="footer-id">Mateus P. S.</span>
+<span className="footer-copy">
+          <span aria-hidden="true">©</span>
+          <span className="sr-only">Copyright</span> {year}. All rights reserved
+        </span>
+        <a href="#top" className="footer-top" aria-label="Back to top of page">
+          Back to top
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M6 10V2M2 6l4-4 4 4" />
+          </svg>
+        </a>
+      </div>
     </footer>
   );
 }

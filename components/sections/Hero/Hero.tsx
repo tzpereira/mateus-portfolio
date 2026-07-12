@@ -1,98 +1,210 @@
 'use client';
+import { useEffect, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Magnetic } from '@/components/ui/Magnetic';
 
-// styles
-import './index.scss';
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// types
-import { HeroProps } from './types';
+const DISCIPLINES = [
+  { word: 'product', cls: 'w1' },
+  { word: 'backend', cls: 'w2' },
+  { word: 'data', cls: 'w3' },
+  { word: 'AI', cls: 'w5' },
+];
 
-// i18n
-import initTranslations from '@/app/i18n';
-import { TFunction } from 'i18next';
+/* uniform "+" grid, exactly like the ref — aligned marks, varied gray tones.
+   Deterministic PRNG so server and client render the same grid. */
+function mulberry32(seed: number) {
+  return function () {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-// react
-import React, { useEffect, useState } from 'react';
+const ROWS = 6;
+const CELL = 28;
+const PAD = 12;
+/* mostly light-gray marks, a sparse scatter of bold dark ones — like the ref.
+   COMPLETE grid (no holes — blank cells read as mistakes) with a floor on
+   opacity so no mark disappears into the paper. Each mark starts scattered
+   and rotated (messy) and settles into the grid (organized) on its own
+   trajectory and timing. */
+const LIGHT_TONES = [0.14, 0.18, 0.22, 0.28, 0.35, 0.42];
 
-// components
-import { AsciiArt } from '@/components/ui/AsciiArt';
-import { Header } from '@/components/layout/Header';
-
-// hooks
-import { useSectionVisibility } from '@/hooks/useSectionVisibility';
-
-// motion
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-
-const outerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.2 },
-  },
-  exit: {
-    transition: { staggerChildren: 0.1, staggerDirection: -1 },
-  },
+type Mark = {
+  x: number; y: number; o: number; sw: number;
+  dx: number; dy: number; dr: number; delay: number; dur: number;
 };
 
-const contentVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: 'easeOut' },
-  },
-  exit: {
-    opacity: 0,
-    y: -40,
-    transition: { duration: 0.1, ease: 'easeIn' },
-  },
-};
+type Grid = { marks: Mark[]; w: number; h: number };
 
-export default function Hero({ locale }: HeroProps) {
-  const isVisible = useSectionVisibility('hero', 0.2);
-  const [t, setT] = useState<TFunction | null>(null);
+/* desktop spans the full container with 33 cols; mobile gets 15 cols (and an
+   extra row) so the marks stay big and the block holds real vertical presence */
+function makeGrid(cols: number, rows: number = ROWS): Grid {
+  const rand = mulberry32(3);
+  const scatter = mulberry32(11);
+  const marks: Mark[] = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const t = rand();
+      const tone = rand();
+      const bold = t > 0.84;
+      marks.push({
+        x: PAD + c * CELL,
+        y: PAD + r * CELL,
+        o: bold ? 0.75 + tone * 0.25 : LIGHT_TONES[Math.floor(tone * LIGHT_TONES.length)],
+        sw: bold ? 2.8 : 2,
+        dx: (scatter() - 0.5) * 100,
+        dy: (scatter() - 0.5) * 80,
+        dr: (scatter() - 0.5) * 160,
+        delay: 0.25 + scatter() * 0.85,
+        dur: 1.0 + scatter() * 0.8,
+      });
+    }
+  }
+  return { marks, w: PAD * 2 + (cols - 1) * CELL, h: PAD * 2 + (rows - 1) * CELL };
+}
 
-  useEffect(() => {
-    initTranslations(locale, ['hero']).then(({ t }) => {
-      setT(() => t);
+const GRID_DESKTOP = makeGrid(33);
+const GRID_MOBILE = makeGrid(15, 7);
+
+/* marks near the cursor push away and tilt, then spring back (CSS transition) */
+const HOVER_R = 110;
+const HOVER_PUSH = 22;
+
+function PlusGrid({ grid, variant }: { grid: Grid; variant: string }) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const raf = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  const reset = () => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    cancelAnimationFrame(raf.current);
+    svg.querySelectorAll<SVGGElement>('.pw').forEach(n => { n.style.transform = ''; });
+  };
+
+  const move = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const svg = svgRef.current;
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const scale = rect.width / grid.w;
+    const mx = (e.clientX - rect.left) / scale;
+    const my = (e.clientY - rect.top) / scale;
+    cancelAnimationFrame(raf.current);
+    raf.current = requestAnimationFrame(() => {
+      svg.querySelectorAll<SVGGElement>('.pw').forEach((n, i) => {
+        const m = grid.marks[i];
+        const ddx = m.x - mx;
+        const ddy = m.y - my;
+        const d = Math.hypot(ddx, ddy);
+        if (d < HOVER_R && d > 0.01) {
+          const f = (1 - d / HOVER_R) * HOVER_PUSH;
+          const rot = (1 - d / HOVER_R) * (m.dr > 0 ? 18 : -18);
+          n.style.transform = `translate(${((ddx / d) * f).toFixed(1)}px, ${((ddy / d) * f).toFixed(1)}px) rotate(${rot.toFixed(1)}deg)`;
+        } else {
+          n.style.transform = '';
+        }
+      });
     });
-  }, [locale]);
+  };
 
   return (
-    <section id="hero" className="section hero">
-      <div className="hero__header-frame">
-        <Header locale={locale} />
-      </div>
+    <div className={`hero-plus ${variant}`} aria-hidden="true" onPointerMove={move} onPointerLeave={reset}>
+      <svg ref={svgRef} viewBox={`0 0 ${grid.w} ${grid.h}`} xmlns="http://www.w3.org/2000/svg">
+        {grid.marks.map((m, i) => (
+          <g key={i} transform={`translate(${m.x},${m.y})`} opacity={m.o}>
+            <g className="pw">
+              <path
+                className="pm"
+                style={{
+                  '--dx': `${m.dx.toFixed(1)}px`,
+                  '--dy': `${m.dy.toFixed(1)}px`,
+                  '--dr': `${m.dr.toFixed(1)}deg`,
+                  '--pd': `${m.delay.toFixed(2)}s`,
+                  '--pdur': `${m.dur.toFixed(2)}s`,
+                } as React.CSSProperties}
+                d="M-8.5 0H8.5M0 -8.5V8.5"
+                stroke="currentColor"
+                strokeWidth={m.sw}
+                fill="none"
+              />
+            </g>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
-      <div className="hero__frame">
-        <AnimatePresence mode="wait">
-          {t ? (
-            <motion.div
-              key="hero-content"
-              className="hero__content"
-              initial="hidden"
-              animate={isVisible ? 'visible' : 'hidden'}
-              exit="exit"
-              variants={outerVariants}
-            >
-              <motion.div className="hero__text-block" variants={contentVariants}>
-                <motion.h1 className="hero__title">
-                  {t('name')}
-                </motion.h1>
-                <motion.p className="hero__description">
-                  {t('title')}
-                </motion.p>
-                <motion.span className="hero__note" variants={contentVariants}>
-                  {t('note')}
-                </motion.span>
-              </motion.div>
-              <motion.div className="hero__ascii-art-container" variants={contentVariants}>
-                  <AsciiArt />
-              </motion.div>
-            </motion.div>
-          ) : (
-            null
-          )}
-        </AnimatePresence>
+export default function Hero() {
+  const reduced = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const fadeUp = (delay: number) =>
+    reduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, ease: EASE, delay },
+        };
+
+  const handleGlow = (e: React.PointerEvent) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--hx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--hy', `${e.clientY - r.top}px`);
+  };
+
+  return (
+    <section className="hero" id="top" aria-label="Introduction" ref={sectionRef} onPointerMove={handleGlow}>
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="container hero-inner">
+        <motion.p className="hero-hey" aria-hidden="true" {...fadeUp(0)}>
+          Hey,
+        </motion.p>
+
+        {/* no fade wrapper — the messy phase must be visible from first paint */}
+        <PlusGrid grid={GRID_DESKTOP} variant="is-desktop" />
+        <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
+
+        <motion.h1 className="hero-line" {...fadeUp(0.24)}>
+          I turn <em className="hl-em">ambiguity</em> into production software —{' '}
+          {DISCIPLINES.map(({ word, cls }, i) => (
+            <span key={cls}>
+              <span className={`hl-w ${cls}`}>{word}</span>
+              {i < DISCIPLINES.length - 1 ? ', ' : ' '}
+            </span>
+          ))}
+          — all done by <em className="hl-em">one engineer</em>.
+        </motion.h1>
+
+        <motion.p className="hero-tag" {...fadeUp(0.34)}>
+          owning the whole arc, discovery to deployment, is my superpower
+        </motion.p>
+
+        <motion.div className="hero-actions" {...fadeUp(0.44)}>
+          <Magnetic>
+            <a className="btn-ghost" href="#projects">
+              See my work
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a className="btn-primary" href="#contact">
+              Let&apos;s talk
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M2 7h10M8 3l4 4-4 4" />
+              </svg>
+            </a>
+          </Magnetic>
+        </motion.div>
       </div>
     </section>
   );

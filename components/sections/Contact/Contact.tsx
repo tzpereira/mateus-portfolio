@@ -1,150 +1,86 @@
-'use client'
+import { FadeIn } from '@/components/ui/FadeIn';
 
-// styles
-import './index.scss';
-
-// types
-import { ContactProps } from './types';
-
-// i18n
-import initTranslations from '@/app/i18n';
-import { TFunction } from 'i18next';
-
-// react
-import { useEffect, useState } from 'react';
-
-// motion
-import { motion, Variants, AnimatePresence } from 'framer-motion';
-
-// hooks
-import { useSectionVisibility } from '@/hooks/useSectionVisibility';
-
-// images
-import { imageMap } from '@/assets/image/imageExporter';
-
-// next
-import Image from 'next/image';
-
-// components
-import { Footer } from '@/components/layout/Footer';
-
-const leftVariants: Variants = {
-  hidden: { opacity: 0, x: -100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-  exit: { opacity: 0, x: -100, transition: { duration: 0.1 } },
-};
-
-const rightVariants: Variants = {
-  hidden: { opacity: 0, x: 100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-  exit: { opacity: 0, x: 100, transition: { duration: 0.1 } },
-};
-
-export default function Contact({ locale }: ContactProps) {
-  const [t, setT] = useState<TFunction | null>(null);
-
-  const [isMobile, setIsMobile] = useState(false);
-  const isVisibleDesktop = useSectionVisibility('contact', 0.2);
-  const shouldShowFooterDesktop = useSectionVisibility('contact', 0.9);
-  const shouldShowFooter = isMobile ? true : shouldShowFooterDesktop;
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsMobile(window.matchMedia('(max-width: 790px)').matches);
-    }
-  }, []);
-
-  const isVisible = isMobile ? true : isVisibleDesktop;
-
-  useEffect(() => {
-    initTranslations(locale, ['contact']).then(({ t }) => {
-      setT(() => t);
-    });
-  }, [locale]);
-
+export default function Contact() {
   return (
-    <section id="contact" className="section contact">
-      <AnimatePresence mode="wait">
-        {isVisible && t && (
-          <motion.div
-            key="contact-content"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={{
-              hidden: {},
-              visible: {},
-              exit: {},
-            }}
-          >
-            <motion.div
-              className="contact__title-container"
-              variants={leftVariants}
-            >
-              <h2 className="contact__title">{t('title')}</h2>
-            </motion.div>
+    <section className="contact" id="contact" aria-labelledby="contact-heading">
+      <div className="topo-bg" aria-hidden="true" />
+      <div className="container contact-inner">
+        <FadeIn as="header" className="sec-head" style={{ marginBottom: '48px' }}>
+          <div className="sec-eyebrow">
+            <span className="num">06</span>
+            <span className="lbl">Work with me</span>
+          </div>
+        </FadeIn>
 
-            <div className="contact__frame">
-              <motion.div
-                className="contact__intro"
-                variants={leftVariants}
-              >
-                <p className="contact__info-description">{t('talk_text')}</p>
-                <div>
-                  <span className="contact__info-subtitle">{t('find_me')}</span>
-                  <a
-                    href="/assets/files/mateus_cv.pdf"
-                    download
-                    className="contact__download-cv"
-                  >
-                    {t('download_cv')}
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="contact__card contact__form-card"
-                variants={rightVariants}
-              >
-                <div className="contact__card-content">
-                  <form
-                    className="contact__form"
-                    action={`mailto:mateuspdasilva369@gmail.com`}
-                    method="POST"
-                    encType="text/plain"
-                  >
-                    <input name="name" type="text" placeholder={t('placeholder.name')} required />
-                    <input name="email" type="email" placeholder={t('placeholder.email')} required />
-                    <textarea name="message" placeholder={t('placeholder.message')} required />
-                    <button type="submit">{t('submit')}</button>
-                  </form>
-                  <div className="glass-reflection" />
-                </div>
-                <div className="contact__card contact__only-links-card">
-                  <div className="contact__card-content contact__only-links">
-                    <div className="contact__links">
-                        <a href="https://wa.me/5551997718421" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['communication.png']} alt="WhatsApp Icon" className="contact__icon" />
-                          {t('whatsapp')}
-                        </a>
-                        <a href="https://linkedin.com/in/mateuspdasilva" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['business.png']} alt="LinkedIn Icon" className="contact__icon" />
-                          {t('linkedin')}
-                        </a>
-                        <a href="https://github.com/tzpereira" target="_blank" rel="noreferrer">
-                          <Image src={imageMap['social.png']} alt="GitHub Icon" className="contact__icon" />
-                          {t('github')}
-                        </a>
-                    </div>
-                    <div className="glass-reflection" />
-                  </div>
-                </div>
-              </motion.div>
+        <div className="contact-grid">
+          <FadeIn>
+            <p className="contact-statement" id="contact-heading">
+              Need someone who can turn ambiguity into products that <em>survive real usage?</em>
+            </p>
+            <p className="contact-lead">
+              From discovery and architecture to implementation and production.
+              One engineer. End-to-end ownership.
+            </p>
+            <div className="contact-ctas">
+              <a className="btn-primary" href="mailto:mateuspdasilva369@gmail.com">
+                Let&apos;s talk
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 7h10M8 3l4 4-4 4" />
+                </svg>
+              </a>
+              <a className="btn-ghost" href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer">
+                Resume
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 11L11 3M5 3h6v6" />
+                </svg>
+              </a>
+              <a className="btn-ghost" href="https://www.linkedin.com/in/mateuspdasilva" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">
+                LinkedIn
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 11L11 3M5 3h6v6" />
+                </svg>
+              </a>
+              <a className="btn-ghost" href="https://github.com/tzpereira" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
+                GitHub
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 11L11 3M5 3h6v6" />
+                </svg>
+              </a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {shouldShowFooter && t && <Footer locale={locale} />}
+          </FadeIn>
+
+          <FadeIn className="contact-meta" delay={0.1}>
+            <div className="cm-block">
+              <div className="cmk">Best fit</div>
+              <div className="opp">
+                <span>Early-stage products</span>
+                <span>Founding engineer roles</span>
+                <span>Product-heavy engineering</span>
+                <span>AI-enabled products</span>
+                <span>Complex business workflows</span>
+              </div>
+            </div>
+            <div className="cm-block">
+              <div className="cmk">Email</div>
+              <div className="cmv">
+                <a href="mailto:mateuspdasilva369@gmail.com">mateuspdasilva369@gmail.com</a>
+              </div>
+            </div>
+            <div className="cm-block">
+              <div className="cmk">Languages</div>
+              <div className="cmv">English · Spanish · Portuguese</div>
+            </div>
+            <div className="cm-block">
+              <div className="cmk">Résumé</div>
+              <div className="cmv">
+                <a href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download résumé PDF (opens in new tab)">
+                  Download PDF ↗
+                </a>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
     </section>
   );
 }
