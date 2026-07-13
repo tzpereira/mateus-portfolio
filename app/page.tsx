@@ -1,7 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import CursorGlow from '@/components/ui/CursorGlow';
 import { GridBackdrop } from '@/components/ui/generative/GridBackdrop';
 import { Hero } from '@/components/sections/Hero';
 import { Marquee } from '@/components/sections/Marquee';
@@ -17,7 +16,6 @@ export default function Home() {
     <>
       <GridBackdrop />
       <ScrollReveal />
-      <CursorGlow />
       <Header />
       <main>
         <Hero />

@@ -48,6 +48,11 @@ export function StaggerItem({ as = 'div', children, className }: StaggerItemProp
       className={className}
       variants={reduced ? {} : itemVariants}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      // scroll-triggered: mark the item once it enters view so its motif can
+      // draw itself in (previously the motif only animated on hover, which on
+      // touch meant a tap was required)
+      viewport={{ once: true, margin: '0px 0px -12% 0px' }}
+      onViewportEnter={(entry) => entry?.target.classList.add('is-in')}
     >
       {children}
     </Tag>

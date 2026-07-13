@@ -144,7 +144,6 @@ function PlusGrid({ grid, variant }: { grid: Grid; variant: string }) {
 
 export default function Hero() {
   const reduced = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
 
   const fadeUp = (delay: number) =>
     reduced
@@ -155,17 +154,8 @@ export default function Hero() {
           transition: { duration: 0.8, ease: EASE, delay },
         };
 
-  const handleGlow = (e: React.PointerEvent) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--hx', `${e.clientX - r.left}px`);
-    el.style.setProperty('--hy', `${e.clientY - r.top}px`);
-  };
-
   return (
-    <section className="hero" id="top" aria-label="Introduction" ref={sectionRef} onPointerMove={handleGlow}>
-      <div className="hero-glow" aria-hidden="true" />
+    <section className="hero" id="top" aria-label="Introduction">
       <div className="container hero-inner">
         <motion.h1 className="hero-line" {...fadeUp(0)}>
           From <strong className="hl-bold">ambiguity</strong>

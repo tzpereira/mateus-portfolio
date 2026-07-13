@@ -143,8 +143,8 @@ main, footer, header { position: relative; z-index: 1; }
    GENERATIVE GRAPHICS — LineArt (Depth)
    ============================================================ */
 .line-art { display: block; width: 100%; height: 100%; }
-/* motif on the iso tile face is solid at rest; hovering its layer plays a motion
-   that fits what the icon means. */
+/* motif on the iso tile face is solid at rest; when the layer scrolls into view
+   it plays a one-shot motion that fits what the icon means. */
 .iso-motif [pathLength] { stroke-dasharray: 1; stroke-dashoffset: 0; }
 
 /* Every layer animates the way the shield does — strokes draw themselves in and
@@ -155,24 +155,24 @@ main, footer, header { position: relative; z-index: 1; }
 @keyframes la-fade { from { opacity: 0; } }
 
 /* security — shield draws, then the check snaps in: locked / verified */
-.iso-layer:hover .iso-motif.la-security path { animation: la-draw 0.6s var(--ease) both; }
-.iso-layer:hover .iso-motif.la-security path:last-of-type { animation: la-draw 0.42s var(--ease) 0.36s both; }
+.iso-layer.is-in .iso-motif.la-security path { animation: la-draw 0.6s var(--ease) both; }
+.iso-layer.is-in .iso-motif.la-security path:last-of-type { animation: la-draw 0.42s var(--ease) 0.36s both; }
 
 /* discovery — dotted probes stream out from the origin (each dot delayed by its
    distance) and form the end nodes where they land: exploring the space */
-.iso-layer:hover .iso-motif.la-discovery .disc-trail { animation: la-fade 0.3s var(--ease) both; animation-delay: var(--dd, 0s); }
-.iso-layer:hover .iso-motif.la-discovery circle[pathLength] { animation: la-fade 0.34s var(--ease) both; animation-delay: var(--dd, 0s); }
+.iso-layer.is-in .iso-motif.la-discovery .disc-trail { animation: la-fade 0.3s var(--ease) both; animation-delay: var(--dd, 0s); }
+.iso-layer.is-in .iso-motif.la-discovery circle[pathLength] { animation: la-fade 0.34s var(--ease) both; animation-delay: var(--dd, 0s); }
 
 /* architecture — signals draw out from the core, then the nodes light: connecting */
-.iso-layer:hover .iso-motif.la-architecture line { animation: la-draw 0.5s var(--ease) both; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(2) { animation-delay: 0.05s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(3) { animation-delay: 0.10s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(4) { animation-delay: 0.15s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(5) { animation-delay: 0.20s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(6) { animation-delay: 0.25s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(7) { animation-delay: 0.30s; }
-.iso-layer:hover .iso-motif.la-architecture line:nth-of-type(8) { animation-delay: 0.35s; }
-.iso-layer:hover .iso-motif.la-architecture circle { animation: la-fade 0.4s var(--ease) 0.36s both; }
+.iso-layer.is-in .iso-motif.la-architecture line { animation: la-draw 0.5s var(--ease) both; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(2) { animation-delay: 0.05s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(3) { animation-delay: 0.10s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(4) { animation-delay: 0.15s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(5) { animation-delay: 0.20s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(6) { animation-delay: 0.25s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(7) { animation-delay: 0.30s; }
+.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(8) { animation-delay: 0.35s; }
+.iso-layer.is-in .iso-motif.la-architecture circle { animation: la-fade 0.4s var(--ease) 0.36s both; }
 
 /* engineering — gears slide in from apart and give a counter-rotating turn as
    they mesh; each spins about its own centre (projects as an in-plane turn) */
@@ -182,22 +182,22 @@ main, footer, header { position: relative; z-index: 1; }
   55%  { opacity: 1; }
   to   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
 }
-.iso-layer:hover .iso-motif.la-engineering .eng-gear { animation: la-gear 0.75s var(--ease) both; }
-.iso-layer:hover .iso-motif.la-engineering .eng-gear:nth-of-type(2) { animation-delay: 0.06s; }
-.iso-layer:hover .iso-motif.la-engineering .eng-gear:nth-of-type(3) { animation-delay: 0.12s; }
+.iso-layer.is-in .iso-motif.la-engineering .eng-gear { animation: la-gear 0.75s var(--ease) both; }
+.iso-layer.is-in .iso-motif.la-engineering .eng-gear:nth-of-type(2) { animation-delay: 0.06s; }
+.iso-layer.is-in .iso-motif.la-engineering .eng-gear:nth-of-type(3) { animation-delay: 0.12s; }
 
 /* scale — baseline draws, bars draw left to right, then the trend line: climbing */
-.iso-layer:hover .iso-motif.la-scale line { animation: la-draw 0.4s var(--ease) both; }
-.iso-layer:hover .iso-motif.la-scale rect { animation: la-draw 0.5s var(--ease) both; }
-.iso-layer:hover .iso-motif.la-scale rect:nth-of-type(2) { animation-delay: 0.06s; }
-.iso-layer:hover .iso-motif.la-scale rect:nth-of-type(3) { animation-delay: 0.12s; }
-.iso-layer:hover .iso-motif.la-scale rect:nth-of-type(4) { animation-delay: 0.18s; }
-.iso-layer:hover .iso-motif.la-scale rect:nth-of-type(5) { animation-delay: 0.24s; }
-.iso-layer:hover .iso-motif.la-scale rect:nth-of-type(6) { animation-delay: 0.30s; }
-.iso-layer:hover .iso-motif.la-scale polyline { animation: la-fade 0.5s var(--ease) 0.42s both; }
+.iso-layer.is-in .iso-motif.la-scale line { animation: la-draw 0.4s var(--ease) both; }
+.iso-layer.is-in .iso-motif.la-scale rect { animation: la-draw 0.5s var(--ease) both; }
+.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(2) { animation-delay: 0.06s; }
+.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(3) { animation-delay: 0.12s; }
+.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(4) { animation-delay: 0.18s; }
+.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(5) { animation-delay: 0.24s; }
+.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(6) { animation-delay: 0.30s; }
+.iso-layer.is-in .iso-motif.la-scale polyline { animation: la-fade 0.5s var(--ease) 0.42s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .iso-layer:hover .iso-motif * { animation: none; }
+  .iso-layer.is-in .iso-motif * { animation: none; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -312,42 +312,25 @@ section {
 /* ============================================================
    TOP BAR
    ============================================================ */
-/* solid cap over the iOS safe area (status bar / Dynamic Island). Sits ABOVE
-   the header (z 90 > 80) and never moves, so neither page content nor the
-   header's own logo/buttons can bleed into that strip — the strip is always a
-   flat block of the current --bg. On non-notch devices env() is 0px → invisible. */
-.safe-cap {
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: env(safe-area-inset-top, 0px);
-  background: var(--bg);
-  z-index: 90;
-  pointer-events: none;
-}
-.topbar {
-  position: fixed;
-  /* sit just below the safe-area cap so the header content clears the island */
-  top: env(safe-area-inset-top, 0px);
-  left: 0;
-  right: 0;
   z-index: 80;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(140%) blur(16px);
-  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  /* SOLID bg + a 200px buffer extended above the viewport: the buffer plus the
+     iOS safe-area inset are painted solid, so the status-bar / Dynamic Island
+     strip is always a flat block of --bg — no page content or header chrome can
+     bleed into it. The nav content sits below the inset (padding pushes it down). */
+  margin-top: -200px;
+  padding-top: calc(200px + env(safe-area-inset-top, 0px));
+  background: var(--bg);
   border-bottom: 1px solid var(--rule-soft);
-  will-change: transform;
-  transition: transform 0.5s var(--ease);
 }
-/* hide upward THROUGH the cap: translate by the header height + the safe-area
-   inset it's offset by, so the whole bar tucks behind the (opaque) cap */
-.topbar.is-hidden { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
-/* specificity override: transitions-ready * kills transform transition via !important shorthand */
-html .topbar { transition: transform 0.4s var(--ease) !important; }
-@media (prefers-reduced-motion: reduce) {
-  html .topbar { transition: none !important; }
-}
+.topbar.is-hidden { border-bottom-color: transparent; }
+/* theme switch should still ease the bar's bg/border (transitions-ready * would
+   otherwise be fine, but we scope explicitly to keep the collapse crisp) */
+html .topbar { transition: background-color 0.35s var(--ease), border-color 0.25s var(--ease) !important; }
 .scroll-progress {
   position: absolute;
   left: 0;
@@ -365,6 +348,14 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   gap: 28px;
   align-items: center;
   height: 64px;
+  overflow: hidden;
+}
+/* on scroll-down the header "hides": the nav content collapses away (logo,
+   links, buttons all gone) while the solid top strip + progress bar stay put */
+.topbar.is-hidden .topbar-inner { height: 0; opacity: 0; pointer-events: none; }
+html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ease) !important; }
+@media (prefers-reduced-motion: reduce) {
+  html .topbar-inner { transition: none !important; }
 }
 .brand {
   white-space: nowrap;
@@ -469,7 +460,7 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   inset: 0;
   z-index: 70;
   flex-direction: column;
-  padding: 92px var(--gutter) 40px;
+  padding: calc(92px + env(safe-area-inset-top, 0px)) var(--gutter) 40px;
   background: var(--bg);
   overflow-y: auto;
   opacity: 0;
@@ -626,22 +617,6 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   align-items: center;
   margin-bottom: 26px;
 }
-
-/* cursor-following accent glow over the hero */
-.hero-glow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.6s var(--ease);
-  background: radial-gradient(
-    560px circle at var(--hx, 72%) var(--hy, 38%),
-    color-mix(in srgb, var(--accent) 9%, transparent),
-    transparent 70%
-  );
-}
-.hero:hover .hero-glow { opacity: 1; }
 
 /* ============================================================
    MARQUEE — oversized outlined type band
@@ -1412,31 +1387,6 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
 }
 [data-theme="dark"] .footer .topo-bg { opacity: 0.1; }
 
-
-/* ============================================================
-   CARD SPOTLIGHT — cursor-following glow (coords fed by CursorGlow)
-   ============================================================ */
-.ai-board::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
-  background: radial-gradient(
-    300px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent) 8%, transparent),
-    transparent 70%
-  );
-}
-.ai-board:hover::after {
-  opacity: 1;
-}
-@media (hover: none) {
-  .ai-board::after { display: none; }
-}
 
 /* mobile stage strip under the prism (hidden on desktop — svg labels do the job).
    Must always read as one row (POSSIBILITIES → JUDGMENT → DIRECTION → IMPACT) —

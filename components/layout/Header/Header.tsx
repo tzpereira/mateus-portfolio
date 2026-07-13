@@ -86,9 +86,6 @@ export default function Header() {
 
   return (
     <>
-      {/* solid cap over the iOS status-bar / Dynamic Island safe area — always
-          present (never scrolls or hides) so nothing bleeds into that strip */}
-      <div className="safe-cap" aria-hidden="true" />
       <header ref={headerRef} className="topbar">
         <motion.span className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
         <div className="container topbar-inner">
