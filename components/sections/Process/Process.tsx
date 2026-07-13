@@ -11,6 +11,10 @@ export default function Process() {
             <span className="lbl">Process</span>
           </div>
           <h2>From messy ideas to <em>business outcomes.</em></h2>
+          <p className="sub">
+            Five layers between a vague brief and a system in production — each one
+            widens the work outward, and I own every one end to end.
+          </p>
         </FadeIn>
 
         <FadeIn>

@@ -42,12 +42,20 @@ export default function Depth() {
     },
   ];
 
+  // Full working range across my projects (Vorax, colplan, Plan Patagonia,
+  // Multi Agent Loop, go-kafka-sdk) and mateus_resume.pdf.
   const technologies = [
+    // Languages & frameworks
     { name: 'TypeScript' }, { name: 'Node.js' }, { name: 'React' }, { name: 'Next.js' },
-    { name: 'Python' }, { name: 'Polars' }, { name: 'Go' }, { name: 'PHP' },
-    { name: 'PostgreSQL' }, { name: 'Docker' }, { name: 'AWS' }, { name: 'Grafana' },
-    { name: 'Observability' }, { name: 'Data pipelines' },
-    { name: 'LLM APIs' }, { name: 'Code agents' }, { name: 'MCP' }, { name: 'RAG' },
+    { name: 'Python' }, { name: 'Go' }, { name: 'PHP' },
+    // Data
+    { name: 'PostgreSQL' }, { name: 'Prisma' }, { name: 'Redis' }, { name: 'Kafka' },
+    { name: 'Polars' }, { name: 'Data pipelines' },
+    // Cloud & ops
+    { name: 'AWS' }, { name: 'Docker' }, { name: 'Kubernetes' }, { name: 'Cloudflare' },
+    { name: 'Grafana' }, { name: 'Observability' },
+    // AI
+    { name: 'LLM APIs' }, { name: 'RAG' }, { name: 'Code agents' }, { name: 'MCP' },
   ];
 
   return (

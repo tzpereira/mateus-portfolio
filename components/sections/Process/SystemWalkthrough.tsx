@@ -92,11 +92,6 @@ export default function SystemWalkthrough() {
 
   return (
     <div className={`proc-orbit${shown ? ' is-in' : ''}`} ref={ref}>
-      <p className="po-lead">
-        Five layers between a vague brief and a system in production — each one
-        widens the work outward, and I own every one end to end.
-      </p>
-
       <div className="po-wrap">
         <svg className="po-svg" viewBox={vb} aria-hidden="true">
           {/* perspective orbits — faint inner rings, accent outer ring */}

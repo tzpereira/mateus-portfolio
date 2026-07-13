@@ -73,8 +73,11 @@ export default function Contact() {
             <div className="cm-block">
               <div className="cmk">Résumé</div>
               <div className="cmv">
-                <a href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download résumé PDF (opens in new tab)">
-                  Download PDF ↗
+                <a className="dl-pdf" href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download résumé PDF (opens in new tab)">
+                  Download PDF
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 11L11 3M5 3h6v6" />
+                  </svg>
                 </a>
               </div>
             </div>

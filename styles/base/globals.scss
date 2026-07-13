@@ -353,7 +353,9 @@ html .topbar { transition: background-color 0.35s var(--ease), border-color 0.25
   right: 0;
   bottom: -1px;
   height: 2px;
-  z-index: 2;
+  /* above the safe-area shield (z 90) so the bar keeps its full 2px when the
+     header is collapsed — otherwise the shield clips its top half to ~1px */
+  z-index: 91;
   background: var(--accent);
   transform-origin: 0 50%;
   pointer-events: none;
@@ -899,15 +901,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
    ring's crest, read inside-out. Draws itself in when scrolled into view. */
 .proc-orbit { margin-top: clamp(6px, 1vw, 12px); }
 
-.po-lead {
-  max-width: 560px;
-  margin: 0;
-  font-size: clamp(15px, 1.5vw, 17px);
-  line-height: 1.6;
-  color: var(--ink-2);
-}
-
-.po-wrap { margin: clamp(16px, 2.6vw, 32px) 0 clamp(18px, 2.4vw, 30px); }
+.po-wrap { margin: 0 0 clamp(18px, 2.4vw, 30px); }
 .po-svg { display: block; width: 100%; height: auto; max-width: 900px; margin: 0 auto; overflow: visible; }
 
 /* nested orbits — faint inner rings, accent outer ring */
@@ -1154,8 +1148,8 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   margin-top: auto;
   align-self: flex-end;
 }
-.ac-read span { color: var(--accent); transition: transform 0.25s var(--ease); }
-.article-card:hover .ac-read span { transform: translate(2px, -2px); }
+.ac-read svg { width: 13px; height: 13px; color: var(--accent); transition: transform 0.25s var(--ease); }
+.article-card:hover .ac-read svg { transform: translate(2px, -2px); }
 
 /* ============================================================
    ARTICLE PAGE (/writing/[slug])
@@ -1314,6 +1308,9 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 .contact-meta .cmv { font-size: 15px; color: var(--ink); }
 .contact-meta .cmv a { border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
 .contact-meta .cmv a:hover { border-color: var(--accent); }
+.contact-meta .cmv a.dl-pdf { display: inline-flex; align-items: center; gap: 6px; border-bottom: none; }
+.contact-meta .cmv a.dl-pdf svg { width: 13px; height: 13px; color: var(--accent); transition: transform 0.25s var(--ease); }
+.contact-meta .cmv a.dl-pdf:hover svg { transform: translate(2px, -2px); }
 .contact-meta .opp { display: flex; flex-direction: column; gap: 7px; }
 .contact-meta .opp span { font-size: 14.5px; color: var(--ink-2); display: flex; gap: 9px; align-items: baseline; }
 .contact-meta .opp span::before { content: "→"; color: var(--accent); font-size: 12px; }

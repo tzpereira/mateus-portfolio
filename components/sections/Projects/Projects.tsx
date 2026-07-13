@@ -69,7 +69,10 @@ export default function Projects() {
                 </div>
                 {href && (
                   <span className="ac-read">
-                    GitHub <span aria-hidden="true">↗</span>
+                    GitHub
+                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M3 11L11 3M5 3h6v6" />
+                    </svg>
                   </span>
                 )}
               </div>

@@ -46,7 +46,10 @@ export default function Writing() {
                   <h3>{title}</h3>
                   <p className="ac-dek">{dek}</p>
                   <span className="ac-read">
-                    Read <span aria-hidden="true">↗</span>
+                    Read
+                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M3 11L11 3M5 3h6v6" />
+                    </svg>
                   </span>
                 </div>
               </Link>
