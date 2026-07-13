@@ -2,7 +2,7 @@
 
 Personal portfolio — Senior Full-Stack / Product Software Engineer.
 
-Single page, statically generated, obsessively polished. Built fast with AI in the loop; finished slow by hand.
+Statically generated, obsessively polished. Built fast with AI in the loop; finished slow by hand.
 
 ## Stack
 
@@ -11,13 +11,16 @@ Single page, statically generated, obsessively polished. Built fast with AI in t
 - **Framer Motion** for scroll reveals and staggered entrances (respects `prefers-reduced-motion`)
 - Apple system fonts for text, **Geist Mono** for technical labels
 
+## Sections
+
+Hero → Marquee → Depth (range across the stack) → Projects (public/open-source work) → Process (how I work, end to end) → AI Leverage (judgment vs. AI-driven speed) → Writing (long-form) → Contact. Plus one standalone article route under `/writing/[slug]`.
+
 ## Details that matter
 
-- ⌘K search palette across every section
+- Every generative diagram — the isometric stack in Depth, the orbit walkthrough in Process, the refraction motif in AI Leverage, the plus-grid in Hero — is hand-built SVG/CSS, no stock art or charting library
 - Theme switch with zero flash — inline script resolves the theme before first paint
-- CSS-drawn artifacts (architecture diagram, data pipeline, performance bars) — client work is confidential, so the abstractions are intentional
 - JSON-LD, OpenGraph, sitemap, semantic landmarks — SEO and accessibility as features, not afterthoughts
-- ~150 kB first load, fully static
+- ~155 kB first load, fully static
 
 ## Run
 
