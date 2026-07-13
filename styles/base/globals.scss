@@ -84,7 +84,7 @@
 
 /* ---------------- BASE RESET ---------------- */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; background: var(--bg); }
 
 body {
   margin: 0;
@@ -318,14 +318,30 @@ section {
   left: 0;
   right: 0;
   z-index: 80;
-  /* SOLID bg + a 200px buffer extended above the viewport: the buffer plus the
-     iOS safe-area inset are painted solid, so the status-bar / Dynamic Island
-     strip is always a flat block of --bg — no page content or header chrome can
-     bleed into it. The nav content sits below the inset (padding pushes it down). */
-  margin-top: -200px;
-  padding-top: calc(200px + env(safe-area-inset-top, 0px));
+  /* Nav content sits below the iOS safe-area inset; the bar's own bg fills the
+     inset strip while expanded. The shield below is what guarantees that strip
+     stays covered once the bar collapses to 0 height (see ::before). */
+  padding-top: env(safe-area-inset-top, 0px);
   background: var(--bg);
   border-bottom: 1px solid var(--rule-soft);
+}
+/* Safe-area shield — a solid block over the status-bar / Dynamic Island strip
+   that NEVER collapses, so it holds in BOTH header states (expanded: scrolling
+   up · collapsed: scrolling down). Unlike the bar's padding, this is an explicit
+   height box, which iOS paints reliably even at 0 content height. It also runs
+   200px above the viewport so an iOS rubber-band overscroll can't reveal page
+   content above the bar. High z-index → no scrolled content ever bleeds in. */
+.topbar::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(200px + env(safe-area-inset-top, 0px));
+  margin-top: -200px;
+  background: var(--bg);
+  z-index: 90;
+  pointer-events: none;
 }
 .topbar.is-hidden { border-bottom-color: transparent; }
 /* theme switch should still ease the bar's bg/border (transitions-ready * would
