@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#fbfbfc' },
     { media: '(prefers-color-scheme: dark)', color: '#0a0a0f' },
@@ -11,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mateuspereira.dev'),
+  metadataBase: new URL('https://mateusps.vercel.app'),
   title: 'Mateus P. S. — Senior Full-Stack / Product Software Engineer',
   description:
     'Senior software engineer, product engineer, and solution architect — a rare combination of engineering depth, product sense, and creative craft. I take problems from ambiguity to shipped product, end to end.',
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mateus P. S. — Senior Full-Stack / Product Software Engineer',
     description: 'Software engineer, product engineer, and solution architect — from unclear problem to production system, end to end.',
-    url: 'https://mateuspereira.dev/',
+    url: 'https://mateusps.vercel.app/',
     siteName: 'Mateus P. S.',
-    images: [{ url: 'https://mateuspereira.dev/og-image.png', width: 1200, height: 630, alt: 'Mateus P. S. — Senior Full-Stack / Product Software Engineer' }],
+    images: [{ url: 'https://mateusps.vercel.app/og-image.png', width: 1200, height: 630, alt: 'Mateus P. S. — Senior Full-Stack / Product Software Engineer' }],
     locale: 'en_US',
     type: 'website',
   },
@@ -49,9 +50,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Mateus P. S. — Senior Full-Stack / Product Software Engineer',
     description: 'Product discovery, solution architecture, and engineering execution — end to end.',
-    images: ['https://mateuspereira.dev/og-image.png'],
+    images: ['https://mateusps.vercel.app/og-image.png'],
   },
-  alternates: { canonical: 'https://mateuspereira.dev/' },
+  alternates: { canonical: 'https://mateusps.vercel.app/' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -76,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'Mateus Pereira da Silva',
               alternateName: 'Mateus P. S.',
               jobTitle: 'Senior Full-Stack / Product Software Engineer',
-              url: 'https://mateuspereira.dev/',
+              url: 'https://mateusps.vercel.app/',
               email: 'mailto:mateuspdasilva369@gmail.com',
               description: 'Senior software engineer, product engineer, and solution architect — product discovery, solution architecture, and engineering execution, end to end.',
               knowsAbout: ['Software architecture', 'Product discovery', 'Product engineering', 'TypeScript', 'Go', 'Python', 'PostgreSQL', 'AWS', 'LLM applications', 'RAG'],

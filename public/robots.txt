@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mateuspereira.dev/sitemap.xml
+Sitemap: https://mateusps.vercel.app/sitemap.xml

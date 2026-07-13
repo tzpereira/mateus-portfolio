@@ -312,9 +312,24 @@ section {
 /* ============================================================
    TOP BAR
    ============================================================ */
-.topbar {
+/* solid cap over the iOS safe area (status bar / Dynamic Island). Sits ABOVE
+   the header (z 90 > 80) and never moves, so neither page content nor the
+   header's own logo/buttons can bleed into that strip — the strip is always a
+   flat block of the current --bg. On non-notch devices env() is 0px → invisible. */
+.safe-cap {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 90;
+  pointer-events: none;
+}
+.topbar {
+  position: fixed;
+  /* sit just below the safe-area cap so the header content clears the island */
+  top: env(safe-area-inset-top, 0px);
   left: 0;
   right: 0;
   z-index: 80;
@@ -325,7 +340,9 @@ section {
   will-change: transform;
   transition: transform 0.5s var(--ease);
 }
-.topbar.is-hidden { transform: translateY(-100%); }
+/* hide upward THROUGH the cap: translate by the header height + the safe-area
+   inset it's offset by, so the whole bar tucks behind the (opaque) cap */
+.topbar.is-hidden { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
 /* specificity override: transitions-ready * kills transform transition via !important shorthand */
 html .topbar { transition: transform 0.4s var(--ease) !important; }
 @media (prefers-reduced-motion: reduce) {
@@ -514,8 +531,10 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
 .hero {
   position: relative;
   border-top: none;
-  /* tight vertical chrome — the whole stack must fit the first fold */
-  padding: calc(64px + 20px) 0 44px;
+  /* tight vertical chrome — the whole stack must fit the first fold.
+     +env keeps the same gap below the header now that the header is offset
+     down by the iOS safe-area inset */
+  padding: calc(env(safe-area-inset-top, 0px) + 64px + 20px) 0 44px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1479,8 +1498,11 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
   .iso-label .db-items, .side-left .iso-label .db-items { justify-content: center; }
   /* Process orbits: the component crops the viewBox on mobile — the diagram
      fits the viewport whole, ring edges bleed off both sides, no scroll */
-  .process .sec-head { margin-bottom: 76px; }
-  .po-wrap { overflow: visible; }
+  /* keep the section title close to its lead paragraph, then push the orbit
+     animation well clear of that paragraph (gap belongs above the animation,
+     not between title and text) */
+  .process .sec-head { margin-bottom: 24px; }
+  .po-wrap { overflow: visible; margin-top: 60px; }
   .po-svg { min-width: 0; }
   /* AI prism: scale the whole narrative to fit — smaller, never cut.
      SVG labels would render tiny, so they move to the HTML strip below. */
@@ -1495,7 +1517,7 @@ html .topbar { transition: transform 0.4s var(--ease) !important; }
      breathing room top (clear of the fixed header) and bottom (mobile
      browser chrome — the address-bar strip — sits over the fold and
      hides content right at the bottom edge otherwise). */
-  .hero { padding: calc(64px + 60px) 0 100px; min-height: auto; align-items: flex-start; }
+  .hero { padding: calc(env(safe-area-inset-top, 0px) + 64px + 60px) 0 100px; min-height: auto; align-items: flex-start; }
   .hero-plus { margin: 16px 0 28px; }
   .hero-plus.is-desktop { display: none; }
   .hero-plus.is-mobile { display: block; }

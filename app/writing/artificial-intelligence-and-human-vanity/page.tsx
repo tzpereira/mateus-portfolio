@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   title: 'AI Didn’t Replace Our Intelligence — Mateus P. S.',
   description:
     'Answers have become abundant. Abundance is not the same as meaning. An essay on AI, self-importance, and where human value really lives.',
-  alternates: { canonical: 'https://mateuspereira.dev/writing/artificial-intelligence-and-human-vanity' },
+  alternates: { canonical: 'https://mateusps.vercel.app/writing/artificial-intelligence-and-human-vanity' },
   openGraph: {
     title: 'AI Didn’t Replace Our Intelligence. It Challenged Our Self-Importance.',
     description: 'Answers have become abundant. Abundance is not the same as meaning.',
-    url: 'https://mateuspereira.dev/writing/artificial-intelligence-and-human-vanity',
+    url: 'https://mateusps.vercel.app/writing/artificial-intelligence-and-human-vanity',
     type: 'article',
     authors: ['Mateus Pereira da Silva'],
   },
