@@ -10,10 +10,12 @@ import { Process } from '@/components/sections/Process';
 import { Depth } from '@/components/sections/Depth';
 import { Writing } from '@/components/sections/Writing';
 import { Contact } from '@/components/sections/Contact';
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (
     <>
+      <Analytics/>
       <GridBackdrop />
       <ScrollReveal />
       <Header />
