@@ -155,24 +155,24 @@ main, footer, header { position: relative; z-index: 1; }
 @keyframes la-fade { from { opacity: 0; } }
 
 /* security — shield draws, then the check snaps in: locked / verified */
-.iso-layer.is-in .iso-motif.la-security path { animation: la-draw 0.6s var(--ease) both; }
-.iso-layer.is-in .iso-motif.la-security path:last-of-type { animation: la-draw 0.42s var(--ease) 0.36s both; }
+.iso-layer.is-drawn .iso-motif.la-security path { animation: la-draw 0.6s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-security path:last-of-type { animation: la-draw 0.42s var(--ease) 0.36s both; }
 
 /* discovery — dotted probes stream out from the origin (each dot delayed by its
    distance) and form the end nodes where they land: exploring the space */
-.iso-layer.is-in .iso-motif.la-discovery .disc-trail { animation: la-fade 0.3s var(--ease) both; animation-delay: var(--dd, 0s); }
-.iso-layer.is-in .iso-motif.la-discovery circle[pathLength] { animation: la-fade 0.34s var(--ease) both; animation-delay: var(--dd, 0s); }
+.iso-layer.is-drawn .iso-motif.la-discovery .disc-trail { animation: la-fade 0.3s var(--ease) both; animation-delay: var(--dd, 0s); }
+.iso-layer.is-drawn .iso-motif.la-discovery circle[pathLength] { animation: la-fade 0.34s var(--ease) both; animation-delay: var(--dd, 0s); }
 
 /* architecture — signals draw out from the core, then the nodes light: connecting */
-.iso-layer.is-in .iso-motif.la-architecture line { animation: la-draw 0.5s var(--ease) both; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(2) { animation-delay: 0.05s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(3) { animation-delay: 0.10s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(4) { animation-delay: 0.15s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(5) { animation-delay: 0.20s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(6) { animation-delay: 0.25s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(7) { animation-delay: 0.30s; }
-.iso-layer.is-in .iso-motif.la-architecture line:nth-of-type(8) { animation-delay: 0.35s; }
-.iso-layer.is-in .iso-motif.la-architecture circle { animation: la-fade 0.4s var(--ease) 0.36s both; }
+.iso-layer.is-drawn .iso-motif.la-architecture line { animation: la-draw 0.5s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(2) { animation-delay: 0.05s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(3) { animation-delay: 0.10s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(4) { animation-delay: 0.15s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(5) { animation-delay: 0.20s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(6) { animation-delay: 0.25s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(7) { animation-delay: 0.30s; }
+.iso-layer.is-drawn .iso-motif.la-architecture line:nth-of-type(8) { animation-delay: 0.35s; }
+.iso-layer.is-drawn .iso-motif.la-architecture circle { animation: la-fade 0.4s var(--ease) 0.36s both; }
 
 /* engineering — gears slide in from apart and give a counter-rotating turn as
    they mesh; each spins about its own centre (projects as an in-plane turn) */
@@ -182,41 +182,50 @@ main, footer, header { position: relative; z-index: 1; }
   55%  { opacity: 1; }
   to   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
 }
-.iso-layer.is-in .iso-motif.la-engineering .eng-gear { animation: la-gear 0.75s var(--ease) both; }
-.iso-layer.is-in .iso-motif.la-engineering .eng-gear:nth-of-type(2) { animation-delay: 0.06s; }
-.iso-layer.is-in .iso-motif.la-engineering .eng-gear:nth-of-type(3) { animation-delay: 0.12s; }
+.iso-layer.is-drawn .iso-motif.la-engineering .eng-gear { animation: la-gear 0.75s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-engineering .eng-gear:nth-of-type(2) { animation-delay: 0.06s; }
+.iso-layer.is-drawn .iso-motif.la-engineering .eng-gear:nth-of-type(3) { animation-delay: 0.12s; }
 
 /* scale — baseline draws, bars draw left to right, then the trend line: climbing */
-.iso-layer.is-in .iso-motif.la-scale line { animation: la-draw 0.4s var(--ease) both; }
-.iso-layer.is-in .iso-motif.la-scale rect { animation: la-draw 0.5s var(--ease) both; }
-.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(2) { animation-delay: 0.06s; }
-.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(3) { animation-delay: 0.12s; }
-.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(4) { animation-delay: 0.18s; }
-.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(5) { animation-delay: 0.24s; }
-.iso-layer.is-in .iso-motif.la-scale rect:nth-of-type(6) { animation-delay: 0.30s; }
-.iso-layer.is-in .iso-motif.la-scale polyline { animation: la-fade 0.5s var(--ease) 0.42s both; }
+.iso-layer.is-drawn .iso-motif.la-scale line { animation: la-draw 0.4s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-scale rect { animation: la-draw 0.5s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-scale rect:nth-of-type(2) { animation-delay: 0.06s; }
+.iso-layer.is-drawn .iso-motif.la-scale rect:nth-of-type(3) { animation-delay: 0.12s; }
+.iso-layer.is-drawn .iso-motif.la-scale rect:nth-of-type(4) { animation-delay: 0.18s; }
+.iso-layer.is-drawn .iso-motif.la-scale rect:nth-of-type(5) { animation-delay: 0.24s; }
+.iso-layer.is-drawn .iso-motif.la-scale rect:nth-of-type(6) { animation-delay: 0.30s; }
+.iso-layer.is-drawn .iso-motif.la-scale polyline { animation: la-fade 0.5s var(--ease) 0.42s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .iso-layer.is-in .iso-motif * { animation: none; }
-  .iso-layer.is-in :is(.iso-tile, .iso-top, .iso-motif) { animation: none; }
+  .iso-layer.is-drawn .iso-motif * { animation: none; }
 }
 
-/* ignite — as each tile scrolls into view it flashes the same lit look as
-   :hover (accent glow + accent strokes), staggered per layer so the stack
-   reads as lighting up one at a time, top to bottom. */
-@keyframes iso-ignite-glow {
-  0%, 100% { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 0%, transparent)); }
-  45% { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
-}
-@keyframes iso-ignite-top { 0%, 100% { stroke: var(--ink-4); } 45% { stroke: var(--accent); } }
-@keyframes iso-ignite-motif { 0%, 100% { stroke: var(--ink-3); } 45% { stroke: var(--accent); } }
+/* ignite — as each tile scrolls into view it lights up into the same look as
+   :hover — accent glow + accent strokes — and STAYS lit (.is-in is added once
+   and never removed), staggered per layer so the stack reads as lighting up
+   one at a time. Clicking a card only replays the motif draw-in above (toggles
+   .is-drawn, a separate class) — the lighting itself is left untouched. */
 .iso-layer:nth-child(2) { --ignite-delay: 0.12s; }
 .iso-layer:nth-child(3) { --ignite-delay: 0.24s; }
 .iso-layer:nth-child(4) { --ignite-delay: 0.36s; }
 .iso-layer:nth-child(5) { --ignite-delay: 0.48s; }
-.iso-layer.is-in .iso-tile { animation: iso-ignite-glow 1.1s var(--ease) var(--ignite-delay, 0s); }
-.iso-layer.is-in .iso-top { animation: iso-ignite-top 1.1s var(--ease) var(--ignite-delay, 0s); }
-.iso-layer.is-in .iso-motif { animation: iso-ignite-motif 1.1s var(--ease) var(--ignite-delay, 0s); }
+.iso-layer { cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes iso-ignite-glow {
+    from { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 0%, transparent)); }
+    to { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
+  }
+  @keyframes iso-ignite-top { from { stroke: var(--ink-4); } to { stroke: var(--accent); } }
+  @keyframes iso-ignite-motif { from { stroke: var(--ink-3); } to { stroke: var(--accent); } }
+  .iso-layer.is-in .iso-tile { animation: iso-ignite-glow 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
+  .iso-layer.is-in .iso-top { animation: iso-ignite-top 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
+  .iso-layer.is-in .iso-motif { animation: iso-ignite-motif 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iso-layer.is-in .iso-tile { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
+  .iso-layer.is-in .iso-top { stroke: var(--accent); }
+  .iso-layer.is-in .iso-motif { stroke: var(--accent); }
+}
 
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
@@ -633,7 +642,8 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   color: var(--ink-2);
   margin: 0 0 36px;
 }
-.hero-copy .hl-w { font-weight: 700; }
+.hero-copy .hl-w { font-weight: 700; white-space: nowrap; }
+.br-mobile { display: none; }
 .hero-copy .w1 { color: var(--word-1); }
 .hero-copy .w2 { color: var(--word-2); }
 .hero-copy .w3 { color: var(--word-3); }
@@ -1440,6 +1450,11 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+/* wide screens: the 1240px content column reads as very condensed against a
+   large monitor — nudge it out a little, not a full-bleed redesign */
+@media (min-width: 1440px) {
+  :root { --maxw: 1320px; }
+}
 @media (max-width: 900px) {
   :root { --gutter: 24px; }
   .nav { display: none; }
@@ -1503,6 +1518,10 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
      allow without an unwanted 3rd wrap — measured per-width via headless
      binary search (safe max width at 360px=44/620px=81, ~4px margin below that) */
   .hero h1.hero-line { font-size: clamp(34px, calc(14.2vw - 11px), 77px); margin-bottom: 28px; }
-  .hero-copy { margin-bottom: 28px; }
+  /* deliberate 4-line break (see .br-mobile below) replaces the old accidental
+     reflow that split the colored "product engineering" term across lines —
+     sized up since we're no longer fighting to keep it to 2 physical lines */
+  .hero-copy { font-size: clamp(28px, 7vw, 32px); margin-bottom: 28px; }
+  .br-mobile { display: inline; }
   .footer-inner { justify-content: flex-start; }
 }

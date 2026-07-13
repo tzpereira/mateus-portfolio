@@ -168,10 +168,13 @@ export default function Hero() {
         <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
 
         <motion.p className="hero-copy" {...fadeUp(0.28)}>
-          I design, build and ship end-to-end software:
+          I design, build and ship
+          <br className="br-mobile" />{' '}
+          end-to-end software:
           <br />
           {DISCIPLINES.map(({ word, cls }, i) => (
             <span key={cls}>
+              {i === DISCIPLINES.length - 1 && <br className="br-mobile" />}
               <span className={`hl-w ${cls}`}>{word}</span>
               {i < DISCIPLINES.length - 2 ? ', ' : i === DISCIPLINES.length - 2 ? ' and ' : '.'}
             </span>

@@ -43,6 +43,15 @@ export function StaggerGrid({ children, className }: StaggerGridProps) {
 export function StaggerItem({ as = 'div', children, className }: StaggerItemProps) {
   const reduced = useReducedMotion();
   const Tag = motion[as];
+  // click replays just the motif draw-in (.is-drawn) — .is-in (the persistent
+  // lit/ignite state) is never touched, so lighting stays intact on replay
+  const replay = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    if (!el.classList.contains('is-drawn')) return;
+    el.classList.remove('is-drawn');
+    void el.offsetWidth; // force reflow so the browser registers the removal
+    el.classList.add('is-drawn');
+  };
   return (
     <Tag
       className={className}
@@ -52,7 +61,8 @@ export function StaggerItem({ as = 'div', children, className }: StaggerItemProp
       // draw itself in (previously the motif only animated on hover, which on
       // touch meant a tap was required)
       viewport={{ once: true, margin: '0px 0px -12% 0px' }}
-      onViewportEnter={(entry) => entry?.target.classList.add('is-in')}
+      onViewportEnter={(entry) => entry?.target.classList.add('is-in', 'is-drawn')}
+      onClick={replay}
     >
       {children}
     </Tag>
