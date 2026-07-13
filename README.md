@@ -1,6 +1,4 @@
-# mateuspereira.dev
-
-Personal portfolio — Senior Full-Stack / Product Software Engineer.
+# Personal portfolio — Senior Full-Stack / Product Software Engineer.
 
 Statically generated, obsessively polished. Built fast with AI in the loop; finished slow by hand.
 
