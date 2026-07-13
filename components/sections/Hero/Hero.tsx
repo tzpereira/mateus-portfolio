@@ -40,8 +40,8 @@ type Mark = {
 
 type Grid = { marks: Mark[]; w: number; h: number };
 
-/* desktop spans the full container with 33 cols; mobile gets 15 cols (and an
-   extra row) so the marks stay big and the block holds real vertical presence */
+/* desktop spans the full container with 33 cols; mobile gets 15 cols so the
+   marks stay big — both keep the same 6 rows */
 function makeGrid(cols: number, rows: number = ROWS): Grid {
   const rand = mulberry32(3);
   const scatter = mulberry32(11);
@@ -68,7 +68,7 @@ function makeGrid(cols: number, rows: number = ROWS): Grid {
 }
 
 const GRID_DESKTOP = makeGrid(33);
-const GRID_MOBILE = makeGrid(15, 7);
+const GRID_MOBILE = makeGrid(15);
 
 /* marks near the cursor push away and tilt, then spring back (CSS transition) */
 const HOVER_R = 110;
