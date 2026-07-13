@@ -28,9 +28,9 @@ export default function Writing() {
             <span className="num">05</span>
             <span className="lbl">Writing</span>
           </div>
-          <h2>Thinking, <em>out loud.</em></h2>
+          <h2>I write to work things out.</h2>
           <p className="sub">
-            Where I work things out — on technology, craft, and what stays human.
+            On engineering, product, and the parts of the job I’m still figuring out.
           </p>
         </FadeIn>
 

@@ -51,7 +51,7 @@ export default function Projects() {
             <span className="num">02</span>
             <span className="lbl">Projects</span>
           </div>
-          <h2>Building, <em>in the open.</em></h2>
+          <h2>What I’m building <em>right now.</em></h2>
         </FadeIn>
 
         <div className="writing-list">

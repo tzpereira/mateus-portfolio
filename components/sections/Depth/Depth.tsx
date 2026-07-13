@@ -66,7 +66,7 @@ export default function Depth() {
             <span className="num">01</span>
             <span className="lbl">The range</span>
           </div>
-          <h2>Every layer, <em>one engineer.</em></h2>
+          <h2>I don’t pick a lane. <em>I cover the whole stack.</em></h2>
         </FadeIn>
 
         <div className="iso-module">

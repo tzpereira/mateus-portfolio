@@ -15,7 +15,7 @@ export default function Contact() {
         <div className="contact-grid">
           <FadeIn>
             <p className="contact-statement" id="contact-heading">
-              Need someone who can turn ambiguity into products that <em>survive real usage?</em>
+              Need someone who can take a rough problem and ship a product that <em>holds up once real people use it?</em>
             </p>
             <p className="contact-lead">
               From discovery and architecture to implementation and production.

@@ -10,10 +10,9 @@ export default function Process() {
             <span className="num">03</span>
             <span className="lbl">Process</span>
           </div>
-          <h2>From messy ideas to <em>business outcomes.</em></h2>
+          <h2>Not just the code — <em>the whole system.</em></h2>
           <p className="sub">
-            Five layers between a vague brief and a system in production — each one
-            widens the work outward, and I own every one end to end.
+            Five layers between a rough idea and a working system. I own each one.
           </p>
         </FadeIn>
 

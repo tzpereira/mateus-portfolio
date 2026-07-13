@@ -211,20 +211,18 @@ main, footer, header { position: relative; z-index: 1; }
 .iso-layer:nth-child(5) { --ignite-delay: 0.48s; }
 .iso-layer { cursor: pointer; }
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes iso-ignite-glow {
-    from { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 0%, transparent)); }
-    to { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
-  }
   @keyframes iso-ignite-top { from { stroke: var(--ink-4); } to { stroke: var(--accent); } }
   @keyframes iso-ignite-motif { from { stroke: var(--ink-3); } to { stroke: var(--accent); } }
-  .iso-layer.is-in .iso-tile { animation: iso-ignite-glow 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
   .iso-layer.is-in .iso-top { animation: iso-ignite-top 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
   .iso-layer.is-in .iso-motif { animation: iso-ignite-motif 0.9s var(--ease) var(--ignite-delay, 0s) forwards; }
 }
+/* the accent halo ignites with the same per-layer stagger (opacity only, so it
+   behaves under reduced motion too) */
+.iso-layer.is-in .iso-cell-c::before { opacity: 1; transition-delay: var(--ignite-delay, 0s); }
 @media (prefers-reduced-motion: reduce) {
-  .iso-layer.is-in .iso-tile { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
   .iso-layer.is-in .iso-top { stroke: var(--accent); }
   .iso-layer.is-in .iso-motif { stroke: var(--accent); }
+  .iso-cell-c::before { transition: none; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -672,13 +670,19 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   overflow: hidden;
   border-top: 1px solid var(--rule-soft);
   user-select: none;
+  cursor: grab;
+  touch-action: pan-y; /* keep vertical page scroll working over the band */
 }
+.marquee.is-held { cursor: grabbing; }
 .mq-track {
   display: flex;
   width: max-content;
   animation: mq-scroll 32s linear infinite;
 }
+/* press-and-hold (pointer/touch) pauses the scroll and lights the whole band */
 .mq-track:has(.mq-item:hover) { animation-play-state: paused; }
+.marquee.is-held .mq-track { animation-play-state: paused; }
+.marquee.is-held .mq-item { color: var(--accent); }
 .mq-copy {
   display: flex;
   align-items: center;
@@ -691,7 +695,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   padding-right: clamp(22px, 3vw, 46px);
   font-size: clamp(42px, 6.4vw, 96px);
   font-weight: 600;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.01em;
   line-height: 1.15;
   white-space: nowrap;
   color: color-mix(in srgb, var(--ink) 16%, transparent);
@@ -830,69 +834,6 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 @keyframes impact-once {
   from { r: 6px; opacity: 0.9; }
   to   { r: 34px; opacity: 0; }
-}
-
-/* board: what leverage gives me · what still belongs to me */
-.ai-board {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 3.5vw, 52px);
-  padding: clamp(20px, 2.2vw, 30px) clamp(24px, 2.8vw, 42px);
-  border: 1px solid var(--rule);
-  border-radius: 16px;
-  background: var(--panel-1);
-  background-image: var(--panel-sheen);
-}
-.ai-board > .ai-col + .ai-col {
-  border-left: 1px solid var(--rule);
-  padding-left: clamp(24px, 3.5vw, 52px);
-}
-.ai-col { position: relative; z-index: 1; }
-.ai-col-k {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: clamp(12px, 1.6vw, 18px);
-}
-.ai-list { list-style: none; margin: 0; padding: 0; }
-.ai-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 13px;
-  align-items: start;
-  padding: clamp(9px, 1vw, 12px) 0;
-  border-top: 1px solid var(--rule-soft);
-}
-.ai-item:first-child { border-top: none; padding-top: 0; }
-.ai-ic {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--rule);
-  border-radius: 9px;
-  color: var(--accent);
-  background: var(--accent-dim);
-}
-.ai-ic svg { width: 16px; height: 16px; }
-.ai-item-tx b {
-  display: block;
-  font-size: clamp(14px, 1.4vw, 15px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 1px;
-}
-.ai-item-tx p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-  letter-spacing: -0.005em;
-  color: var(--ink-3);
 }
 
 /* ============================================================
@@ -1034,8 +975,24 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 .iso-motif * { vector-effect: non-scaling-stroke; }
 .iso-layer { transition: transform 0.35s var(--ease); }
 .iso-layer:hover { transform: translateY(-3px); }
-.iso-tile { transition: filter 0.35s var(--ease); }
-.iso-layer:hover .iso-tile { filter: drop-shadow(0 6px 28px color-mix(in srgb, var(--accent) 16%, transparent)); }
+/* soft accent halo behind the tile — a radial pool, never a hard box, so it
+   fades identically on mobile and desktop. Replaces the SVG drop-shadow that
+   some mobile browsers rasterized to a square with no fade. */
+.iso-cell-c::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: 82%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.7s var(--ease);
+}
+.iso-layer:hover .iso-cell-c::before { opacity: 1; transition-delay: 0s; }
 .iso-layer:hover .iso-top { stroke: var(--accent); }
 .iso-layer:hover .iso-motif { stroke: var(--accent); }
 /* labels */
@@ -1440,13 +1397,6 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 .ai-flow-stages span { display: inline-flex; align-items: center; white-space: nowrap; }
 .ai-flow-stages i { font-style: normal; color: var(--accent); margin-left: 6px; }
 
-/* leverage / ownership item hover */
-.ai-item .ai-ic { transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease); }
-.ai-item:hover .ai-ic {
-  transform: translateY(-2px);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent);
-}
-
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -1462,14 +1412,6 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   .nav-toggle { display: grid; }
   .topbar-inner { display: flex; justify-content: space-between; }
   .mobile-nav { display: flex; }
-  .ai-board { grid-template-columns: 1fr; gap: 8px; }
-  .ai-board > .ai-col + .ai-col {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid var(--rule);
-    padding-top: 24px;
-    margin-top: 8px;
-  }
   .contact-grid { grid-template-columns: 1fr; }
   /* ac-link is already block — no mobile override needed */
 }

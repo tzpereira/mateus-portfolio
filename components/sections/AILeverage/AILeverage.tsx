@@ -46,64 +46,6 @@ const STAGES: { x: number; k: string; s: [string, string] }[] = [
   { x: 720, k: 'IMPACT', s: ['Outcomes that', 'move the business'] },
 ];
 
-const ic = (inner: string) =>
-  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
-
-const FORK =
-  '<path d="M12 20V12"/><path d="M12 12 6 6"/><path d="M6 6h4"/><path d="M6 6v4"/><path d="M12 12 18 6"/><path d="M18 6h-4"/><path d="M18 6v4"/>';
-
-const ICONS: Record<string, string> = {
-  speed: ic('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/>'),
-  fork: ic(FORK),
-  loop: ic(
-    '<path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.36 2.64L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.36-2.64L3 16"/><path d="M3 21v-5h5"/>',
-  ),
-  down: ic('<path d="M12 4v15"/><path d="m6 13 6 6 6-6"/>'),
-  expand: ic(
-    '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
-  ),
-  target: ic('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.4" fill="currentColor" stroke="none"/>'),
-  person: ic('<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>'),
-  heart: ic(
-    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
-  ),
-  shield: ic('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>'),
-};
-
-const GIVES: { k: string; t: string; d: string }[] = [
-  { k: 'speed', t: 'Speed to explore', d: 'Go from idea to prototype fast. Test more, learn earlier.' },
-  { k: 'fork', t: 'Parallel possibilities', d: 'Explore many angles at once. See connections others miss.' },
-  { k: 'loop', t: 'Better feedback loops', d: 'Validate assumptions continuously. Iterate with less friction.' },
-  { k: 'down', t: 'Lower execution cost', d: 'Ship more ideas with fewer resources. Focus on what matters.' },
-  { k: 'expand', t: 'Leverage multiplies', d: 'One person can now operate at a scale that wasn’t possible before.' },
-];
-const MINE: { k: string; t: string; d: string }[] = [
-  { k: 'target', t: 'Judgment', d: 'Decide what’s worth building — and what’s not.' },
-  { k: 'person', t: 'Context', d: 'Understand people, business, and the real problem.' },
-  { k: 'heart', t: 'Empathy', d: 'Design for humans, not just for users.' },
-  { k: 'fork', t: 'Product decisions', d: 'Make trade-offs. Set priorities. Say no to good ideas.' },
-  { k: 'shield', t: 'Responsibility', d: 'Own the outcome and the consequences.' },
-];
-
-function Column({ kicker, items }: { kicker: string; items: { k: string; t: string; d: string }[] }) {
-  return (
-    <div className="ai-col">
-      <span className="ai-col-k">{kicker}</span>
-      <ul className="ai-list">
-        {items.map(({ k, t, d }) => (
-          <li className="ai-item" key={t}>
-            <span className="ai-ic" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICONS[k] }} />
-            <div className="ai-item-tx">
-              <b>{t}</b>
-              <p>{d}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 export default function AILeverage() {
   const svgRef = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
@@ -129,7 +71,7 @@ export default function AILeverage() {
             <span className="lbl">Working with leverage</span>
           </div>
           <h2>
-            Answers are abundant. <em>Direction is not.</em>
+            Generating options is easy now. <em>Choosing is the job.</em>
           </h2>
           <p className="sub">
             AI creates countless possibilities. My job is to bring judgment, context, and responsibility to choose the path that creates real impact.
@@ -195,11 +137,6 @@ export default function AILeverage() {
               ))}
             </div>
           </div>
-        </FadeIn>
-
-        <FadeIn className="ai-board" delay={0.1}>
-          <Column kicker="What leverage gives me" items={GIVES} />
-          <Column kicker="What still belongs to me" items={MINE} />
         </FadeIn>
       </div>
     </section>

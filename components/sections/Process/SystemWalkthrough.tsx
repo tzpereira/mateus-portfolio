@@ -122,8 +122,7 @@ export default function SystemWalkthrough() {
       </div>
 
       <p className="po-foot">
-        I connect product thinking with engineering execution.{' '}
-        <em>Strategy to system. End to end.</em>
+        I connect product thinking with <em>engineering execution.</em>
       </p>
     </div>
   );
