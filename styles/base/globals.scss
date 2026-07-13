@@ -624,7 +624,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 /* the headline — Helvetica throughout, thin by default, bold on the emphasis words */
 .hero h1.hero-line {
   font-family: var(--font-sans);
-  font-size: clamp(48px, 8.5vw, 100px);
+  font-size: clamp(52px, 9vw, 120px);
   line-height: 0.98;
   letter-spacing: -0.02em;
   font-weight: 400;
@@ -1517,7 +1517,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   /* as large as the two hard line-breaks ("From ambiguity" / "to production.")
      allow without an unwanted 3rd wrap — measured per-width via headless
      binary search (safe max width at 360px=44/620px=81, ~4px margin below that) */
-  .hero h1.hero-line { font-size: clamp(34px, calc(14.2vw - 11px), 77px); margin-bottom: 28px; }
+  .hero h1.hero-line { font-size: clamp(40px, calc(15vw - 10px), 90px); margin-bottom: 28px; }
   /* deliberate 4-line break (see .br-mobile below) replaces the old accidental
      reflow that split the colored "product engineering" term across lines —
      sized up since we're no longer fighting to keep it to 2 physical lines */

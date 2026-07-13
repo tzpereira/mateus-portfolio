@@ -54,10 +54,17 @@ export default function Header() {
 
   useEffect(() => {
     const stored = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const resolved = stored ?? 'light';
-    setTheme(resolved);
-    document.documentElement.setAttribute('data-theme', resolved);
-    syncThemeColorMeta(resolved);
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = (t: 'light' | 'dark') => {
+      setTheme(t);
+      document.documentElement.setAttribute('data-theme', t);
+      syncThemeColorMeta(t);
+    };
+    apply(stored ?? (media.matches ? 'dark' : 'light'));
+    if (stored) return; // explicit choice already made — stop following the OS setting
+    const onChange = (e: MediaQueryListEvent) => apply(e.matches ? 'dark' : 'light');
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
   }, []);
 
   // Lock scroll + close on Escape while the mobile menu is open.
