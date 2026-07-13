@@ -9,7 +9,7 @@ const DISCIPLINES = [
   { word: 'backend', cls: 'w2' },
   { word: 'AI', cls: 'w1' },
   { word: 'data', cls: 'w3' },
-  { word: 'full product', cls: 'w5' },
+  { word: 'product engineering', cls: 'w5' },
 ];
 
 /* uniform "+" grid, exactly like the ref — aligned marks, varied gray tones.
@@ -168,7 +168,7 @@ export default function Hero() {
         <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
 
         <motion.p className="hero-copy" {...fadeUp(0.28)}>
-          I design, build and ship complete software products
+          I design, build and ship end-to-end software:
           <br />
           {DISCIPLINES.map(({ word, cls }, i) => (
             <span key={cls}>
