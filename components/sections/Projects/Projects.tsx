@@ -12,14 +12,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    name: 'Workflow Execution Engine',
-    kind: 'Open source · In development',
-    area: 'AI orchestration',
-    intent: 'Runs teams of LLM agents against real tasks — coordinated tool use and hand-offs, built to be observed and trusted in production.',
-    stack: ['Go', 'Python', 'LLM APIs', 'AWS', 'Docker'],
-    href: 'https://github.com/tzpereira/workflow-execution-engine',
-  },
-  {
     name: 'Plan Patagonia',
     kind: 'Co-founder · 0→1',
     area: 'Travel tech',
@@ -27,6 +19,14 @@ const projects: Project[] = [
     stack: ['TypeScript', 'Next.js', 'Prisma', 'Neon Postgres', 'Claude API'],
     href: 'https://planpatagonia.com/',
     linkLabel: 'Visit site',
+  },
+  {
+    name: 'Workflow Execution Engine',
+    kind: 'Open source · In development',
+    area: 'AI orchestration',
+    intent: 'Runs teams of LLM agents against real tasks — coordinated tool use and hand-offs, built to be observed and trusted in production.',
+    stack: ['Go', 'Python', 'LLM APIs', 'AWS', 'Docker'],
+    href: 'https://github.com/tzpereira/workflow-execution-engine',
   },
   {
     name: 'go-kafka-sdk',
