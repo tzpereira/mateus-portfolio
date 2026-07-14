@@ -7,15 +7,17 @@ type Project = {
   intent: string;
   stack: string[];
   href?: string;
+  linkLabel?: string;
 };
 
 const projects: Project[] = [
   {
-    name: 'Multi Agent Loop',
+    name: 'Workflow Execution Engine',
     kind: 'Open source · In development',
     area: 'AI orchestration',
-    intent: 'Multi-agent orchestration system for autonomous task execution — agent coordination, tool use, memory and observability, designed for production patterns.',
-    stack: ['Go', 'Python', 'LLM APIs', 'Kubernetes', 'Docker'],
+    intent: 'Runs teams of LLM agents against real tasks — coordinated tool use and hand-offs, built to be observed and trusted in production.',
+    stack: ['Go', 'Python', 'LLM APIs', 'AWS', 'Docker'],
+    href: 'https://github.com/tzpereira/workflow-execution-engine',
   },
   {
     name: 'Plan Patagonia',
@@ -23,6 +25,8 @@ const projects: Project[] = [
     area: 'Travel tech',
     intent: 'US-registered travel-tech company I co-founded — architected and built the entire platform from zero to launch: product engineering, AI integrations, SEO infrastructure and business strategy.',
     stack: ['TypeScript', 'Next.js', 'Prisma', 'Neon Postgres', 'Claude API'],
+    href: 'https://planpatagonia.com/',
+    linkLabel: 'Visit site',
   },
   {
     name: 'go-kafka-sdk',
@@ -55,7 +59,8 @@ export default function Projects() {
         </FadeIn>
 
         <div className="writing-list">
-          {projects.map(({ name, kind, area, intent, stack, href }) => {
+          {projects.map(({ name, kind, area, intent, stack, href, linkLabel }) => {
+            const label = linkLabel ?? 'GitHub';
             const body = (
               <div className="ac-body">
                 <div className="ac-meta">
@@ -69,7 +74,7 @@ export default function Projects() {
                 </div>
                 {href && (
                   <span className="ac-read">
-                    GitHub
+                    {label}
                     <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M3 11L11 3M5 3h6v6" />
                     </svg>
@@ -80,7 +85,7 @@ export default function Projects() {
             return (
               <FadeIn as="article" className="article-card" key={name}>
                 {href ? (
-                  <a className="ac-link" href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name} on GitHub`}>
+                  <a className="ac-link" href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name} — ${label}`}>
                     {body}
                   </a>
                 ) : (
