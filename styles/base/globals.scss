@@ -622,7 +622,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 /* the headline — Helvetica throughout, thin by default, bold on the emphasis words */
 .hero h1.hero-line {
   font-family: var(--font-sans);
-  font-size: clamp(52px, 9vw, 120px);
+  font-size: clamp(48px, 8.5vw, 100px);
   line-height: 0.98;
   letter-spacing: -0.02em;
   font-weight: 400;
