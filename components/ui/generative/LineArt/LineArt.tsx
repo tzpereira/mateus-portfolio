@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-export type LineArtVariant = 'discovery' | 'architecture' | 'engineering' | 'scale' | 'security';
+export type LineArtVariant = 'discovery' | 'architecture' | 'engineering' | 'harness' | 'scale' | 'security';
 
 interface LineArtProps {
   variant: LineArtVariant;
@@ -114,6 +114,24 @@ function Engineering() {
   );
 }
 
+/** Harness — a source block that builds blocks: connectors fan out from the
+ *  machine (which holds the seed of its own product) to the things it makes.
+ *  "Build the thing that builds the thing." */
+function Harness() {
+  return (
+    <>
+      <rect x={16} y={44} width={32} height={32} rx={3} pathLength={1} />
+      <rect x={25} y={53} width={14} height={14} rx={2} pathLength={1} />
+      <line x1={48} y1={54} x2={76} y2={30} pathLength={1} />
+      <line x1={48} y1={60} x2={86} y2={60} pathLength={1} />
+      <line x1={48} y1={66} x2={76} y2={90} pathLength={1} />
+      <rect x={76} y={20} width={20} height={20} rx={2.5} pathLength={1} />
+      <rect x={86} y={50} width={20} height={20} rx={2.5} pathLength={1} />
+      <rect x={76} y={80} width={20} height={20} rx={2.5} pathLength={1} />
+    </>
+  );
+}
+
 /** Scale & Operations — throughput climbing (ascending bars + trend). */
 function Scale() {
   const base = 96;
@@ -155,6 +173,7 @@ export function Motif({ variant }: { variant: LineArtVariant }) {
       {variant === 'discovery' && <Discovery />}
       {variant === 'architecture' && <Architecture />}
       {variant === 'engineering' && <Engineering />}
+      {variant === 'harness' && <Harness />}
       {variant === 'scale' && <Scale />}
       {variant === 'security' && <Security />}
     </>

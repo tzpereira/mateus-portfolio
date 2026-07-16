@@ -186,6 +186,18 @@ main, footer, header { position: relative; z-index: 1; }
 .iso-layer.is-drawn .iso-motif.la-engineering .eng-gear:nth-of-type(2) { animation-delay: 0.06s; }
 .iso-layer.is-drawn .iso-motif.la-engineering .eng-gear:nth-of-type(3) { animation-delay: 0.12s; }
 
+/* harness — the machine draws first (with the seed of its product inside),
+   connectors extend outward, then the blocks it builds snap in one by one:
+   build the thing that builds the thing */
+.iso-layer.is-drawn .iso-motif.la-harness rect { animation: la-draw 0.5s var(--ease) both; }
+.iso-layer.is-drawn .iso-motif.la-harness rect:nth-of-type(2) { animation-delay: 0.12s; }
+.iso-layer.is-drawn .iso-motif.la-harness line { animation: la-draw 0.4s var(--ease) 0.3s both; }
+.iso-layer.is-drawn .iso-motif.la-harness line:nth-of-type(2) { animation-delay: 0.38s; }
+.iso-layer.is-drawn .iso-motif.la-harness line:nth-of-type(3) { animation-delay: 0.46s; }
+.iso-layer.is-drawn .iso-motif.la-harness rect:nth-of-type(3) { animation-delay: 0.55s; }
+.iso-layer.is-drawn .iso-motif.la-harness rect:nth-of-type(4) { animation-delay: 0.63s; }
+.iso-layer.is-drawn .iso-motif.la-harness rect:nth-of-type(5) { animation-delay: 0.71s; }
+
 /* scale — baseline draws, bars draw left to right, then the trend line: climbing */
 .iso-layer.is-drawn .iso-motif.la-scale line { animation: la-draw 0.4s var(--ease) both; }
 .iso-layer.is-drawn .iso-motif.la-scale rect { animation: la-draw 0.5s var(--ease) both; }
@@ -209,6 +221,7 @@ main, footer, header { position: relative; z-index: 1; }
 .iso-layer:nth-child(3) { --ignite-delay: 0.24s; }
 .iso-layer:nth-child(4) { --ignite-delay: 0.36s; }
 .iso-layer:nth-child(5) { --ignite-delay: 0.48s; }
+.iso-layer:nth-child(6) { --ignite-delay: 0.60s; }
 .iso-layer { cursor: pointer; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes iso-ignite-top { from { stroke: var(--ink-4); } to { stroke: var(--accent); } }
@@ -1100,6 +1113,7 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   color: var(--ink-4);
   margin-bottom: 16px;
 }
+.ac-meta .ac-pulse { color: var(--accent); }
 .article-card h3 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -1127,7 +1141,19 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   align-self: flex-end;
 }
 .ac-read svg { width: 13px; height: 13px; color: var(--accent); transition: transform 0.25s var(--ease); }
-.article-card:hover .ac-read svg { transform: translate(2px, -2px); }
+.article-card:hover .ac-link .ac-read svg { transform: translate(2px, -2px); }
+
+/* Cards with multiple proof links (repo + architecture/ADRs/vision) — each anchor stands alone */
+.ac-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+.ac-links .ac-read { margin-top: 0; align-self: auto; }
+a.ac-read:hover { color: var(--accent); }
+a.ac-read:hover svg { transform: translate(2px, -2px); }
 
 /* ============================================================
    ARTICLE PAGE (/writing/[slug])
@@ -1461,9 +1487,11 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
      binary search (safe max width at 360px=44/620px=81, ~4px margin below that) */
   .hero h1.hero-line { font-size: clamp(40px, calc(15vw - 10px), 90px); margin-bottom: 28px; }
   /* deliberate 4-line break (see .br-mobile below) replaces the old accidental
-     reflow that split the colored "product engineering" term across lines —
-     sized up since we're no longer fighting to keep it to 2 physical lines */
-  .hero-copy { font-size: clamp(28px, 7vw, 32px); margin-bottom: 28px; }
+     reflow that split the colored "product engineering" term across lines.
+     Formula fit to measured safe-max font per width (binary-searched line count,
+     ~2px margin): 320px→25, cap 32 from ~400px. The old 28px floor overflowed
+     narrow phones even before the copy change. */
+  .hero-copy { font-size: clamp(24px, calc(10vw - 7px), 32px); margin-bottom: 28px; }
   .br-mobile { display: inline; }
   .footer-inner { justify-content: flex-start; }
 }

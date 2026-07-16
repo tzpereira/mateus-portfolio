@@ -170,7 +170,7 @@ export default function Hero() {
         <motion.p className="hero-copy" {...fadeUp(0.28)}>
           I design, build and ship
           <br className="br-mobile" />{' '}
-          complete software:
+          systems teams rely on:
           <br />
           {DISCIPLINES.map(({ word, cls }, i) => (
             <span key={cls}>

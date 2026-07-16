@@ -12,31 +12,37 @@ export default function Depth() {
   }[] = [
     {
       ix: '01',
-      title: 'Product & Discovery',
+      title: 'Shaping the product',
       items: ['Stakeholder alignment', 'Requirements', 'MVP definition', 'UX thinking', 'Prototyping', 'Prioritization'],
       art: 'discovery',
     },
     {
       ix: '02',
-      title: 'Solution Architecture',
+      title: 'Designing the architecture',
       items: ['System design', 'Data modeling', 'APIs & services', 'Integrations', 'Scalability', 'Technical trade-offs'],
       art: 'architecture',
     },
     {
       ix: '03',
-      title: 'Software Engineering',
+      title: 'Building & shipping',
       items: ['Backend & frontend', 'Full-stack delivery', 'Cloud', 'Data workflows', 'RAG & LLM features', 'Observability'],
       art: 'engineering',
     },
     {
       ix: '04',
-      title: 'Cloud Economics & Scale',
+      title: 'Building the tools that build',
+      items: ['Internal platforms', 'Workflow automation', 'SDKs & templates', 'Agent infrastructure', 'Validation systems', 'Developer experience'],
+      art: 'harness',
+    },
+    {
+      ix: '05',
+      title: 'Running lean at scale',
       items: ['Cloud cost architecture', 'Low-cost infrastructure', 'SQL optimization', 'Performance', 'Monitoring', 'Reliability'],
       art: 'scale',
     },
     {
-      ix: '05',
-      title: 'Security & Trust',
+      ix: '06',
+      title: 'Securing the system',
       items: ['Threat modeling', 'Pentest suite (authored)', 'Hardening', 'Audits & compliance', 'Access & secrets', 'On-spec delivery'],
       art: 'security',
     },
@@ -66,7 +72,7 @@ export default function Depth() {
             <span className="num">01</span>
             <span className="lbl">The range</span>
           </div>
-          <h2>I don’t pick a lane. <em>I cover the whole stack.</em></h2>
+          <h2>Problems cut across layers. <em>So do I.</em></h2>
         </FadeIn>
 
         <div className="iso-module">
