@@ -28,7 +28,7 @@ export async function getContributions(login: string): Promise<ContribWeek[] | n
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query: QUERY, variables: { login } }),
-      next: { revalidate: 86400 },
+      next: { revalidate: 60 },
     });
     if (!res.ok) return null;
     const json = await res.json();

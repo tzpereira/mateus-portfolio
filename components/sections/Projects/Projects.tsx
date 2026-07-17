@@ -73,7 +73,7 @@ async function lastCommit(repo: string): Promise<string | undefined> {
       headers: process.env.GITHUB_TOKEN
         ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
         : undefined,
-      next: { revalidate: 86400 },
+      next: { revalidate: 60 },
     });
     if (!res.ok) return undefined;
     const { pushed_at } = await res.json();
