@@ -26,12 +26,6 @@
   --panel-sheen: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0) 42%);
   --shadow: 0 1px 2px rgba(20,20,30,0.04), 0 30px 64px -38px rgba(20,20,30,0.2);
   --selection: rgba(79,70,229,0.16);
-  /* hero discipline words — playful hues, one per craft (ref: Pantom) */
-  --word-1: #2f7cf6;
-  --word-2: #e8442f;
-  --word-3: #2fbe66;
-  --word-4: #e9b41f;
-  --word-5: #7c3aed;
   color-scheme: light;
 }
 
@@ -463,27 +457,6 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
 [data-theme="light"] .theme-toggle .i-sun { display: block; }
 [data-theme="light"] .theme-toggle .i-moon { display: none; }
 
-/* desktop "Let's talk" CTA */
-.btn-nav {
-  display: inline-flex;
-  align-items: center;
-  height: 40px;
-  padding: 0 17px;
-  border-radius: 10px;
-  border: 1px solid var(--rule);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  white-space: nowrap;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-.btn-nav:hover {
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--rule));
-  background: var(--accent-dim);
-}
-
 /* mobile hamburger — hidden on desktop */
 .nav-toggle {
   display: none;
@@ -537,7 +510,6 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   transition: color 0.2s;
 }
 .mobile-nav nav a:hover, .mobile-nav nav a:active { color: var(--accent); }
-.mn-cta { margin-top: 32px; align-self: flex-start; }
 @media (prefers-reduced-motion: reduce) {
   .mobile-nav { transition: opacity 0.2s, visibility 0.2s; transform: none; }
 }
@@ -632,6 +604,41 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   .hero-plus .pm { animation: none; }
 }
 
+/* commit graph — real contribution calendar, same slot as the plus grid.
+   Cells ignite in a diagonal wave; intensity maps to --accent opacity so it
+   lives inside the site's system instead of GitHub green. */
+.hero-commit { margin: 0 0 8px; }
+.hero-commit-caption {
+  margin: 0 0 32px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-4);
+}
+.hero-commit-caption strong { color: var(--ink-3); font-weight: 600; }
+.hero-commit-caption.is-mobile { display: none; }
+.hero-commit svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hero-commit.is-mobile { display: none; }
+.hero-commit rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: commit-ignite 0.35s var(--ease) var(--d, 0s) both;
+  transition: fill 0.25s var(--ease);
+}
+.hero-commit .lvl-0 { fill: var(--rule); }
+.hero-commit .lvl-1 { fill: color-mix(in srgb, var(--accent) 40%, transparent); }
+.hero-commit .lvl-2 { fill: color-mix(in srgb, var(--accent) 60%, transparent); }
+.hero-commit .lvl-3 { fill: color-mix(in srgb, var(--accent) 80%, transparent); }
+.hero-commit .lvl-4 { fill: var(--accent); }
+.hero-commit rect:hover { fill: var(--accent); }
+@keyframes commit-ignite {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-commit rect { animation: none; }
+}
+
 /* the headline — Helvetica throughout, thin by default, bold on the emphasis words */
 .hero h1.hero-line {
   font-family: var(--font-sans);
@@ -642,35 +649,50 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   color: var(--ink);
   margin: 0 0 40px;
 }
-.hero-line .hl-bold { font-weight: 700; }
+.hero-line .hl-bold { font-weight: 800; }
 
 /* the sentence under the grid — plain Helvetica, each craft in its own hue */
 .hero-copy {
   font-family: var(--font-sans);
-  font-size: clamp(19px, 2.4vw, 28px);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
   line-height: 1.45;
   letter-spacing: -0.012em;
   color: var(--ink-2);
   margin: 0 0 36px;
 }
-.hero-copy .hl-w { font-weight: 700; white-space: nowrap; }
+.hero-copy .hl-w { 
+  font-weight: 700; 
+  white-space: nowrap; 
+  color: var(--accent); 
+}
+
 .br-mobile { display: none; }
 .hero-copy .w1 { color: var(--word-1); }
-.hero-copy .w2 { color: var(--word-2); }
-.hero-copy .w3 { color: var(--word-3); }
-.hero-copy .w5 { color: var(--word-5); }
 
-/* hero CTAs — a size up from the global buttons, to match the scale */
-.hero-actions .btn-primary,
-.hero-actions .btn-ghost {
-  font-size: 15px;
-  padding: 14px 26px;
+/* hero CTAs — quiet text links (no button chrome), the same idiom as .ac-read
+   and .dl-pdf elsewhere on the site. The hero only points the way; the real
+   commitment CTA lives in Contact. */
+.hero-actions .hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
 }
+.hero-actions .hero-link svg { width: 14px; height: 14px; color: var(--accent); transition: transform 0.25s var(--ease); }
+.hero-actions .hero-link:hover { border-color: var(--accent); }
+.hero-actions .hero-link:first-child:hover svg { transform: translateY(3px); }
+.hero-actions .hero-link:last-child:hover svg { transform: translateX(3px); }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 28px;
   align-items: center;
   margin-bottom: 26px;
 }
@@ -1132,6 +1154,24 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   color: var(--ink-2);
   margin: 0 0 18px;
 }
+/* one trade-off per card — the reasoning sits next to the proof, no separate section */
+.ac-decision {
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin: 0 0 18px;
+  padding-left: 14px;
+  border-left: 2px solid var(--rule);
+}
+.ac-decision span {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 .ac-read {
   display: inline-flex;
   align-items: center;
@@ -1269,57 +1309,97 @@ a.ac-read:hover svg { transform: translate(2px, -2px); }
 .contact-inner { position: relative; z-index: 1; }
 .contact-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.3fr 0.7fr;
   gap: clamp(40px, 6vw, 90px);
   align-items: start;
 }
 .contact-statement {
-  font-size: clamp(30px, 4.2vw, 54px);
+  font-size: clamp(50px, 7vw, 80px);
   line-height: 1.05;
   letter-spacing: -0.035em;
   font-weight: 600;
   color: var(--ink);
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   text-wrap: balance;
 }
 .contact-statement em { color: var(--accent); font-style: normal; }
 .contact-lead {
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: clamp(15px, 2.2vw, 18px);
+  line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--ink-2);
   max-width: 460px;
-  margin: 0 0 38px;
+  margin: 0 0 28px;
 }
-.contact-ctas {
+/* CTA stack — quiet text links, the same idiom as .hero-link/.ac-read/.dl-pdf
+   elsewhere on the site. The scheduler link stays visually heavier (size,
+   accent color) since it's the one real commitment action on the page. */
+.contact-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.contact-link svg { width: 14px; height: 14px; color: var(--accent); transition: transform 0.25s var(--ease); }
+.contact-link:hover { border-color: var(--accent); }
+.contact-link:hover svg:last-child { transform: translateX(3px); }
+
+.contact-link-primary {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--accent);
+  border-bottom-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.contact-link-primary svg { width: 16px; height: 16px; }
+
+.contact-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px 24px;
+}
+
+@media (max-width: 620px) {
+  .contact-cta-group { width: 100%; }
 }
 .contact-meta {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-.contact-meta .cm-block { padding: 18px 0; border-top: 1px solid var(--rule); }
+.contact-meta .cm-block { padding: 20px 0; border-top: 1px solid var(--rule); }
 .contact-meta .cm-block:first-child { border-top: none; padding-top: 0; }
 .contact-meta .cmk {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 14px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-4);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
-.contact-meta .cmv { font-size: 15px; color: var(--ink); }
+.contact-meta .cmv { font-size: 16px; color: var(--ink); }
+.contact-meta .cmv + .opp { margin-top: 10px; }
 .contact-meta .cmv a { border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
 .contact-meta .cmv a:hover { border-color: var(--accent); }
 .contact-meta .cmv a.dl-pdf { display: inline-flex; align-items: center; gap: 6px; border-bottom: none; }
 .contact-meta .cmv a.dl-pdf svg { width: 13px; height: 13px; color: var(--accent); transition: transform 0.25s var(--ease); }
 .contact-meta .cmv a.dl-pdf:hover svg { transform: translate(2px, -2px); }
-.contact-meta .opp { display: flex; flex-direction: column; gap: 7px; }
-.contact-meta .opp span { font-size: 14.5px; color: var(--ink-2); display: flex; gap: 9px; align-items: baseline; }
-.contact-meta .opp span::before { content: "→"; color: var(--accent); font-size: 12px; }
+.contact-meta .opp { display: flex; flex-direction: column; gap: 8px; }
+.contact-meta .opp span { font-size: 16px; color: var(--ink-2); display: flex; gap: 9px; align-items: baseline; }
+.contact-meta .opp span::before { content: "→"; color: var(--accent); font-size: 16px; }
 
 /* ============================================================
    FOOTER
@@ -1436,7 +1516,6 @@ a.ac-read:hover svg { transform: translate(2px, -2px); }
 @media (max-width: 900px) {
   :root { --gutter: 24px; }
   .nav { display: none; }
-  .btn-nav { display: none; }
   .nav-toggle { display: grid; }
   .topbar-inner { display: flex; justify-content: space-between; }
   .mobile-nav { display: flex; }
@@ -1483,19 +1562,23 @@ a.ac-read:hover svg { transform: translate(2px, -2px); }
      breathing room top (clear of the fixed header) and bottom (mobile
      browser chrome — the address-bar strip — sits over the fold and
      hides content right at the bottom edge otherwise). */
-  .hero { padding: calc(env(safe-area-inset-top, 0px) + 64px + 60px) 0 100px; min-height: auto; align-items: flex-start; }
+  .hero { padding: calc(env(safe-area-inset-top, 0px) + 64px + 54px) 0 100px; min-height: auto; align-items: flex-start; }
   .hero-plus { margin: 16px 0 28px; }
   .hero-plus.is-desktop { display: none; }
   .hero-plus.is-mobile { display: block; }
+  .hero-commit { margin: 16px 0 8px; }
+  .hero-commit.is-desktop { display: none; }
+  .hero-commit.is-mobile { display: block; }
+  .hero-commit-caption { margin: 0 0 28px; }
+  .hero-commit-caption.is-desktop { display: none; }
+  .hero-commit-caption.is-mobile { display: block; text-align: left; }
   /* as large as the two hard line-breaks ("From ambiguity" / "to production.")
      allow without an unwanted 3rd wrap — measured per-width via headless
      binary search (safe max width at 360px=44/620px=81, ~4px margin below that) */
   .hero h1.hero-line { font-size: clamp(40px, calc(15vw - 10px), 90px); margin-bottom: 28px; }
-  /* deliberate 4-line break (see .br-mobile below) replaces the old accidental
-     reflow that split the colored "product engineering" term across lines.
-     Size: the 28-32px pass read too big on real phones; this scale is well
-     inside the measured safe-max (26.9px at 320px) so the 4 lines never wrap. */
-  .hero-copy { font-size: clamp(22px, 5.6vw, 25px); margin-bottom: 28px; }
+  .hero-copy { font-size: clamp(24px, 6vw, 30px); margin-bottom: 28px; }
+  /* forces the "product thinking / into engineering execution" break on
+     narrow screens — desktop lets the sentence wrap naturally instead */
   .br-mobile { display: inline; }
   .footer-inner { justify-content: flex-start; }
 }
