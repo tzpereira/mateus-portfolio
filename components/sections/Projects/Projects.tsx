@@ -10,6 +10,7 @@ type Project = {
   kind: string;
   area: string;
   intent: string;
+  decision?: string;
   stack: string[];
   href?: string;
   linkLabel?: string;
@@ -24,6 +25,7 @@ const projects: Project[] = [
     kind: 'Open source · MVP · M1.3/M1.15',
     area: 'Engineering platform',
     intent: 'Engineering processes live in docs and people’s heads. WEE turns well-defined workflows into versioned, replayable, budgeted pipelines — built for execution, not discovery: clear workflows produce reliable outcomes. The engine owns the loops, not the model, and reinforces harness-style engineering at every step. Workflows are software; LLMs are an implementation detail.',
+    decision: 'Hand-rolled net/http, zero vendor SDKs — full control of the loop and budget over convenience.',
     stack: ['Go', 'TypeScript', 'JSON Schema', 'LLM APIs'],
     repo: 'tzpereira/workflow-execution-engine',
     links: [
@@ -48,6 +50,7 @@ const projects: Project[] = [
     kind: 'Open source',
     area: 'Backend tooling',
     intent: 'Every service that touches Kafka re-implements the same connection, retry and error handling — each with its own subtle bugs. This SDK packages those patterns once, safe by default, so Go services ship events instead of plumbing.',
+    decision: 'Safe defaults over maximum flexibility — fewer ways for each service to get events wrong.',
     stack: ['Go', 'Apache Kafka'],
     href: 'https://github.com/tzpereira/go-kafka-sdk',
     repo: 'tzpereira/go-kafka-sdk',
@@ -57,6 +60,7 @@ const projects: Project[] = [
     kind: 'Open source',
     area: 'Machine learning',
     intent: 'A/B tests keep feeding traffic to losing variants while they wait for significance. bandit-brain shifts traffic toward winners in real time — a pure decision engine kept separate from API and storage, so the math stays testable.',
+    decision: 'Pure decision engine, split from API and storage — the math stays testable, at the cost of some wiring.',
     stack: ['Python', 'Multi-armed bandits'],
     href: 'https://github.com/tzpereira/bandit-brain',
     repo: 'tzpereira/bandit-brain',
@@ -102,7 +106,7 @@ export default async function Projects() {
         </FadeIn>
 
         <div className="writing-list">
-          {projects.map(({ name, kind, area, intent, stack, href, linkLabel, links, note }, i) => {
+          {projects.map(({ name, kind, area, intent, decision, stack, href, linkLabel, links, note }, i) => {
             const label = linkLabel ?? 'GitHub';
             const pulse = note ?? (commits[i] && `Last commit ${commits[i]}`);
             const arrow = (
@@ -119,6 +123,12 @@ export default async function Projects() {
                 </div>
                 <h3>{name}</h3>
                 <p className="ac-dek">{intent}</p>
+                {decision && (
+                  <p className="ac-decision">
+                    <span>Key call</span>
+                    {decision}
+                  </p>
+                )}
                 <div className="proj-stack">
                   {stack.map(t => <span className="t" key={t}>{t}</span>)}
                 </div>
