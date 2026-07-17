@@ -10,7 +10,7 @@ export default function Process() {
             <span className="num">03</span>
             <span className="lbl">Process</span>
           </div>
-          <h2>Not just the code — <em>the whole system.</em></h2>
+          <h2>Not just the code, <em>the whole system.</em></h2>
           <p className="sub">
             Five layers between a rough idea and a working system. I own all of them — nothing gets lost in a hand-off.
           </p>
