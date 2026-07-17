@@ -17,6 +17,7 @@ const LINKS = [
   { href: '#process', label: 'Process' },
   { href: '#ai', label: 'Leverage' },
   { href: '#writing', label: 'Writing' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -107,8 +108,6 @@ export default function Header() {
         </nav>
 
         <div className="topbar-right">
-          <a className="btn-nav" href="#contact">Let&apos;s talk</a>
-
           <button
             className="theme-toggle"
             onClick={toggleTheme}
@@ -144,12 +143,6 @@ export default function Header() {
             <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
           ))}
         </nav>
-        <a className="btn-primary mn-cta" href="#contact" onClick={() => setOpen(false)}>
-          Let&apos;s talk
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M2 7h10M8 3l4 4-4 4" />
-          </svg>
-        </a>
       </div>
     </>
   );

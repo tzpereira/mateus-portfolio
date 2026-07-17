@@ -15,37 +15,53 @@ export default function Contact() {
         <div className="contact-grid">
           <FadeIn>
             <p className="contact-statement" id="contact-heading">
-              Need someone who can take a rough problem and ship a product that <em>holds up once real people use it?</em>
+              Have a solution worth building?
+              <br/> 
+              <em>Let&apos;s turn it into a product.</em>
             </p>
             <p className="contact-lead">
               From discovery and architecture to implementation and production.
               One engineer. End-to-end ownership.
             </p>
-            <div className="contact-ctas">
-              <a className="btn-primary" href="mailto:mateuspdasilva369@gmail.com">
-                Let&apos;s talk
+
+            <div className="contact-cta-group">
+              <a className="contact-link contact-link-primary" href="https://calendly.com/mateuspdasilva369/1-1-meeting" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="1.5" y="2.5" width="11" height="10" rx="1.5" />
+                  <path d="M1.5 5.5h11M4 1v2M10 1v2" />
+                </svg>
+                Schedule a 30-minute intro call
                 <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M2 7h10M8 3l4 4-4 4" />
                 </svg>
               </a>
-              <a className="btn-ghost" href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer">
-                Resume
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 11L11 3M5 3h6v6" />
-                </svg>
-              </a>
-              <a className="btn-ghost" href="https://www.linkedin.com/in/mateuspdasilva" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">
-                LinkedIn
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 11L11 3M5 3h6v6" />
-                </svg>
-              </a>
-              <a className="btn-ghost" href="https://github.com/tzpereira" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
-                GitHub
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 11L11 3M5 3h6v6" />
-                </svg>
-              </a>
+
+              <div className="contact-links">
+                <a className="contact-link" href="/assets/files/mateus_resume.pdf" target="_blank" rel="noopener noreferrer">
+                  Resume
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 11L11 3M5 3h6v6" />
+                  </svg>
+                </a>
+                <a className="contact-link" href="https://github.com/tzpereira" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
+                  GitHub
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 11L11 3M5 3h6v6" />
+                  </svg>
+                </a>
+                <a className="contact-link" href="https://www.linkedin.com/in/mateuspdasilva" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">
+                  LinkedIn
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 11L11 3M5 3h6v6" />
+                  </svg>
+                </a>
+                <a className="contact-link" href="mailto:mateuspdasilva369@gmail.com">
+                  Send me an email
+                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </FadeIn>
 
@@ -53,17 +69,19 @@ export default function Contact() {
             <div className="cm-block">
               <div className="cmk">Best fit</div>
               <div className="opp">
-                <span>Early-stage products</span>
-                <span>Founding engineer roles</span>
-                <span>Product-heavy engineering</span>
+                <span>Early-stage companies</span>
+                <span>Product-focused engineering</span>
                 <span>AI-enabled products</span>
                 <span>Complex business workflows</span>
+                <span>0 → 1 and scaling products</span>
               </div>
             </div>
             <div className="cm-block">
-              <div className="cmk">Email</div>
-              <div className="cmv">
-                <a href="mailto:mateuspdasilva369@gmail.com">mateuspdasilva369@gmail.com</a>
+              <div className="cmk">Open to</div>
+              <div className="opp">
+                <span>Product Engineer roles</span>
+                <span>Software Engineer roles</span>
+                <span>Founding Engineer roles</span>
               </div>
             </div>
             <div className="cm-block">
