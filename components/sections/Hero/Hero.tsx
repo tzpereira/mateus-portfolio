@@ -1,16 +1,9 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Magnetic } from '@/components/ui/Magnetic';
+import type { ContribWeek } from './contributions';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const DISCIPLINES = [
-  { word: 'backend', cls: 'w2' },
-  { word: 'AI', cls: 'w1' },
-  { word: 'data', cls: 'w3' },
-  { word: 'product engineering', cls: 'w5' },
-];
 
 /* uniform "+" grid, exactly like the ref — aligned marks, varied gray tones.
    Deterministic PRNG so server and client render the same grid. */
@@ -142,7 +135,52 @@ function PlusGrid({ grid, variant }: { grid: Grid; variant: string }) {
   );
 }
 
-export default function Hero() {
+/* commit graph — real contribution calendar as the hero graphic.
+   Same "coming into order" motion as the PlusGrid, but literal: real cells
+   ignite in a diagonal wave. Recolored to --accent (not GitHub green) so it
+   stays inside the site's system. Decorative → aria-hidden. */
+const CG_CELL = 10;
+const CG_GAP = 3;
+const CG_STEP = CG_CELL + CG_GAP;
+/* must match the ignite delay factor below and the commit-ignite
+   animation-duration in globals.scss — used to time the caption's
+   fade-in to when the last cell finishes igniting */
+const CG_IGNITE_STEP = 0.008;
+const CG_IGNITE_DURATION = 0.35;
+/* ~3 months, so the mobile graph and its caption stay in sync */
+const CG_MOBILE_WEEKS = 13;
+
+function formatCount(n: number): string {
+  if (n < 1000) return String(n);
+  return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+}
+
+function CommitGraph({ weeks, variant }: { weeks: ContribWeek[]; variant: string }) {
+  const w = weeks.length * CG_STEP - CG_GAP;
+  const h = 7 * CG_STEP - CG_GAP;
+  return (
+    <div className={`hero-commit ${variant}`} aria-hidden="true">
+      <svg viewBox={`0 0 ${w} ${h}`} xmlns="http://www.w3.org/2000/svg">
+        {weeks.map((week, wi) =>
+          week.days.map((d, di) => (
+            <rect
+              key={`${wi}-${di}`}
+              className={`lvl-${d.level}`}
+              x={wi * CG_STEP}
+              y={di * CG_STEP}
+              width={CG_CELL}
+              height={CG_CELL}
+              rx={2}
+              style={{ '--d': `${((wi + di) * CG_IGNITE_STEP).toFixed(2)}s` } as React.CSSProperties}
+            />
+          ))
+        )}
+      </svg>
+    </div>
+  );
+}
+
+export default function Hero({ weeks }: { weeks: ContribWeek[] | null }) {
   const reduced = useReducedMotion();
 
   const fadeUp = (delay: number) =>
@@ -154,6 +192,11 @@ export default function Hero() {
           transition: { duration: 0.8, ease: EASE, delay },
         };
 
+  const mobileWeeks = weeks ? weeks.slice(-CG_MOBILE_WEEKS) : null;
+  const totalContribs = (ws: ContribWeek[]) =>
+    ws.reduce((sum, w) => sum + w.days.reduce((s, d) => s + d.count, 0), 0);
+  const igniteFinish = (len: number) => (len - 1 + 6) * CG_IGNITE_STEP + CG_IGNITE_DURATION + 0.1;
+
   return (
     <section className="hero" id="top" aria-label="Introduction">
       <div className="container hero-inner">
@@ -163,38 +206,45 @@ export default function Hero() {
           to <strong className="hl-bold">production.</strong>
         </motion.h1>
 
-        {/* no fade wrapper — the messy phase must be visible from first paint */}
-        <PlusGrid grid={GRID_DESKTOP} variant="is-desktop" />
-        <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
+        {/* no fade wrapper — the ignite/settle must be visible from first paint.
+            Real commit graph when data is available; PlusGrid otherwise. */}
+        {weeks && mobileWeeks ? (
+          <>
+            <CommitGraph weeks={weeks} variant="is-desktop" />
+            <CommitGraph weeks={mobileWeeks} variant="is-mobile" />
+            <motion.p className="hero-commit-caption is-desktop" {...fadeUp(igniteFinish(weeks.length))}>
+              The last year of building in public. <strong>+{formatCount(totalContribs(weeks))}</strong> contributions.
+            </motion.p>
+            <motion.p className="hero-commit-caption is-mobile" {...fadeUp(igniteFinish(mobileWeeks.length))}>
+              The last 3 months of building in public. <strong>+{formatCount(totalContribs(mobileWeeks))}</strong> contributions.
+            </motion.p>
+          </>
+        ) : (
+          <>
+            <PlusGrid grid={GRID_DESKTOP} variant="is-desktop" />
+            <PlusGrid grid={GRID_MOBILE} variant="is-mobile" />
+          </>
+        )}
 
         <motion.p className="hero-copy" {...fadeUp(0.28)}>
-          I design, build and ship
-          <br className="br-mobile" />{' '}
-          systems teams rely on:
-          <br />
-          {DISCIPLINES.map(({ word, cls }, i) => (
-            <span key={cls}>
-              {i === DISCIPLINES.length - 1 && <br className="br-mobile" />}
-              <span className={`hl-w ${cls}`}>{word}</span>
-              {i < DISCIPLINES.length - 2 ? ', ' : i === DISCIPLINES.length - 2 ? ' and ' : '.'}
-            </span>
-          ))}
+          Bringing <span className="hl-w">product thinking</span>
+          <br className="br-mobile" /> into{' '}
+          <span className="hl-w">engineering execution</span>.
         </motion.p>
 
         <motion.div className="hero-actions" {...fadeUp(0.4)}>
-          <Magnetic>
-            <a className="btn-ghost" href="#projects">
-              See work
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a className="btn-primary" href="#contact">
-              Let&apos;s talk
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M2 7h10M8 3l4 4-4 4" />
-              </svg>
-            </a>
-          </Magnetic>
+          <a className="hero-link" href="#projects">
+            See work
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 2v9M3 7l4 4 4-4" />
+            </svg>
+          </a>
+          <a className="hero-link" href="#contact">
+            Get in touch
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M2 7h10M8 3l4 4-4 4" />
+            </svg>
+          </a>
         </motion.div>
       </div>
     </section>

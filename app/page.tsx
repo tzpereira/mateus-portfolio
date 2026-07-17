@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { GridBackdrop } from '@/components/ui/generative/GridBackdrop';
 import { Hero } from '@/components/sections/Hero';
+import { getContributions } from '@/components/sections/Hero/contributions';
 import { Marquee } from '@/components/sections/Marquee';
 import { Projects } from '@/components/sections/Projects';
 import { AILeverage } from '@/components/sections/AILeverage';
@@ -12,7 +13,8 @@ import { Writing } from '@/components/sections/Writing';
 import { Contact } from '@/components/sections/Contact';
 import { Analytics } from "@vercel/analytics/next"
 
-export default function Home() {
+export default async function Home() {
+  const weeks = await getContributions('tzpereira');
   return (
     <>
       <Analytics/>
@@ -20,7 +22,7 @@ export default function Home() {
       <ScrollReveal />
       <Header />
       <main>
-        <Hero />
+        <Hero weeks={weeks} />
         <Marquee />
         <Depth />
         <Projects />
