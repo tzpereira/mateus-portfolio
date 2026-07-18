@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mateusps.vercel.app'),
   title: 'Mateus P. S. — Product Engineer',
   description:
-    'Product engineer building the systems that let products ship faster — from ambiguous problems to production, across backend, AI, data, and product. Proven with real repos, architecture decisions, and trade-offs — not claims.',
+    'Product engineer building the systems that let products ship faster: from ambiguous problems to production, across backend, AI, data, and product. The proof is real repos, architecture decisions, and trade-offs, not claims.',
   keywords: [
     'Product Engineer', 'Founding Engineer', 'Solution Architect', 'Software Architecture',
     'Developer Platforms', 'AI Infrastructure',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   openGraph: {
     title: 'Mateus P. S. — Product Engineer',
-    description: 'From ambiguous problems to production systems — backend, AI, data, and product engineering, proven with real repos and architecture decisions.',
+    description: 'From ambiguous problems to production systems: backend, AI, data, and product engineering, proven with real repos and architecture decisions.',
     url: 'https://mateusps.vercel.app/',
     siteName: 'Mateus P. S.',
     images: [{ url: 'https://mateusps.vercel.app/og-image.png', width: 1200, height: 630, alt: 'Mateus P. S. — Product Engineer' }],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Mateus P. S. — Product Engineer',
-    description: 'Product Engineer — from ambiguous problems to production, proven with real repos, not claims.',
+    description: 'Product Engineer taking ambiguous problems to production. The proof is real repos, not claims.',
     images: ['https://mateusps.vercel.app/og-image.png'],
   },
   alternates: { canonical: 'https://mateusps.vercel.app/' },
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               jobTitle: 'Product Engineer',
               url: 'https://mateusps.vercel.app/',
               email: 'mailto:mateuspdasilva369@gmail.com',
-              description: 'Product engineer building the systems that let products ship faster — from ambiguous problems to production, across backend, AI, data, and product engineering.',
+              description: 'Product engineer building the systems that let products ship faster: from ambiguous problems to production, across backend, AI, data, and product engineering.',
               knowsAbout: ['Software architecture', 'Developer platforms', 'AI infrastructure', 'Product engineering', 'TypeScript', 'Go', 'Python', 'PostgreSQL', 'AWS', 'LLM applications', 'RAG'],
               sameAs: ['https://www.linkedin.com/in/mateuspdasilva', 'https://github.com/tzpereira'],
             }),
