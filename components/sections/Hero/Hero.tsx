@@ -142,6 +142,9 @@ function PlusGrid({ grid, variant }: { grid: Grid; variant: string }) {
 const CG_CELL = 10;
 const CG_GAP = 3;
 const CG_STEP = CG_CELL + CG_GAP;
+const CG_LABEL_WIDTH = 12;
+const CG_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
 /* must match the ignite delay factor below and the commit-ignite
    animation-duration in globals.scss — used to time the caption's
    fade-in to when the last cell finishes igniting */
@@ -156,25 +159,43 @@ function formatCount(n: number): string {
 }
 
 function CommitGraph({ weeks, variant }: { weeks: ContribWeek[]; variant: string }) {
-  const w = weeks.length * CG_STEP - CG_GAP;
+  const w = CG_LABEL_WIDTH + weeks.length * CG_STEP - CG_GAP;
   const h = 7 * CG_STEP - CG_GAP;
+
   return (
     <div className={`hero-commit ${variant}`} aria-hidden="true">
       <svg viewBox={`0 0 ${w} ${h}`} xmlns="http://www.w3.org/2000/svg">
+
+        {CG_LABELS.map((label, i) => (
+          <text
+            key={`${label}-${i}`}
+            x={0}
+            y={i * CG_STEP + 8}
+            fontSize="7"
+            fill="currentColor"
+            opacity="0.45"
+          >
+            {label}
+          </text>
+        ))}
+
         {weeks.map((week, wi) =>
           week.days.map((d, di) => (
             <rect
               key={`${wi}-${di}`}
-              className={`lvl-${d.level}`}
-              x={wi * CG_STEP}
+              className={`lvl-${Math.min(d.level, 4)}`}
+              x={CG_LABEL_WIDTH + wi * CG_STEP}
               y={di * CG_STEP}
               width={CG_CELL}
               height={CG_CELL}
               rx={2}
-              style={{ '--d': `${((wi + di) * CG_IGNITE_STEP).toFixed(2)}s` } as React.CSSProperties}
+              style={{
+                '--d': `${((wi + di) * CG_IGNITE_STEP).toFixed(2)}s`,
+              } as React.CSSProperties}
             />
           ))
         )}
+
       </svg>
     </div>
   );
