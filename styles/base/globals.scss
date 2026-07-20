@@ -626,11 +626,14 @@ html .topbar-inner { transition: height 0.42s var(--ease), opacity 0.3s var(--ea
   transition: fill 0.25s var(--ease);
 }
 .hero-commit .lvl-0 { fill: var(--rule); }
-.hero-commit .lvl-1 { fill: color-mix(in srgb, var(--accent) 40%, transparent); }
-.hero-commit .lvl-2 { fill: color-mix(in srgb, var(--accent) 60%, transparent); }
-.hero-commit .lvl-3 { fill: color-mix(in srgb, var(--accent) 80%, transparent); }
+.hero-commit .lvl-1 { fill: color-mix(in srgb, var(--accent) 55%, transparent); }
+.hero-commit .lvl-2 { fill: color-mix(in srgb, var(--accent) 68%, transparent); }
+.hero-commit .lvl-3 { fill: color-mix(in srgb, var(--accent) 84%, transparent); }
 .hero-commit .lvl-4 { fill: var(--accent); }
-.hero-commit rect:hover { fill: var(--accent); }
+/* days that haven't happened yet (rest of the current week) — lighter than
+   a real no-commit day (.lvl-0) so the two read as distinct states */
+.hero-commit .is-blank { fill: color-mix(in srgb, var(--rule) 40%, transparent); }
+.hero-commit rect:not(.is-blank):hover { fill: var(--accent); }
 @keyframes commit-ignite {
   from { opacity: 0; transform: scale(0.4); }
   to   { opacity: 1; transform: none; }

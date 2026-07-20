@@ -142,8 +142,6 @@ function PlusGrid({ grid, variant }: { grid: Grid; variant: string }) {
 const CG_CELL = 10;
 const CG_GAP = 3;
 const CG_STEP = CG_CELL + CG_GAP;
-const CG_LABEL_WIDTH = 12;
-const CG_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 /* must match the ignite delay factor below and the commit-ignite
    animation-duration in globals.scss — used to time the caption's
@@ -154,37 +152,23 @@ const CG_IGNITE_DURATION = 0.35;
 const CG_MOBILE_WEEKS = 13;
 
 function formatCount(n: number): string {
-  if (n < 1000) return String(n);
-  return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+  return n.toLocaleString('en-US');
 }
 
 function CommitGraph({ weeks, variant }: { weeks: ContribWeek[]; variant: string }) {
-  const w = CG_LABEL_WIDTH + weeks.length * CG_STEP - CG_GAP;
+  const w = weeks.length * CG_STEP - CG_GAP;
   const h = 7 * CG_STEP - CG_GAP;
 
   return (
     <div className={`hero-commit ${variant}`} aria-hidden="true">
       <svg viewBox={`0 0 ${w} ${h}`} xmlns="http://www.w3.org/2000/svg">
 
-        {CG_LABELS.map((label, i) => (
-          <text
-            key={`${label}-${i}`}
-            x={0}
-            y={i * CG_STEP + 8}
-            fontSize="7"
-            fill="currentColor"
-            opacity="0.45"
-          >
-            {label}
-          </text>
-        ))}
-
         {weeks.map((week, wi) =>
           week.days.map((d, di) => (
             <rect
               key={`${wi}-${di}`}
-              className={`lvl-${Math.min(d.level, 4)}`}
-              x={CG_LABEL_WIDTH + wi * CG_STEP}
+              className={d.isFuture ? 'is-blank' : `lvl-${Math.min(d.level, 4)}`}
+              x={wi * CG_STEP}
               y={di * CG_STEP}
               width={CG_CELL}
               height={CG_CELL}
@@ -234,10 +218,10 @@ export default function Hero({ weeks }: { weeks: ContribWeek[] | null }) {
             <CommitGraph weeks={weeks} variant="is-desktop" />
             <CommitGraph weeks={mobileWeeks} variant="is-mobile" />
             <motion.p className="hero-commit-caption is-desktop" {...fadeUp(igniteFinish(weeks.length))}>
-              The last year of building in public. <strong>+{formatCount(totalContribs(weeks))}</strong> contributions.
+              The last year of building in public. <strong>{formatCount(totalContribs(weeks))}</strong> contributions.
             </motion.p>
             <motion.p className="hero-commit-caption is-mobile" {...fadeUp(igniteFinish(mobileWeeks.length))}>
-              The last 3 months of building in public. <strong>+{formatCount(totalContribs(mobileWeeks))}</strong> contributions.
+              The last 3 months of building in public. <strong>{formatCount(totalContribs(mobileWeeks))}</strong> contributions.
             </motion.p>
           </>
         ) : (
