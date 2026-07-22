@@ -120,10 +120,6 @@ export default function SystemWalkthrough() {
           ))}
         </svg>
       </div>
-
-      <p className="po-foot">
-        I connect product thinking with <em>engineering execution.</em>
-      </p>
     </div>
   );
 }
